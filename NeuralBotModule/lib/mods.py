@@ -7,6 +7,7 @@ import datetime
 stemmer = LancasterStemmer()
 import numpy as np
 import time
+import glob
 
 # compute sigmoid nonlinearity
 def sigmoid(x):
@@ -147,18 +148,12 @@ def classify(sentence, show_details=False):
 
 def make_dict():
     d = []
-    with open("./dict/physiological.txt","r") as wordfile:
-        for line in wordfile:
-            d.append({"class":"physiological", "sentence":line.rstrip('\r\n')})
-    with open("./dict/safety.txt","r") as wordfile:
-        for line in wordfile:
-            d.append({"class":"safety", "sentence":line.rstrip('\r\n')})
-    with open("./dict/psychological.txt","r") as wordfile:
-        for line in wordfile:
-            d.append({"class":"psychological", "sentence":line.rstrip('\r\n')})
-    with open("./dict/self-fulfillment.txt","r") as wordfile:
-        for line in wordfile:
-            d.append({"class":"self-fulfillment", "sentence":line.rstrip('\r\n')})
+    memes = glob.glob('./dict/*')
+    for meme in memes:
+        with open(meme,"r") as word_file:
+            for line in word_file:
+                d.append({"class":str(meme)[7:], "sentence":line.rstrip('\r\n')})
+
     return d
 
 #Open needed files

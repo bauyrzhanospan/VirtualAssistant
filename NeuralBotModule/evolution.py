@@ -61,6 +61,8 @@ while generation <= generations:
                 alpha = (alpha-(y/10))
             y = y/10
         x = x/10
+    print("Generation is:")
+    print(generaion)
     generaion = generation + 1
 
 print(delta)
