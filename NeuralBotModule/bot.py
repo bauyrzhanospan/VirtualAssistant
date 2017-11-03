@@ -11,4 +11,6 @@ from lib import mods as m
 
 while 1:
     data = input("What:")
-    m.classify(data)
+    #m.classify(data)
+    k = m.classify(data)
+    print(k[0][0])
