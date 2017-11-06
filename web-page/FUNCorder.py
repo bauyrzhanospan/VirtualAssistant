@@ -8,7 +8,6 @@ from nltk.stem.lancaster import LancasterStemmer
 
 stemmer = LancasterStemmer()
 
-
 # TODO: commend everything and write good README
 
 # If first user has higher priority than return 1, if less 0, if equal 2
