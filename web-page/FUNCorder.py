@@ -1,16 +1,13 @@
-import nltk
-from nltk.stem.lancaster import LancasterStemmer
-import os
-import json
 import datetime
-
-stemmer = LancasterStemmer()
-import numpy as np
+import json
 import time
-import glob
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
+
 from lib import modsOrder as mO
 from lib import modsReason as mR
+from nltk.stem.lancaster import LancasterStemmer
+
+stemmer = LancasterStemmer()
 
 
 # TODO: commend everything and write good README
@@ -27,13 +24,14 @@ def compare_user(user1, user2):
             k[m] = 1
         elif str(u) in "young":
             k[m] = 2
-        m = m+1
-    if k[0]>k[1]:
+        m = m + 1
+    if k[0] > k[1]:
         return 0
-    elif k[0]==k[1]:
+    elif k[0] == k[1]:
         return 2
     else:
         return 1
+
 
 def find_high(rule):
     users = list(rule["users"])
@@ -53,21 +51,23 @@ def find_high(rule):
     else:
         return "young"
 
-# TODO: make it unique for users
-def check_order():
-    words_file = './include/order.json'
+
+def check_order(user):
+    words_file = './include/order' + str(user).lower() + '.json'
     with open(words_file) as word_file:
         order = json.load(word_file)
         if order == 1:
             return 1
         else:
             return 0
-# TODO: make it uniqe too
-def make_order(Isorder):
-    words_file = './include/order.json'
+
+
+def make_order(Isorder, user):
+    words_file = './include/order' + str(user).lower() + '.json'
     with open(words_file, "w") as word_file:
         json.dump(Isorder, word_file)
     return "Printed"
+
 
 def class_order(text):
     order = mO.classify(text)
@@ -76,12 +76,14 @@ def class_order(text):
     except IndexError:
         return 0
 
+
 def class_reason(text):
     reason = mR.classify(text)
     try:
         return reason[0][0]
     except IndexError:
         return 0
+
 
 def compare(reason1, reason2, usertype):
     conf_file = "./Conf/rules.conf"
@@ -106,16 +108,16 @@ def compare(reason1, reason2, usertype):
     else:
         return 2
 
+
 def in_between(now, start, end):
     if start <= end:
         return start <= now < end
-    else: # over midnight e.g., 23:30-04:15
+    else:  # over midnight e.g., 23:30-04:15
         return start <= now or now < end
 
-# TODO: create script to eliminate conflicts between online users
+
 def check_pol(order, username, reason):
-    # TODO: make temp politics configuration file, idea is: when smb changes status of the device with enough power, just write this change to the temp politics conf, and when it will be changed, just refresh at specific time.
-    conf_file = "./Conf/politics.conf"
+    conf_file = "./Conf/temp_politics.conf"
     politics = []
     pol = dict.fromkeys(["start", "stop", "users", "device", "preference", "status"])
     with open(conf_file) as file:
@@ -151,7 +153,8 @@ def check_pol(order, username, reason):
         startMin = int(str(element["start"])[-2:])
         stopHour = int(str(element["stop"])[:-2])
         stopMin = int(str(element["stop"])[-2:])
-        if in_between(now_time, time(startHour, startMin), time(stopHour, stopMin)) and act == str(element["status"]) and dev == str(element["device"]):
+        if in_between(now_time, time(startHour, startMin), time(stopHour, stopMin)) and act == str(
+                element["status"]) and dev == str(element["device"]):
             if compare_user(username, find_high(element)) == 0:
                 return 9
             noway.append(politics.index(element))
@@ -169,23 +172,49 @@ def check_pol(order, username, reason):
                 else:
                     return 0
 
-def device_change(order):
-    make_order(0)
+
+def Give_answer(order, usertype, reason, username):
+    make_order(0, username)
     conf_file = "./Conf/timer.conf"
     with open(conf_file) as file:
         for line in file:
-            timer = line
+            time1 = int(line)
     if order == "KettleOff":
-        return "Kettle is turned off for " + str(timer) + " minutes"
+        device = "19"
+        status = "Off"
+        add_pol(time1, usertype, device, status, reason)
+        return "Kettle is turned off for " + str(time1 / 60) + " minutes"
     elif order == "KettleOn":
-        return "Kettle is turned on for " + str(timer) + " minutes"
+        device = "19"
+        status = "On"
+        add_pol(time1, usertype, device, status, reason)
+        return "Kettle is turned on for " + str(time1 / 60) + " minutes"
     elif order == "LampOn":
-        return "Lamp is turned on for " + str(timer) + " minutes"
+        device = "395"
+        status = "On"
+        add_pol(time1, usertype, device, status, reason)
+        return "Lamp is turned on for " + str(time1 / 60) + " minutes"
     elif order == "LampOff":
-        return "Lamp is turned off for " + str(timer) + " minutes"
+        device = "395"
+        status = "Off"
+        add_pol(time1, usertype, device, status, reason)
+        return "Lamp is turned off for " + str(time1 / 60) + " minutes"
 
-def Give_answer(text):
-    return device_change(text)
+
+def add_pol(timer, user, device, status, preference):
+    # TODO: Add time choose for users, forex: How many time it has to be on? Or off?
+    conf_file = "./Conf/temp_politics.conf"
+    now = datetime.now()
+    then = now + timedelta(0, int(timer))
+    now_time = str(now.time())
+    then_time = str(then.time())
+    start = now_time.split(":")[:2]
+    stop = then_time.split(":")[:2]
+    t = str(start[0]) + str(start[1]) + "-" + str(stop[0]) + str(stop[1])
+    text = str(t) + ":" + str(user[:-1]) + ":" + str(device) + ":" + str(status) + ":" + str(preference)
+    with open(conf_file, "a") as file:
+        file.write(text + '\n')
+
 
 def user_type(user):
     conf_file = "./Conf/users.conf"
@@ -199,6 +228,7 @@ def user_type(user):
                 return 0
     return usertype
 
+
 def accounts():
     conf_file = "./Conf/users.conf"
     account = []
@@ -211,9 +241,9 @@ def accounts():
                 return 0
     return account
 
-# TODO: make it uniq for all users
-def write_order(order):
-    words_file = './include/GlobalOrders.json'
+
+def write_order(order, user):
+    words_file = './include/GlobalOrders' + str(user) + '.json'
     if order == 0:
         with open(words_file, "r") as word_file:
             order2 = json.load(word_file)
@@ -221,5 +251,3 @@ def write_order(order):
     else:
         with open(words_file, "w") as word_file:
             json.dump(order, word_file)
-
-print(class_reason("danger"))

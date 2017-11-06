@@ -1,15 +1,13 @@
 # use natural language toolkit
-import nltk
-from nltk.stem.lancaster import LancasterStemmer
-import os
-import json
 import datetime
+import glob
+import json
+
+import nltk
+import numpy as np
+from nltk.stem.lancaster import LancasterStemmer
 
 stemmer = LancasterStemmer()
-import numpy as np
-import time
-import glob
-
 
 # compute sigmoid nonlinearity
 def sigmoid(x):
