@@ -54,8 +54,6 @@ def think(sentence, show_details=False):
 
 def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout_percent=0.5):
 
-    print ("Training with %s neurons, alpha:%s, dropout:%s %s" % (hidden_neurons, str(alpha), dropout, dropout_percent if dropout else '') )
-    print ("Input matrix: %sx%s    Output matrix: %sx%s" % (len(X),len(X[0]),1, len(classes)) )
     np.random.seed(1)
 
     last_mean_error = 1
@@ -86,10 +84,10 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
         if (j% 10000) == 0 and j > 5000:
             # if this 10k iteration's error is greater than the last iteration, break out
             if np.mean(np.abs(layer_2_error)) < last_mean_error:
-                print ("delta after "+str(j)+" iterations:" + str(np.mean(np.abs(layer_2_error))) )
+                #                print ("delta after "+str(j)+" iterations:" + str(np.mean(np.abs(layer_2_error))) )
                 last_mean_error = np.mean(np.abs(layer_2_error))
             else:
-                print ("break:", np.mean(np.abs(layer_2_error)), ">", last_mean_error )
+                #                print ("break:", np.mean(np.abs(layer_2_error)), ">", last_mean_error )
                 break
 
         # in what direction is the target value?
@@ -131,7 +129,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
         json.dump(synapse, outfile, indent=4, sort_keys=True)
     with open(synapse_file2, 'w') as outfile:
         json.dump(synapse, outfile, indent=4, sort_keys=True)
-    print ("saved synapses to:", synapse_file)
+    #    print ("saved synapses to:", synapse_file)
     return last_mean_error
 
 def classify(sentence, show_details=False):
@@ -143,7 +141,7 @@ def classify(sentence, show_details=False):
     results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD ]
     results.sort(key=lambda x: x[1], reverse=True)
     return_results =[[classes[r[0]],r[1]] for r in results]
-    print ("%s \n classification: %s" % (sentence, return_results))
+    #    print ("%s \n classification: %s" % (sentence, return_results))
     return return_results
 
 def make_dict():

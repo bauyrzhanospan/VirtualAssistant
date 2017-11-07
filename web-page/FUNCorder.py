@@ -1,12 +1,14 @@
 import datetime
 import json
-import time
 from datetime import datetime, time, timedelta
 from lib import modsOrder as mO
 from lib import modsReason as mR
 from nltk.stem.lancaster import LancasterStemmer
+import urllib.request
+import re
 
 stemmer = LancasterStemmer()
+
 
 # TODO: commend everything and write good README
 
@@ -85,19 +87,13 @@ def class_reason(text):
 
 def compare(reason1, reason2, usertype):
     conf_file = "./Conf/rules.conf"
-    print(reason1)
-    print(reason2)
-    print(usertype)
     with open(conf_file) as file:
         for line in file:
             try:
                 data = line.split(":")
                 if str(data[0]) in str(usertype.lower()):
-                    print("Ok")
                     rules = data[1][:-1].split(",")
-                    print(rules)
             except:
-                print("There is no rules")
                 return None
     if rules.index(reason1.lower()) == rules.index(reason2.lower()):
         return 0
@@ -177,30 +173,40 @@ def Give_answer(order, usertype, reason, username):
     with open(conf_file) as file:
         for line in file:
             time1 = int(line)
+    now = datetime.now()
+    clock = str(now.time())
+    log_order(order, username, clock)
     if order == "KettleOff":
         device = "19"
         status = "Off"
         add_pol(time1, usertype, device, status, reason)
-        return "Kettle is turned off for " + str(time1 / 60) + " minutes"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.9835083063374366"
+        urllib.request.urlopen(url)
+        return "Kettle is turned off for " + str(int(time1 / 60)) + " minutes"
     elif order == "KettleOn":
         device = "19"
         status = "On"
         add_pol(time1, usertype, device, status, reason)
-        return "Kettle is turned on for " + str(time1 / 60) + " minutes"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1&rand=0.8954535030571291"
+        urllib.request.urlopen(url)
+        return "Kettle is turned on for " + str(int(time1 / 60)) + " minutes"
     elif order == "LampOn":
         device = "395"
         status = "On"
         add_pol(time1, usertype, device, status, reason)
-        return "Lamp is turned on for " + str(time1 / 60) + " minutes"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1"
+        urllib.request.urlopen(url)
+        return "Lamp is turned on for " + str(int(time1 / 60)) + " minutes"
     elif order == "LampOff":
         device = "395"
         status = "Off"
         add_pol(time1, usertype, device, status, reason)
-        return "Lamp is turned off for " + str(time1 / 60) + " minutes"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.46221056753903733"
+        urllib.request.urlopen(url)
+        return "Lamp is turned off for " + str(int(time1 / 60)) + " minutes"
 
 
 def add_pol(timer, user, device, status, preference):
-    # TODO: Add time choose for users, forex: How many time it has to be on? Or off?
     conf_file = "./Conf/temp_politics.conf"
     now = datetime.now()
     then = now + timedelta(0, int(timer))
@@ -249,3 +255,83 @@ def write_order(order, user):
     else:
         with open(words_file, "w") as word_file:
             json.dump(order, word_file)
+
+
+def check_status(deviceNum):
+    data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
+    d = data.decode("utf-8")
+    try:
+        Status = int(d.split('"id": ' + str(deviceNum))[1].split('" }', 1)[0].strip()[-1])
+        states = ["off", "on"]
+        return states[Status]
+    except:
+        return "or not?"
+
+
+def check_same(order):
+    data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
+    d = data.decode("utf-8")
+    if order == "KettleOff":
+        device = 19
+        status = 0
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "KettleOn":
+        device = 19
+        status = 1
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "LampOn":
+        device = 395
+        status = 1
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "LampOff":
+        device = 395
+        status = 0
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+
+
+def log_order(order, username, clock):
+    file = "./include/ordersLog.txt"
+    order2 = str([order, username, clock]) + "\n"
+    with open(file, "a") as word_file:
+        word_file.write(str(order2))
+
+
+# FIXME: It doesn`t change dynamically, I don`t know why.
+def activity():
+    words_file = './include/ordersLog.txt'
+    order2 = []
+    with open(words_file, "r") as word_file:
+        for line in word_file.readlines():
+            order2.append(line)
+    head = '<div class="w3-container w3-card w3-white w3-round w3-margin"><br><span class="w3-right w3-opacity">at: '
+    mid = '</span><h4>Activity by '
+    mid2 = '</h4><br><hr class="w3-clear"><p>'
+    end = '</p></div>'
+    text = ""
+    if len(order2) == 0:
+        text = ""
+    elif len(order2) > 0:
+        for line in order2[-4:]:
+            line = line.split("'")
+            act = re.findall('[A-Z][^A-Z]*', str(line[1]))
+            ac = str(act[0]) + " is turned " + str(act[1]).lower()
+            text = text + head + str(line[5])[:5] + mid + str(line[3]).capitalize() + mid2 + str(ac) + end
+    with open("./templates/activities.html", "w") as word_file:
+        word_file.write(text)
+    return "activities.html"

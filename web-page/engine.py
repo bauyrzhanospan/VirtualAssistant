@@ -1,3 +1,12 @@
+import datetime
+import json
+from datetime import datetime, time, timedelta
+from lib import modsOrder as mO
+from lib import modsReason as mR
+from nltk.stem.lancaster import LancasterStemmer
+import urllib.request
+import re
+
 def change_politics():
     Temp = open("./Conf/temp_politics.conf", "r")
     Global = open("./Conf/politics.conf", "r")
@@ -20,6 +29,38 @@ def change_politics():
     return 0
 
 
-def check_device():
-    # TODO: make this in Lab
-    print("")
+def check_same(order):
+    data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
+    d = data.decode("utf-8")
+    if order == "KettleOff":
+        device = 19
+        status = 0
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "KettleOn":
+        device = 19
+        status = 1
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "LampOn":
+        device = 395
+        status = 1
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0
+    elif order == "LampOff":
+        device = 395
+        status = 0
+        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        if Status == status:
+            return 1
+        else:
+            return 0

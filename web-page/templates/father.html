@@ -32,7 +32,8 @@
               <h6 class="w3-opacity">Text here or click microphone</h6>
                 <form action="/{{username}}" method="POST">
                     <input  type="text" name="text" contenteditable="true" class="w3-border w3-padding"  id="transcript" placeholder="Text or speak" />
-                    <img onclick="startDictation()" src="https://image.flaticon.com/icons/svg/568/568026.svg" style="width:5%;" />
+                    <img onclick="javascript:startDictation()" src="https://image.flaticon.com/icons/svg/568/568026.svg"
+                         style="width:5%;"/>
                     <br><input type="submit" class="w3-button w3-theme" name="my-form" value="Send" />
                 </form>
             </div>
@@ -40,34 +41,16 @@
         </div>
       </div>
       <!-- TODO: Make activity block dynamic-->
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="https://www.w3schools.com/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">2 min</span>
-        <h4>Activity</h4><br>
-        <hr class="w3-clear">
-        <p>You turned on light.</p>
-        <button type="button" class="w3-button w3-block w3-red w3-section"><i class="fa fa-remove"></i>  Cancel</button>
-      </div>
-
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="https://www.w3schools.com/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">14 min</span>
-        <h4>Activity</h4><br>
-        <hr class="w3-clear">
-        <p>You turned off light.</p>
-        <button type="button" class="w3-button w3-block w3-red w3-section"><i class="fa fa-remove"></i>  Cancel</button>
-      </div>
+        {% include activities %}
     </div>
 
       <!-- Right lane -->
-<!-- TODO: Make right column dynamic -->
       <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
           <p>Lamp [Device: 395]</p>
           <img src="https://image.flaticon.com/icons/svg/201/201867.svg" alt="Lamp" style="width:100%;">
-          <p><strong>Turned {{status}}</strong></p>
-          <p><button class="w3-button w3-block w3-theme-l4">Change</button></p>
+            <p><strong>Turned {{statusLamp}}</strong></p>
         </div>
       </div>
       <br>
@@ -75,10 +58,13 @@
         <div class="w3-container">
           <p>Kettle [Device: 19]</p>
           <img src="https://image.flaticon.com/icons/svg/242/242435.svg" alt="Kettle" style="width:100%;">
-          <p><strong>Turned {{status}}</strong></p>
-          <p><button class="w3-button w3-block w3-theme-l4">Change</button></p>
+            <p><strong>Turned {{statusKettle}}</strong></p>
         </div>
       </div>
       <br>
         </div>
+<script>
+setTimeout(speak("{{fuck}}"));
+
+</script>
 {% endblock %}

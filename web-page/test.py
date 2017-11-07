@@ -1,5 +1,6 @@
 import FUNCorder as f
 from flask import Flask, render_template, request
+import time as TTT
 
 app = Flask(__name__)
 f.make_order(0, "father")
@@ -10,7 +11,9 @@ f.make_order(0, "grandpa")
 ## Login page without pass
 @app.route("/<username>", methods=['GET','POST'])
 def login(username):
-
+    statusLamp = f.check_status(395)
+    statusKettle = f.check_status(19)
+    activities = f.activity()
     if request.method == 'POST':
         usertype = f.user_type(username)
         if usertype == 0:
@@ -30,11 +33,18 @@ def login(username):
                 fuck = "Sorry, I cannot classify the order"
                 f.make_order(0, username)
                 return render_template('father.html', **locals())
+            elif f.check_same(order) == 1:
+                fuck = "Device is already in your status"
+                return render_template('father.html', **locals())
             pol = f.check_pol(order, usertype, 0)
             f.write_order(order, username)
             if pol == 0:
                 fuck = str(f.Give_answer(order, usertype, "temp",
                                          username)) + "\n Do want me to write your order to Global Politics?"
+                TTT.sleep(1)
+                statusLamp = f.check_status(395)
+                statusKettle = f.check_status(19)
+                activities = f.activity()
                 f.make_order(1, username)
                 return render_template('father.html', **locals())
             elif pol == 9:
@@ -57,15 +67,19 @@ def login(username):
             if pol == 0:
                 order = f.write_order(0, username)
                 fuck = f.Give_answer(order, usertype, reason, username)
+                TTT.sleep(1)
+                statusLamp = f.check_status(395)
+                statusKettle = f.check_status(19)
+                activities = f.activity()
                 return render_template('father.html', **locals())
             else:
                 fuck = "Sorry, but you do not have good reason."
                 f.write_order(" ", username)
                 return render_template('father.html', **locals())
     else:
-        fuck = "Here will be answer"
+        fuck = "Hello, " + str(username) + ", I am your Virtual Assistant. Type or say me your order."
     return render_template('father.html', **locals())
 
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=8090)
+    app.run(host='0.0.0.0', port=8090)
