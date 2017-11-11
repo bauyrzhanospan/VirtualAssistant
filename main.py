@@ -1,13 +1,18 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort, send_from_directory
-import FUNCorder as f
 import time as TTT
+
+from flask import Flask, render_template, request, send_from_directory
+
+import FUNCorder as f
+
 app = Flask(__name__)
+
 
 ## Login page without pass
 @app.route("/")
 def login():
     return render_template(
         "login.html", **locals())
+
 
 # TODO: make engine to change the politics conf file online
 @app.route("/politics")
@@ -16,8 +21,9 @@ def pol():
     return render_template(
         "Politics.html", **locals())
 
+
 # TODO: finish core processes inside the test.py and put it here
-@app.route("/<username>", methods=['GET','POST'])
+@app.route("/<username>", methods=['GET', 'POST'])
 def chat(username):
     statusLamp = f.check_status(395)
     statusKettle = f.check_status(19)
@@ -88,6 +94,7 @@ def chat(username):
         fuck = "Hello, " + str(username) + ", I am your Virtual Assistant. Type or say me your order."
     return render_template('father.html', **locals())
 
+
 # TODO: create some logging engine
 ## Uploading logs, It is working
 @app.route("/logs")
@@ -95,10 +102,12 @@ def log():
     return render_template(
         "logs.html", **locals())
 
-@app.route('/logs/<filename>',methods=['GET'])
+
+@app.route('/logs/<filename>', methods=['GET'])
 def return_file(filename):
     print(filename)
     return send_from_directory(directory='Conf', filename=filename, as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8090)

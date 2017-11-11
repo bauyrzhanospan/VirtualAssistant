@@ -1,11 +1,5 @@
-import datetime
-import json
-from datetime import datetime, time, timedelta
-from lib import modsOrder as mO
-from lib import modsReason as mR
-from nltk.stem.lancaster import LancasterStemmer
 import urllib.request
-import re
+
 
 def change_politics():
     Temp = open("./Conf/temp_politics.conf", "r")

@@ -1,7 +1,11 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort, send_from_directory
-import FUNCorder as f
 import time as TTT
+
+from flask import Flask, render_template, request, send_from_directory
+
+import FUNCorder as f
+
 app = Flask(__name__)
+
 
 ## Login page without pass
 @app.route("/")
@@ -19,7 +23,7 @@ def pol():
 
 
 # TODO: finish core processes inside the test.py and put it here
-@app.route("/<username>", methods=['GET','POST'])
+@app.route("/<username>", methods=['GET', 'POST'])
 def chat(username):
     # statusLamp = f.check_status(395)
     # statusKettle = f.check_status(19)
@@ -103,6 +107,7 @@ def log():
 def return_file(filename):
     print(filename)
     return send_from_directory(directory='Conf', filename=filename, as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8090)

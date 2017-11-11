@@ -1,30 +1,32 @@
 {% extends "layout.html" %}
 {% block body %}
-    <!-- Left Column -->
-    <div class="w3-col m5">
-        <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+<!-- Left Column -->
+<div class="w3-col m5">
+    <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
         </span>
         <p><strong>It is important!</strong></p>
         <p>Enter the politics in form:</p>
-            <p>Time[hhmm-hhmm]:User,User:Device Number:Status:Preference</p>
-            <p>For example:</p>
-            <p>1400-1500:Son,Father,Mother,Grandpa:395:On:Food</p>
-      </div>
+        <p>Time[hhmm-hhmm]:User,User:Device Number:Status:Preference</p>
+        <p>For example:</p>
+        <p>1400-1500:Son,Father,Mother,Grandpa:395:On:Food</p>
     </div>
+</div>
 <!-- TODO: Make this page real, please-->
-    <div class="w3-col m7">
-        <div class="w3-row-padding">
+<div class="w3-col m7">
+    <div class="w3-row-padding">
         <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding" action="." method="POST">
-              <h6 class="w3-opacity">Edit the politics configuration</h6>
-              <p contenteditable="true" class="w3-border w3-padding">{{politic}}</p>
-              <button type="button" class="w3-button w3-theme" name="politics" value="Send"><i class="fa fa-pencil"></i>  Change</button>
+            <div class="w3-card w3-round w3-white">
+                <div class="w3-container w3-padding" action="." method="POST">
+                    <h6 class="w3-opacity">Edit the politics configuration</h6>
+                    <p contenteditable="true" class="w3-border w3-padding">{{politic}}</p>
+                    <button type="button" class="w3-button w3-theme" name="politics" value="Send"><i
+                            class="fa fa-pencil"></i>  Change
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 {% endblock %}

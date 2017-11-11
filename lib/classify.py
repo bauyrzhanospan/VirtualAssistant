@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
 
-import tensorflow as tf
-import numpy as np
 import os
-import time
-import datetime
+
+import numpy as np
+import tensorflow as tf
 
 try:
     import data_helpers
@@ -13,7 +12,6 @@ except ImportError:
     from lib import data_helpers
     from lib.text_cnn import TextCNN
 from tensorflow.contrib import learn
-import csv
 import glob
 
 # Parameters
@@ -79,10 +77,12 @@ def classifyR(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./data/reasons/*')
-    print(str(x_raw) + ": " + str(memes[int(all_predictions[0])])[15:])
-    return str(memes[int(all_predictions[0])])[15:]
-
+    memes = glob.glob('./lib/data/reasons/*')
+    try:
+        print(str(x_raw) + ": " + str(memes[int(all_predictions[0])])[19:])
+        return str(memes[int(all_predictions[0])])[19:]
+    except IndexError:
+        return 0
 
 def classifyO(x_raw):
     # print("\nParameters:")
@@ -130,6 +130,9 @@ def classifyO(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./data/orders/*')
-    print(str(x_raw) + ": " + str(memes[int(all_predictions[0])])[14:])
-    return str(memes[int(all_predictions[0])])[14:]
+    memes = glob.glob('./lib/data/orders/*')
+    print(str(x_raw) + ": " + str(memes[int(all_predictions[0])])[18:])
+    try:
+        return str(memes[int(all_predictions[0])])[18:]
+    except IndexError:
+        return 0

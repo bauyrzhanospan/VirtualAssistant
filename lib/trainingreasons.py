@@ -1,11 +1,9 @@
 #! /usr/bin/env python3
 
-import tensorflow as tf
-import numpy as np
-import os
-import time
 import datetime
-
+import os
+import numpy as np
+import tensorflow as tf
 try:
     import data_helpers
     from text_cnn import TextCNN

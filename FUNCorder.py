@@ -3,7 +3,9 @@ import json
 import re
 import urllib.request
 from datetime import datetime, time, timedelta
+
 from nltk.stem.lancaster import LancasterStemmer
+
 from lib import classify as cl
 
 stemmer = LancasterStemmer()
@@ -70,18 +72,12 @@ def make_order(Isorder, user):
 
 def class_order(text):
     order = cl.classifyO(text)
-    try:
-        return order[0][0]
-    except IndexError:
-        return 0
+    return order
 
 
 def class_reason(text):
     reason = cl.classifyR(text)
-    try:
-        return reason[0][0]
-    except IndexError:
-        return 0
+    return reason
 
 
 def compare(reason1, reason2, usertype):
@@ -335,5 +331,5 @@ def activity():
         word_file.write(text)
     return "activities.html"
 
-
 print(cl.classifyO(input("Type order: ")))
+print(cl.classifyR(input("Type order: ")))
