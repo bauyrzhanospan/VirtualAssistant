@@ -1,0 +1,6 @@
+model_checkpoint_path: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-800"
+all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-400"
+all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-500"
+all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-600"
+all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-700"
+all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/CNN_reason/runs/model/checkpoints/model-800"
