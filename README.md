@@ -128,9 +128,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Diseases and condition list is from https://www.cdc.gov/diseasesconditions/index.html
+* Chatbot from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
+* 
 
 ## Bibliography concerning the state of the art and the research objectives
 

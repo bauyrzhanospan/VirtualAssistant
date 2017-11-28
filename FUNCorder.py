@@ -3,15 +3,7 @@ import json
 import re
 import urllib.request
 from datetime import datetime, time, timedelta
-
-from nltk.stem.lancaster import LancasterStemmer
-
 from lib import classify as cl
-
-stemmer = LancasterStemmer()
-
-
-# TODO: commend everything and write good README
 
 # If first user has higher priority than return 1, if less 0, if equal 2
 def compare_user(user1, user2):
@@ -89,8 +81,8 @@ def compare(reason1, reason2, usertype):
                 if str(data[0]) in str(usertype.lower()):
                     rules = data[1][:-1].split(",")
             except:
-                return None
-    if rules.index(reason1.lower()) == rules.index(reason2.lower()):
+                return 1
+    if rules.index(reason1.lower()) == rules.index(reason2.lower()) and usertype.lower() in data[0]:
         return 0
     elif rules.index(reason1.lower()) < rules.index(reason2.lower()):
         return 1
@@ -124,11 +116,12 @@ def check_pol(order, username, reason):
                 politics.append(pol)
                 pol = dict.fromkeys(["start", "stop", "users", "device", "preference", "status"])
             except IndexError:
-                return False
+                return 0
     now = datetime.now()
     now_time = now.time()
     noway = []
     bush = []
+
     if order[-1:] == "f":
         act = "On"
     else:
@@ -158,6 +151,8 @@ def check_pol(order, username, reason):
             for el in bush:
                 if compare(el["preference"], reason, username) == 1:
                     return 1
+                elif compare(el["preference"], reason, username) == 0:
+                    return 3
                 else:
                     return 0
 
@@ -170,33 +165,38 @@ def Give_answer(order, usertype, reason, username):
             time1 = int(line)
     now = datetime.now()
     clock = str(now.time())
+    print("Logging: " + str(order))
     log_order(order, username, clock)
     if order == "KettleOff":
         device = "19"
         status = "Off"
         add_pol(time1, usertype, device, status, reason)
-        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.9835083063374366"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn" \
+              ":upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.9835083063374366 "
         urllib.request.urlopen(url)
         return "Kettle is turned off for " + str(int(time1 / 60)) + " minutes"
     elif order == "KettleOn":
         device = "19"
         status = "On"
         add_pol(time1, usertype, device, status, reason)
-        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1&rand=0.8954535030571291"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=19&serviceId=urn" \
+              ":upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1&rand=0.8954535030571291 "
         urllib.request.urlopen(url)
         return "Kettle is turned on for " + str(int(time1 / 60)) + " minutes"
     elif order == "LampOn":
         device = "395"
         status = "On"
         add_pol(time1, usertype, device, status, reason)
-        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId" \
+              "=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=1 "
         urllib.request.urlopen(url)
         return "Lamp is turned on for " + str(int(time1 / 60)) + " minutes"
     elif order == "LampOff":
         device = "395"
         status = "Off"
         add_pol(time1, usertype, device, status, reason)
-        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.46221056753903733"
+        url = "http://10.12.102.156/port_3480/data_request?id=lu_action&output_format=json&DeviceNum=395&serviceId" \
+              "=urn:upnp-org:serviceId:SwitchPower1&action=SetTarget&newTargetValue=0&rand=0.46221056753903733 "
         urllib.request.urlopen(url)
         return "Lamp is turned off for " + str(int(time1 / 60)) + " minutes"
 
@@ -217,6 +217,7 @@ def add_pol(timer, user, device, status, preference):
 
 def user_type(user):
     conf_file = "./Conf/users.conf"
+    usertype = 0
     with open(conf_file) as file:
         for line in file:
             try:
@@ -285,7 +286,10 @@ def check_same(order):
     elif order == "LampOn":
         device = 395
         status = 1
-        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        try:
+            Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        except ValueError:
+            Status = 0
         if Status == status:
             return 1
         else:
@@ -293,7 +297,10 @@ def check_same(order):
     elif order == "LampOff":
         device = 395
         status = 0
-        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        try:
+            Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+        except ValueError:
+            Status = 0
         if Status == status:
             return 1
         else:
@@ -302,9 +309,26 @@ def check_same(order):
 
 def log_order(order, username, clock):
     file = "./include/ordersLog.txt"
-    order2 = str([order, username, clock]) + "\n"
+    userlog = "./Conf/" + str(username).title() + ".log"
+
+    date = [datetime.now().year, datetime.now().month, datetime.now().day]
+
+    order2 = str([order, username, clock, date]) + "\n"
+    order3 = str([order, clock, date]) + "\n"
+    with open(userlog, "a") as word_file:
+        word_file.write(str(order3))
     with open(file, "a") as word_file:
         word_file.write(str(order2))
+    words_file = './Conf/' + str(username).lower() + '.json'
+    with open(words_file) as word_file:
+        try:
+            order4 = json.load(word_file)
+        except:
+            order4 = []
+        order4.append([order, clock, date])
+        print(order4)
+    with open(words_file, "w") as word_file:
+        json.dump(order4, word_file)
 
 
 # FIXME: It doesn`t change dynamically, I don`t know why.
@@ -324,12 +348,13 @@ def activity():
     elif len(order2) > 0:
         for line in order2[-4:]:
             line = line.split("'")
-            act = re.findall('[A-Z][^A-Z]*', str(line[1]))
-            ac = str(act[0]) + " is turned " + str(act[1]).lower()
-            text = text + head + str(line[5])[:5] + mid + str(line[3]).capitalize() + mid2 + str(ac) + end
+            try:
+                act = re.findall('[A-Z][^A-Z]*', str(line[1]))
+                ac = str(act[0]) + " is turned " + str(act[1]).lower()
+                text = text + head + str(line[5])[:5] + mid + str(line[3]).capitalize() + mid2 + str(ac) + end
+            except:
+                text = "It is broken"
     with open("./templates/activities.html", "w") as word_file:
         word_file.write(text)
     return "activities.html"
 
-print(cl.classifyO(input("Type order: ")))
-print(cl.classifyR(input("Type order: ")))

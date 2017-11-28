@@ -21,7 +21,7 @@ import glob
 
 # Data loading params
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
-memes = glob.glob('./data/orders/*')
+memes = glob.glob('./data/orders/*[!.py]')
 numb = 0
 for meme in memes:
     tf.flags.DEFINE_string(str(meme)[15:], meme, "Data source for " + str(meme)[15:])
@@ -81,8 +81,8 @@ y_shuffled = y[shuffle_indices]
 
 # Split train/test set
 dev_sample_index = -1 * int(FLAGS.dev_sample_percentage * float(len(y)))
-x_train, x_dev = x_shuffled[:dev_sample_index], x_shuffled[dev_sample_index:]
-y_train, y_dev = y_shuffled[:dev_sample_index], y_shuffled[dev_sample_index:]
+x_train, x_dev = x_shuffled, x_shuffled[dev_sample_index:]
+y_train, y_dev = y_shuffled, y_shuffled[dev_sample_index:]
 print("Vocabulary Size: {:d}".format(len(vocab_processor.vocabulary_)))
 print("Train/Dev split: {:d}/{:d}".format(len(y_train), len(y_dev)))
 
