@@ -1,16 +1,14 @@
 #! /usr/bin/env python3
 
 import os
-
 import numpy as np
 import tensorflow as tf
-
 try:
     import data_helpers
     from text_cnn import TextCNN
 except ImportError:
-    from lib import data_helpers
-    from lib.text_cnn import TextCNN
+    from Classification import data_helpers
+    from Classification.text_cnn import TextCNN
 from tensorflow.contrib import learn
 import glob
 
@@ -20,8 +18,10 @@ import glob
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("Reasons", "./lib/runs/ClassReasons/checkpoints/", "Checkpoint directory from training run")
-tf.flags.DEFINE_string("Orders", "./lib/runs/ClassOrders/checkpoints/", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("Reasons", "./Classification/runs/ClassReasons/checkpoints/",
+                       "Checkpoint directory from training run")
+tf.flags.DEFINE_string("Orders", "./Classification/runs/ClassOrders/checkpoints/",
+                       "Checkpoint directory from training run")
 
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
@@ -77,12 +77,12 @@ def classifyR(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./lib/data/reasons/*[!.py]')
+    memes = glob.glob('./Classification/data/reasons/*[!.py]')
     scores = \
     sess.run(graph.get_operation_by_name("output/scores").outputs[0], {input_x: x_test_batch, dropout_keep_prob: 1.0})[
         0]
     if max(scores) > 2:
-        return str(memes[int(all_predictions[0])])[19:]
+        return str(memes[int(all_predictions[0])])[30:]
     else:
         return None
 
@@ -131,11 +131,11 @@ def classifyO(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./lib/data/orders/*[!.py]')
+    memes = glob.glob('./Classification/data/orders/*[!.py]')
     scores = \
     sess.run(graph.get_operation_by_name("output/scores").outputs[0], {input_x: x_test_batch, dropout_keep_prob: 1.0})[
         0]
     if max(scores) > 2:
-        return str(memes[int(all_predictions[0])])[18:]
+        return str(memes[int(all_predictions[0])])[29:]
     else:
         return None
