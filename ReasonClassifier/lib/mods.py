@@ -88,7 +88,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
                 last_mean_error = np.mean(np.abs(layer_2_error))
             else:
                 print("break:", np.mean(np.abs(layer_2_error)), ">", last_mean_error)
-                break
+                # break
 
         # in what direction is the target value?
         # were we really sure? if so, don't change too much.
