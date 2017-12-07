@@ -1,3 +1,0 @@
-['KettleOff', 'father', '19:09:38.321240']
-['LampOff', 'father', '19:29:39.953267']
-['LampOn', 'father', '19:34:20.289166']

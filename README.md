@@ -4,3 +4,5 @@ This is a old version of the Virtual assistant of MDX university that uses Feedf
 
 What is more:
 I have changed the ANN type in the middle of work, so it is not full version. It works without logging engine and etc.
+
+It is cool
