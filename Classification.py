@@ -1,10 +1,8 @@
 #! /usr/bin/env python3
 
 import os
-
 import numpy as np
 import tensorflow as tf
-
 try:
     import data_helpers
     from text_cnn import TextCNN
@@ -20,8 +18,10 @@ import glob
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_string("Reasons", "./runs/ClassReasons/checkpoints/", "Checkpoint directory from training run")
-tf.flags.DEFINE_string("Orders", "./runs/ClassOrders/checkpoints/", "Checkpoint directory from training run")
+tf.flags.DEFINE_string("Reasons", "./lib/runs/ClassReasons/checkpoints",
+                       "Checkpoint directory from training run")
+tf.flags.DEFINE_string("Orders", "./lib/runs/ClassOrders/checkpoints",
+                       "Checkpoint directory from training run")
 
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
@@ -38,7 +38,7 @@ def classifyR(x_raw):
     # print("")
     x_raw = [x_raw]
     # Map data into vocabulary
-    vocab_path = os.path.join(FLAGS.Reasons, "..", "vocab")
+    vocab_path = os.path.join("./lib/runs/ClassReasons/vocab")
     vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
     x_test = np.array(list(vocab_processor.transform(x_raw)))
 
@@ -77,15 +77,14 @@ def classifyR(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./data/reasons/*[!.py]')
+    memes = glob.glob('./lib/data/reasons/*[!.py]')
     scores = \
     sess.run(graph.get_operation_by_name("output/scores").outputs[0], {input_x: x_test_batch, dropout_keep_prob: 1.0})[
         0]
     if max(scores) > 2:
-        return str(memes[int(all_predictions[0])])[15:]
+        return str(memes[int(all_predictions[0])])[19:]
     else:
         return None
-
 
 def classifyO(x_raw):
     # print("\nParameters:")
@@ -94,7 +93,7 @@ def classifyO(x_raw):
     # print("")
     x_raw = [x_raw]
     # Map data into vocabulary
-    vocab_path = os.path.join(FLAGS.Orders, "..", "vocab")
+    vocab_path = os.path.join("./lib/runs/ClassOrders/vocab")
     vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
     x_test = np.array(list(vocab_processor.transform(x_raw)))
 
@@ -132,15 +131,11 @@ def classifyO(x_raw):
                 all_predictions = np.concatenate([all_predictions, batch_predictions])
 
     # Save the evaluation to a csv
-    memes = glob.glob('./data/orders/*[!.py]')
+    memes = glob.glob('./lib/data/orders/*[!.py]')
     scores = \
     sess.run(graph.get_operation_by_name("output/scores").outputs[0], {input_x: x_test_batch, dropout_keep_prob: 1.0})[
         0]
     if max(scores) > 2:
-        return str(memes[int(all_predictions[0])])[14:]
+        return str(memes[int(all_predictions[0])])[18:]
     else:
         return None
-
-
-while 1:
-    print(classifyO(input("Your order: ")))

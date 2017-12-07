@@ -1,15 +1,17 @@
 import urllib.request
 from datetime import datetime, time, timedelta
 import pymysql
-
+import re
 
 # from CBR.CBR import Use as cbr
 
-def checkTime(rules):
+
+def checkTime(order, rules):
     now = datetime.now()
     now = timedelta(0, int(now.second) + int(now.minute) * 60 + int(now.hour) * 3600)
     for rule in rules:
-        if now >= rule["start"] and now <= rule["stop"]:
+        if rule["stop"] <= now >= rule["start"] and str(order[0]).lower() == rule["device"] and order[1] == int(
+                rule["device"]):
             return rule
     return "0"
 
@@ -91,15 +93,30 @@ def Usertype(username):
     return ""
 
 
-def RBR(order, usertype):
+def RBR(order, username):
     rules = importrules()
     prefs = importprefs()
-    if check_same(order) == 1:
-        return 0
+    usertypein = Usertype(username)
+    conflict = {}
+    order2 = order
+    orderDevice = re.sub('[On]', '', order2)
+    orderDevice = re.sub('[Off]', '', orderDevice)
+    if order[-1] == "n":
+        orderStatus = 1
     else:
-        if str(checkTime(rules)) != "0":
-            test = []
-            # cbr(test)
+        orderStatus = 0
 
+    orderdata = [orderDevice, orderStatus]
 
-print(Usertype("father"))
+    # 0 - device in the same status
+    # 1 - you have no enough power
+    # 2 - device is changed - it is ok
+
+    if check_same(order) == 1:
+        return 0, {"Hello": "No conflict"}
+    else:
+        conflictrule = checkTime(orderdata, rules)
+        if str(conflictrule) != "0":
+            return 1, conflictrule
+        else:
+            return 2, {"Hello": "No conflict"}

@@ -48,10 +48,14 @@
 
     }
   }
-  function speak(text, callback) {
+  function speak2(text, callback) {
     var u = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+
+    u.voice = voices.filter(function(voice) { return voice.name == 'Google UK English Male'; })[0];
     u.text = text;
-    u.lang = 'en-US';
+    u.lang = 'en-GB';
+
 
     u.onend = function () {
         if (callback) {
@@ -67,6 +71,20 @@
 
     speechSynthesis.speak(u);
 }
+function speak(phrase) {
+    if(phrase =="")
+    {
+        alert("Please enter a phrase before asking me to speak for you. Thank you!");
+    }
+    else
+    {
+        var speech = new SpeechSynthesisUtterance(phrase);
+        var voices = window.speechSynthesis.getVoices()[3];
+        speech.default = false;
+        speech.voice = voices;
+        window.speechSynthesis.speak(speech);
+    }
+}
 
 
     </script>
@@ -80,10 +98,7 @@
         <a href="https://github.com/BiggyBaron/VirtualAssistant"
            class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Virtual
             Assistant</a>
-        <a href="/politics" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-           title="Global Politics"><i class="fa fa-globe"></i></a>
-        <a href="/logs" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-           title="Users logs"><i class="fa fa-user"></i></a>
+
         <a href="/" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
            title="Change user">Change User <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-circle"
                                                 style="height:25px;width:25px" alt="Avatar"></a>
@@ -92,8 +107,7 @@
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="/politics" class="w3-bar-item w3-button w3-padding-large">Politics</a>
-    <a href="/logs" class="w3-bar-item w3-button w3-padding-large">Logs</a>
+
     <a href="https://github.com/BiggyBaron/VirtualAssistant" class="w3-bar-item w3-button w3-padding-large">About us</a>
     <a href="/" class="w3-bar-item w3-button w3-padding-large">Change user</a>
 </div>

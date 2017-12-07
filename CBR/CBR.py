@@ -11,7 +11,7 @@ con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, 
 cur = con.cursor()
 
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
-usersList = {"adult": 0.3, "young": 0.9, "elder": 0.6}
+usersList = {"adult": 0.6, "young": 0.3, "elder": 0.6}
 
 
 def loadDataset(split, trainingSet=[], testSet=[]):
@@ -29,7 +29,7 @@ def loadDataset(split, trainingSet=[], testSet=[]):
         prefDict = {}
         for el in prefRaw:
             pref.append(list(el[2:]))
-            weightsRaw = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+            weightsRaw = [0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
             weights = [weightsRaw[x] for x in list(el[3:])]
             prefTemp = {el[2]: weights}
             prefDict.update(prefTemp)
@@ -47,12 +47,12 @@ def loadDataset(split, trainingSet=[], testSet=[]):
             cases.append(caseTemp)
         # print(cases)
         random.shuffle(cases)
+
         #        print(cases)
         for x in range(len(cases)):
-            if float(x / len(cases)) < float(split):
-                trainingSet.append(cases[x])
-            else:
-                testSet.append(cases[x])
+            trainingSet.append(cases[x])
+            testSet.append(cases[x])
+
 
 
 def loadDatasetNOpref(split, trainingSet=[], testSet=[]):
@@ -90,10 +90,8 @@ def loadDatasetNOpref(split, trainingSet=[], testSet=[]):
         random.shuffle(cases)
         #        print(cases)
         for x in range(len(cases)):
-            if float(x / len(cases)) < float(split):
-                trainingSet.append(cases[x])
-            else:
-                testSet.append(cases[x])
+            trainingSet.append(cases[x])
+            testSet.append(cases[x])
 
 
 def loadDataset2():
@@ -275,7 +273,8 @@ def train():
         organism = [king]
         for x in range(Deep):
             for k in range(100):
-                new_weight = [float(i) * pow(10.0, -x) for i in [random.uniform(-1.0, 1.0) for _ in range(14)]]
+                new_weight = [float(i) * pow(10.0, -x) for i in
+                              [random.SystemRandom().uniform(-1.0, 1.0) for _ in range(14)]]
                 genome = [abs(float((x + y))) for x, y in zip(genome, new_weight)]
                 organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(specy(TresholdValue, genome))})
         prince = max(organism, key=lambda x: x['Accuracy'])
@@ -350,7 +349,8 @@ def trainNoPref(Epos, Deep):
         organism = [king]
         for x in range(Deep):
             for k in range(100):
-                new_weight = [float(i) * pow(10.0, -x) for i in [random.uniform(-1.0, 1.0) for _ in range(14)]]
+                new_weight = [float(i) * pow(10.0, -x) for i in
+                              [random.SystemRandom().uniform(-1.0, 1.0) for _ in range(14)]]
                 genome = [abs(float((x + y))) for x, y in zip(genome, new_weight)]
                 organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(specy(TresholdValue, genome))})
         prince = max(organism, key=lambda x: x['Accuracy'])
@@ -407,4 +407,6 @@ def Use(test):
     return getResponse(getNeighbors(loadDataset2(), test, 0.9, weights))
 
 
-train()
+def main(usertypein, usertypeout, reasonin, reasonout):
+    test = [str.lower(usertypein), str.lower(usertypeout), str.lower(reasonin), str.lower(reasonout)]
+    return Use(test)
