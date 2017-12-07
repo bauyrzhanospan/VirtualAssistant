@@ -37,7 +37,6 @@ def Give_answer(order):
         return "Lamp is turned off"
 
 
-# TODO: Make this work
 def DMorder(text, username):
     # text is raw input
     order = classify.classifyO(text)

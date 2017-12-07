@@ -1,7 +1,8 @@
 import time as TTT
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Markup
 import DM
 import urllib
+import random
 
 app = Flask(__name__)
 
@@ -16,9 +17,34 @@ def check_status(deviceNum):
     except:
         return "or not?"
 
+
+def randomiser(cmd):
+    if cmd == "user":
+        users = ["Father", "Mother", "Son", "Grandpa"]
+        usertypes = {"Father": "adult", "Mother": "adult", "Son": "young", "Grandpa": "older"}
+        priorities = {"adult": "highest", "older": "second highest", "young": "lowest"}
+        preferences = {"adult": "1: Security, 2: Health, 3: Work, 4: Food, 5: Energy, 6: Entertainment",
+                       "older": "1: Health, 2: Security, 3: Work, 4: Food, 5: Energy, 6: Entertainment",
+                       "young": "1: Security, 2: Work, 3: Entertainment, 4: Health, 5: Food, 6: Energy"}
+        user = random.SystemRandom().choice(users)
+        usertype = usertypes[user]
+        priority = priorities[usertype]
+        preference = preferences[usertype]
+        answer = str(user) + "'.<br>" + str(user) + " is '" + str(usertype) + "' usertype which is the " \
+                 + str(priority) + " priority usertype.<br>" + str(user) + " has next preferences:<br><br>" \
+                 + str(preference)
+    return answer
+
+
 ## Login page without pass
 @app.route("/")
 def login():
+    header = "Welcome to the evaluation test"
+    Info = "You are chosen to be the one who will test our new system.<br>Please, go through instructions. " \
+           "<br><br><h4>Instruction:</h4><br>" \
+           "Evaluation system is fully randomised with secure blind crypto randomizer.<br>And randomiser choose you " \
+           "to be user '" + str(randomiser("user"))
+    Info = Markup(Info)
     return render_template(
         "login.html", **locals())
 
