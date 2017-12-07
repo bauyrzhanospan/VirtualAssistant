@@ -10,10 +10,11 @@ def checkTime(order, rules):
     now = datetime.now()
     now = timedelta(0, int(now.second) + int(now.minute) * 60 + int(now.hour) * 3600)
     for rule in rules:
-        if rule["stop"] <= now >= rule["start"] and str(order[0]).lower() == rule["device"] and order[1] == int(
-                rule["device"]):
+        if rule["start"] <= now <= rule["stop"] and str(order[0]).lower() == rule["device"] and order[1] == int(
+                rule["status"]):
             return rule
-    return "0"
+        else:
+            return "0"
 
 
 def importrules():
@@ -37,46 +38,49 @@ def importprefs():
 
 
 def check_same(order):
-    data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
-    d = data.decode("utf-8")
-    if order == "KettleOff":
-        device = 19
-        status = 0
-        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
-        if Status == status:
-            return 1
-        else:
-            return 0
-    elif order == "KettleOn":
-        device = 19
-        status = 1
-        Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
-        if Status == status:
-            return 1
-        else:
-            return 0
-    elif order == "LampOn":
-        device = 395
-        status = 1
-        try:
+    try:
+        data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
+        d = data.decode("utf-8")
+        if order.lower() == "KettleOff".lower():
+            device = 19
+            status = 0
             Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
-        except ValueError:
-            Status = 0
-        if Status == status:
-            return 1
-        else:
-            return 0
-    elif order == "LampOff":
-        device = 395
-        status = 0
-        try:
+            if Status == status:
+                return 1
+            else:
+                return 0
+        elif order.lower() == "KettleOn".lower():
+            device = 19
+            status = 1
             Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
-        except ValueError:
-            Status = 0
-        if Status == status:
-            return 1
-        else:
-            return 0
+            if Status == status:
+                return 1
+            else:
+                return 0
+        elif order.lower() == "LampOn".lower():
+            device = 395
+            status = 1
+            try:
+                Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+            except ValueError:
+                Status = 0
+            if Status == status:
+                return 1
+            else:
+                return 0
+        elif order.lower() == "LampOff".lower():
+            device = 395
+            status = 0
+            try:
+                Status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
+            except ValueError:
+                Status = 0
+            if Status == status:
+                return 1
+            else:
+                return 0
+    except ValueError:
+        return 0
     return 0
 
 
@@ -102,10 +106,9 @@ def RBR(order, username):
     orderDevice = re.sub('[On]', '', order2)
     orderDevice = re.sub('[Off]', '', orderDevice)
     if order[-1] == "n":
-        orderStatus = 1
-    else:
         orderStatus = 0
-
+    else:
+        orderStatus = 1
     orderdata = [orderDevice, orderStatus]
 
     # 0 - device in the same status

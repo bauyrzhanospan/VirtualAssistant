@@ -3,6 +3,7 @@ from CBR import CBR
 import Classification as classify
 from datetime import datetime
 import urllib
+import re
 
 def Give_answer(order):
     now = datetime.now()
@@ -72,15 +73,25 @@ def DMreason(text, username, order):
     reason = classify.classifyR(text)
     usertypein = RBR.Usertype(username)
     rules = RBR.importrules()
-    conflict = RBR.checkTime(rules)
+    print("Here is conflict")
+    order2 = order
+    orderDevice = re.sub('[On]', '', order2)
+    orderDevice = re.sub('[Off]', '', orderDevice)
+    if order[-1] == "n":
+        orderStatus = 0
+    else:
+        orderStatus = 1
+    orderdata = [orderDevice, orderStatus]
+    conflict = RBR.checkTime(orderdata, rules)
+    print(conflict)
     usertypeout = conflict["user"]
     reasonout = conflict["reason"]
 
     responce = CBR.main(usertypein, usertypeout, reason, reasonout)
     if responce == 0:
         answer = "Sorry, your reason is not strong enough"
-        smile = "./static/sorry.gif"
+        smile = "https://github.com/BiggyBaron/VirtualAssistant/blob/master/static/sorry.gif?raw=true"
     else:
         answer = Give_answer(order)
-        smile = "./static/sucsses.gif"
-    return answer, reason, smile
+        smile = "https://github.com/BiggyBaron/VirtualAssistant/blob/master/static/sucsses.gif?raw=true"
+    return answer, reason, smile, responce
