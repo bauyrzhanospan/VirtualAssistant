@@ -81,7 +81,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
         # how much did we miss the target value?
         layer_2_error = y - layer_2
 
-        if (j% 10000) == 0 and j > 5000:
+        if (j% 100) == 0 and j > 50:
             # if this 10k iteration's error is greater than the last iteration, break out
             if np.mean(np.abs(layer_2_error)) < last_mean_error:
                 print("delta after "+str(j)+" iterations:" + str(np.mean(np.abs(layer_2_error))))
