@@ -1,6 +1,0 @@
-model_checkpoint_path: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6600"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6200"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6300"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6400"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6500"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassOrders/checkpoints/model-6600"

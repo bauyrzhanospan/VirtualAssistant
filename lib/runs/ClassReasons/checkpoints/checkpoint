@@ -1,6 +1,0 @@
-model_checkpoint_path: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21700"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21300"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21400"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21500"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21600"
-all_model_checkpoint_paths: "/home/naboo/Documents/VirtualAssistant/lib/runs/ClassReasons/checkpoints/model-21700"

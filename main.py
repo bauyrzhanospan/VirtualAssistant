@@ -12,7 +12,7 @@ app = Flask(__name__)
 def write2dbLOG(key, value):
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
-    id = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000") - 1
+    id = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000")
     cur.execute("UPDATE `eval` SET `" + str(key) + "` = '" + str(value) + "' WHERE `eval`.`id` = '" + str(id) + "';")
     print(id)
     print("Key is " + str(key) + " and value is " + str(value))
@@ -80,9 +80,9 @@ def randomiser():
     con.close()
 
     # Write to answer
-    priorities = {"adult": "highest", "older": "second highest", "young": "lowest"}
+    priorities = {"adult": "highest", "elder": "second highest", "young": "lowest"}
     preferences = {"adult": "1: Security, 2: Health, 3: Work, 4: Food, 5: Energy, 6: Entertainment",
-                   "older": "1: Health, 2: Security, 3: Work, 4: Food, 5: Energy, 6: Entertainment",
+                   "elder": "1: Health, 2: Security, 3: Work, 4: Food, 5: Energy, 6: Entertainment",
                    "young": "1: Security, 2: Work, 3: Entertainment, 4: Health, 5: Food, 6: Energy"}
     priority = priorities[user]
     preference = preferences[user]
@@ -150,7 +150,7 @@ def orderClassification(username, order="noorder"):
         if responce == 0:
             statusLamp = check_status(395)
             statusKettle = check_status(19)
-            smile = Markup("../VirtualAssistant/static/yesno.gif?raw=true")
+            smile = Markup("https://github.com/BiggyBaron/VirtualAssistant/blob/master/static/yesno.gif?raw=true")
             return render_template('yesno.html', **locals())
         elif responce == 1:
             statusLamp = check_status(395)
