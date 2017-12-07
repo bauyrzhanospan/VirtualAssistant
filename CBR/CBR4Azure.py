@@ -217,7 +217,8 @@ def loadDataset(split, trainingSet=[], testSet=[]):
              [0.3, 0, 0, 0, 0, 0.6, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 1]]
     for x in range(len(cases)):
         trainingSet.append(cases[x])
-        testSet.append(cases[x])
+        if float(x) > float(len(cases) * 0.6):
+            testSet.append(cases[x])
 
 
 def loadDatasetNOpref(split, trainingSet=[], testSet=[]):
@@ -428,7 +429,8 @@ def loadDatasetNOpref(split, trainingSet=[], testSet=[]):
              [0.6, 0, 0, 0, 1.0, 0, 0, 0.3, 0, 0, 0, 0, 1.0, 0, 1]]
     for x in range(len(cases)):
         trainingSet.append(cases[x])
-        testSet.append(cases[x])
+        if float(x) > float(len(cases) * 0.6):
+            testSet.append(cases[x])
 
 
 def euclideanDistance(instance1, instance2, length, weights):
