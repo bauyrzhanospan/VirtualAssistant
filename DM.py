@@ -61,8 +61,8 @@ def DMorder(text, username):
         answer = Give_answer(order)
     elif resp == 1:
         responce = 0
-        answer = "Sorry, but you should not change the device status. Do you want to " \
-                 "try to change it anyway? Answer yes or no: "
+        answer = "Sorry, another user has already set the device in an opposite status." \
+                 " Do you want to try to change it anyway? Answer yes or no: "
 
     return responce, answer, conflict, order
     # conflict - conflicting rule full data
@@ -70,6 +70,7 @@ def DMorder(text, username):
 
 def DMreason(text, username, order):
     # conflict - conflicting rule full data as dictionary, conflict["user"] = usertype
+    print(order)
     reason = classify.classifyR(text)
     usertypein = RBR.Usertype(username)
     rules = RBR.importrules()
@@ -82,8 +83,12 @@ def DMreason(text, username, order):
     else:
         orderStatus = 1
     orderdata = [orderDevice, orderStatus]
+    print(orderdata)
+    print(rules)
     conflict = RBR.checkTime(orderdata, rules)
     print(conflict)
+    while conflict == None:
+        conflict = RBR.checkTime(orderdata, rules)
     usertypeout = conflict["user"]
     reasonout = conflict["reason"]
 

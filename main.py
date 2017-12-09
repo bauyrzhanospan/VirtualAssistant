@@ -1,10 +1,8 @@
-import time as TTT
 from flask import Flask, render_template, request, Markup
 import DM
 import urllib
 import random
 import pymysql
-
 
 app = Flask(__name__)
 
@@ -14,8 +12,6 @@ def write2dbLOG(key, value):
     cur = con.cursor(pymysql.cursors.DictCursor)
     id = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000")
     cur.execute("UPDATE `eval` SET `" + str(key) + "` = '" + str(value) + "' WHERE `eval`.`id` = '" + str(id) + "';")
-    print(id)
-    print("Key is " + str(key) + " and value is " + str(value))
     con.commit()
     cur.close()
     con.close()
@@ -29,7 +25,7 @@ def check_status(deviceNum):
         states = ["off", "on"]
         return states[Status]
     except:
-        return "or not?"
+        return "somehow?"
 
 
 def randomiser():
@@ -42,7 +38,9 @@ def randomiser():
     devices = ["kettle", "lamp"]
     u = random.SystemRandom().choice(users)
     user = usertypes2[u]
-    u2 = random.SystemRandom().choice(users)
+    users2 = users
+    users2.remove(u)
+    u2 = random.SystemRandom().choice(users2)
     user2 = usertypes2[u2]
     reason = random.SystemRandom().choice(reasons)
     dev = random.SystemRandom().choice(devices)
@@ -89,32 +87,73 @@ def randomiser():
     priority2 = priorities[user2]
     preference2 = preferences[user2]
 
-    answer = "You are chosen to be the one who will test our new system.<br>Please, go through instructions. " \
-             "<br><br><h4>Instruction:</h4><br>" \
-             "Evaluation system is fully randomised with secure blind crypto randomizer.<br>And randomiser choose you " \
+    answer = "You are chosen to be the one who will test our new system.<br>Please, go through the instructions. " \
+             "<br><br><h4>Instructions:</h4>" \
+             "Evaluation system is fully randomised with the secure blind crypto randomiser.<br>" \
+             "And randomiser has chosen you " \
              "to be user '"
-    answer = answer + str(u) + "'.<br>" + str(u) + " is '" + str(user) + "' usertype which is the " \
-             + str(priority) + " priority usertype.<br>" + str(u) + " has next preferences:<br><br>" \
+    answer = answer + str(u) + "'.<br>" + str(u) + " is the '" + str(user) + "' usertype which is the " \
+             + str(priority) + " priority usertype.<br>" + str(u) + " has the " \
+                                                                    "following preferences (1 is the highest):<br>" \
              + str(preference) + "<br>"
 
-    answer = answer + "<br>Other user of the system is '" + str(u2) + "' with usertype '" + str(
+    answer = answer + "Another user of the system is the '" + str(u2) + "' with usertype '" + str(
         user2) + "' which is the " \
-             + str(priority2) + " priority usertype.<br>" + str(u2) + " has next preferences:<br><br>" \
-             + str(preference2) + "<br><br>" + "<h5>Conflict:</h5><br>There is conflict between you and other " \
-                                               "user.<br>Other user turned the " + str(dev) + " " + \
-             str(["off", "on"][status]) + " with reason based on the " + str(reason) + " issue.<br>" + \
+             + str(priority2) + " priority usertype.<br>" + str(u2) + " has the following preferences:<br>" \
+             + str(preference2) + "<br><br>" + "<h5>Conflict:</h5><br>There is a conflict between you and the other " \
+                                               "user.<br>Another user turned the " + str(dev) + " " + \
+             str(["off", "on"][status]) + " with a reason based on the " + str(reason) + " issue.<br>" + \
              "But you need the device to be in an opposite status because your reason is " + str(Newreason) \
-             + " issue.<br> Let`s check how system will resolve this conflict. <br><h3>Manual</h3><br>" + \
-             "<ol><li>At the login page choose '" + str(u) + "'. </li>" + \
-             "<li>Then type or say (by clicking the microphone) order with your own words to turn " \
+             + " issue.<br> Let`s check how the system will resolve this conflict."
+    Manual = "<ol><li>On the login page choose '" + str(u) + "'. </li>" + \
+             "<li>Then type or say (by clicking the microphone) in your own words the order to turn " \
              + str(["on", "off"][status]) + " the " + str(dev) + ".</li>" \
-             + "<li>Then the system will inform you that there is a conflict and asks you about " \
-               "next step. Type or say 'yes'." + "</li>" \
-             + "<li>Then type or say (by clicking the microphone) reason with your own words about " + \
-             str(Newreason) + " issue.</li>" + "<li>Then system resolves conflict and you need to answer the questions." \
+             + "<li>Then the system will inform you that there is a conflict and will ask you about " \
+               "the next step. Type or say 'yes'." + "</li>" \
+             + "<li>Then type or say (by clicking the microphone) in your own words the reason about the " + \
+             str(Newreason) + " issue.</li>" + "<li>Then the system resolves the conflict and " \
+                                               "you will need to answer the questions." \
                                                "</li></ol>"
+    summary = "<h2>Story:</h2><ol><li>Your user is " + str(u) + ", " + str(user) + " usertype (" + str(priority) + \
+              " priority) with next preferences:<br>" + str(preference) + "<br></li><li>" + \
+              "Other user is " + str(u2) + ", " + str(user2) + " usertype (" + str(priority2) + \
+              " priority) with next preferences:<br>" + str(preference2) + "<br></li><li>" + \
+              "Conflict: you want to turn the " + str(dev) + " " + str(["on", "off"][status]) + \
+              " but other user did the opposite. </li><li>" + \
+              "You reason is: " + str(Newreason) + \
+              "</li><li>Other user`s reason is " + str(reason) + "</li>"
     with open("answer.txt", 'w') as out:
         out.write(answer)
+    with open("manual.txt", 'w') as o:
+        o.write(Manual)
+    with open("summary.txt", 'w') as o:
+        o.write(summary)
+
+
+def Summary():
+    header = "Summary"
+    with open("summary.txt", 'r') as out:
+        summary = out.read()
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    cur = con.cursor(pymysql.cursors.DictCursor)
+    cur.execute('SELECT * FROM `eval`')
+    dataset = cur.fetchall()
+    cur.close()
+    con.close()
+    print(dataset)
+    orderraw = dataset[-1]["orderraw"]
+    orderdef = dataset[-1]["orderdef"]
+    reasonraw = dataset[-1]["reasonraw"]
+    reasondef = dataset[-1]["reasondef"]
+    output = dataset[-1]["output"]
+    winner = [" other user`s ", " your "][output]
+    summary = summary + "<li>System desided that" + str(winner) + \
+              "order has higher priority.</li></ol><h2>Classification:</h2><ol><li>Your order was: " + \
+              str(orderraw) + "</li><li>System classified order as: " + str(orderdef) + "</li><li>" + \
+              "Your reason was: " + str(reasonraw) + "</li><li>" + \
+              "System classified reason as: " + str(reasondef) + "</li></ol>"
+    answer = Markup(summary)
+    return answer, header
 
 
 def readANS():
@@ -125,22 +164,29 @@ def readANS():
     return Info, header
 
 
+def readMan():
+    with open("manual.txt", 'r') as out:
+        answer = out.read()
+    Info = Markup(answer)
+    header = "Manual"
+    return Info, header
+
+
 ## Login page without pass
 @app.route("/")
 def login():
     randomiser()
     Info, header = readANS()
+    manual, mheader = readMan()
     return render_template(
         "login.html", **locals())
 
-
-# TODO: put try and exception for classificationQ
-# TODO: put manual under Virtual Assistant emoji
 
 @app.route("/<username>", methods=['GET', 'POST'])
 @app.route("/<username>/<order>/", methods=["GET", "POST"])
 def orderClassification(username, order="noorder"):
     Info, header = readANS()
+    manual, mheader = readMan()
     statusLamp = check_status(395)
     statusKettle = check_status(19)
     text = ''
@@ -148,7 +194,13 @@ def orderClassification(username, order="noorder"):
     if request.method == 'POST':
         text = request.form['text']
         write2dbLOG("orderraw", text)
-        responce, answer, conflict, order = DM.DMorder(text, username)
+        try:
+            responce, answer, conflict, order = DM.DMorder(text, username)
+        except IndexError:
+            answer = "Sorry, I could not classify your order. Please, try again with different phrase."
+            smile = Markup("https://github.com/BiggyBaron/VirtualAssistant/blob/master/static/waiting.gif?raw=true")
+            order = "noorder"
+            return render_template('main.html', **locals())
         write2dbLOG("orderdef", order)
         if responce == 0:
             statusLamp = check_status(395)
@@ -169,6 +221,7 @@ def orderClassification(username, order="noorder"):
 @app.route("/<username>/<order>/yesno", methods=["GET", "POST"])
 def yesno(username, order):
     Info, header = readANS()
+    manual, mheader = readMan()
     statusLamp = check_status(395)
     statusKettle = check_status(19)
     text = ''
@@ -192,6 +245,7 @@ def yesno(username, order):
 @app.route("/<username>/<reason>/<order>", methods=["GET", "POST"])
 def reasonClassification(username, order, reason):
     Info, header = readANS()
+    manual, mheader = readMan()
     statusLamp = check_status(395)
     statusKettle = check_status(19)
     text = ''
@@ -200,13 +254,20 @@ def reasonClassification(username, order, reason):
         write2dbLOG("reasonraw", text)
         statusLamp = check_status(395)
         statusKettle = check_status(19)
-        answer, reason, smile, responce = DM.DMreason(text, username, order)
+        try:
+            answer, reason, smile, responce = DM.DMreason(text, username, order)
+        except IndexError:
+            answer = "Sorry, I could not classify your reason. Please, try again with different phrase."
+            smile = Markup("https://github.com/BiggyBaron/VirtualAssistant/blob/master/static/waiting.gif?raw=true")
+            reason = "noreason"
+            return render_template('reason.html', **locals())
         smile = Markup(smile)
         write2dbLOG("output", responce)
         write2dbLOG("reasondef", reason)
+        Info, header = Summary()
     statusLamp = check_status(395)
     statusKettle = check_status(19)
-    return render_template('main.html', **locals())
+    return render_template('summary.html', **locals())
 
 
 if __name__ == "__main__":

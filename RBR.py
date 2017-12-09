@@ -14,7 +14,7 @@ def checkTime(order, rules):
                 rule["status"]):
             return rule
         else:
-            return "0"
+            return None
 
 
 def importrules():
