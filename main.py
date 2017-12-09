@@ -134,6 +134,9 @@ def login():
         "login.html", **locals())
 
 
+# TODO: put try and exception for classificationQ
+# TODO: put manual under Virtual Assistant emoji
+
 @app.route("/<username>", methods=['GET', 'POST'])
 @app.route("/<username>/<order>/", methods=["GET", "POST"])
 def orderClassification(username, order="noorder"):
