@@ -25,7 +25,14 @@
     <!-- HTML5 Speech Recognition API -->
     <script>
   function startDictation() {
-
+    if (document.getElementById("imgClickAndChange").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
+        {
+            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
+        }
+        else
+        {
+            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
+        }
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
       var recognition = new webkitSpeechRecognition();
