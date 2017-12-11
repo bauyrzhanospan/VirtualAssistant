@@ -32,6 +32,7 @@ def randomiser():
     # Change rules table
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
+
     users = ["Father", "Mother", "Son", "Grandpa"]
     usertypes2 = {"Father": "adult", "Mother": "adult", "Son": "young", "Grandpa": "elder"}
     reasons = ["energy", "entertainment", "food", "health", "security", "work"]
@@ -74,6 +75,7 @@ def randomiser():
                 str(user) + "', '" + str(user2) + "', '" + str(order) + "', '" + str(reason) + "', '" + str(
         Newreason) + "');")
     con.commit()
+    id23 = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000")
     cur.close()
     con.close()
 
@@ -87,21 +89,25 @@ def randomiser():
     priority2 = priorities[user2]
     preference2 = preferences[user2]
 
-    answer = "You are chosen to be the one who will test our new system.<br>Please, go through the instructions. " \
+    answer = "Your ID is " + str(id23) + "<br>" + \
+             "The system can be used by different users (Father, Mother, Son, Grandpa) that have different " \
+             "roles (Adult, Elder, Young).<br>Please, go through the instructions. " \
              "<br><br><h4>Instructions:</h4>" \
-             "Evaluation system is fully randomised with the secure blind crypto randomiser.<br>" \
-             "And randomiser has chosen you " \
+             "The system has randomly chosen " \
              "to be user '"
     answer = answer + str(u) + "'.<br>" + str(u) + " is the '" + str(user) + "' usertype which is the " \
              + str(priority) + " priority usertype.<br>" + str(u) + " has the " \
                                                                     "following preferences (1 is the highest):<br>" \
              + str(preference) + "<br>"
 
-    answer = answer + "Another user of the system is the '" + str(u2) + "' with usertype '" + str(
+    answer = answer + "The other user of the system is the '" + str(u2) + "' with usertype '" + str(
         user2) + "' which is the " \
-             + str(priority2) + " priority usertype.<br>" + str(u2) + " has the following preferences:<br>" \
-             + str(preference2) + "<br><br>" + "<h5>Conflict:</h5><br>There is a conflict between you and the other " \
-                                               "user.<br>Another user turned the " + str(dev) + " " + \
+             + str(priority2) + " priority usertype.<br> The other user '" + str(u2) + "' has the " \
+                                                                                       "following preferences:<br>" \
+             + str(preference2) + "<br><br>" + "<h5>Conflict:</h5><br>There is a conflict between you (" + \
+             str(u) + ":" + str(user) + ") and the other " \
+                                        "user (" + str(u2) + ":" + str(
+        user2) + ") .<br>The other user turned the " + str(dev) + " " + \
              str(["off", "on"][status]) + " with a reason based on the " + str(reason) + " issue.<br>" + \
              "But you need the device to be in an opposite status because your reason is " + str(Newreason) \
              + " issue.<br> Let`s check how the system will resolve this conflict."
@@ -112,16 +118,17 @@ def randomiser():
                "the next step. Type or say 'yes'." + "</li>" \
              + "<li>Then type or say (by clicking the microphone) in your own words the reason about the " + \
              str(Newreason) + " issue.</li>" + "<li>Then the system resolves the conflict and " \
-                                               "you will need to answer the questions." \
+                                               "you will need to answer the questionnaire." \
                                                "</li></ol>"
     summary = "<h2>Story:</h2><ol><li>Your user is " + str(u) + ", " + str(user) + " usertype (" + str(priority) + \
               " priority) with next preferences:<br>" + str(preference) + "<br></li><li>" + \
               "Other user is " + str(u2) + ", " + str(user2) + " usertype (" + str(priority2) + \
               " priority) with next preferences:<br>" + str(preference2) + "<br></li><li>" + \
-              "Conflict: you want to turn the " + str(dev) + " " + str(["on", "off"][status]) + \
-              " but other user did the opposite. </li><li>" + \
-              "You reason is: " + str(Newreason) + \
-              "</li><li>Other user`s reason is " + str(reason) + "</li>"
+              "Conflict: you (" + str(u) + ":" + str(user) + ") want to turn the " + str(dev) + \
+              " " + str(["on", "off"][status]) + \
+              " but other user (" + str(u2) + ":" + str(user2) + ") did the opposite. </li><li>" + \
+              "Your (" + str(u2) + ", " + str(user2) + ") reason is: " + str(Newreason).upper() + \
+              "</li><li>Other user`s (" + str(u2) + ", " + str(user2) + ") reason is " + str(reason).upper() + "</li>"
     with open("answer.txt", 'w') as out:
         out.write(answer)
     with open("manual.txt", 'w') as o:
@@ -148,7 +155,7 @@ def Summary():
     output = dataset[-1]["output"]
     winner = [" other user`s ", " your "][output]
     summary = summary + "<li>System desided that" + str(winner) + \
-              "order has higher priority.</li></ol><h2>Classification:</h2><ol><li>Your order was: " + \
+              "order has a higher priority.</li></ol><h2>Classification:</h2><ol><li>Your order was: " + \
               str(orderraw) + "</li><li>System classified order as: " + str(orderdef) + "</li><li>" + \
               "Your reason was: " + str(reasonraw) + "</li><li>" + \
               "System classified reason as: " + str(reasondef) + "</li></ol>"
@@ -190,7 +197,7 @@ def orderClassification(username, order="noorder"):
     statusLamp = check_status(395)
     statusKettle = check_status(19)
     text = ''
-    answer = "Hello, " + str(username).title() + ", I am your Virtual Assistant. Type or say me your order."
+    answer = "Hello, " + str(username).title() + ", I am your Virtual Assistant. Type or tell me your order."
     if request.method == 'POST':
         text = request.form['text']
         write2dbLOG("orderraw", text)

@@ -61,7 +61,8 @@ def DMorder(text, username):
         answer = Give_answer(order)
     elif resp == 1:
         responce = 0
-        answer = "Sorry, another user has already set the device in an opposite status." \
+        answer = "Sorry, another user (" + str(conflict["user"]) + \
+                 ") has already set the device in an opposite status." \
                  " Do you want to try to change it anyway? Answer yes or no: "
 
     return responce, answer, conflict, order
