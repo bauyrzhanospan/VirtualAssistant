@@ -1,0 +1,7 @@
+Flask==0.12.2
+Flask-Assistant==0.2.93
+nltk==3.2.5
+numpy==1.13.3
+PyMySQL==0.7.11
+pyOpenSSL==17.3.0
+

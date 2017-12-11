@@ -127,8 +127,8 @@ def randomiser():
               "Conflict: you (" + str(u) + ":" + str(user) + ") want to turn the " + str(dev) + \
               " " + str(["on", "off"][status]) + \
               " but other user (" + str(u2) + ":" + str(user2) + ") did the opposite. </li><li>" + \
-              "Your (" + str(u2) + ", " + str(user2) + ") reason is: " + str(Newreason).upper() + \
-              "</li><li>Other user`s (" + str(u2) + ", " + str(user2) + ") reason is " + str(reason).upper() + "</li>"
+              "Other user`s (" + str(u2) + ", " + str(user2) + ") reason is " + str(reason).upper() + \
+              "</li><li>Your (" + str(u) + ", " + str(user) + ") reason is: "
     with open("answer.txt", 'w') as out:
         out.write(answer)
     with open("manual.txt", 'w') as o:
@@ -154,7 +154,7 @@ def Summary():
     reasondef = dataset[-1]["reasondef"]
     output = dataset[-1]["output"]
     winner = [" other user`s ", " your "][output]
-    summary = summary + "<li>System desided that" + str(winner) + \
+    summary = summary + str(reasondef).upper() + "</li>" + "<li>System desided that" + str(winner) + \
               "order has a higher priority.</li></ol><h2>Classification:</h2><ol><li>Your order was: " + \
               str(orderraw) + "</li><li>System classified order as: " + str(orderdef) + "</li><li>" + \
               "Your reason was: " + str(reasonraw) + "</li><li>" + \
