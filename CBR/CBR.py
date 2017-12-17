@@ -56,25 +56,29 @@ def specy(weights, test):
         del (training[el]["id"])
     del (test["output"])
     del (test["id"])
-
+    training2 = []
     for trainings in training:
         for key in trainings:
             trainings[key] = trainings[key] * weights[key]
+        training2.append(trainings)
 
+    test2 = {}
     for key in test:
-        test[key] = test[key] * weights[key]
+        test2[key] = test[key] * weights[key]
 
-    df = pd.DataFrame(training)
+    df = pd.DataFrame(training2)
+
     covmx = df.cov()
+
     invcovmx = sp.linalg.inv(covmx)
 
-    tests = [test["reasonIN"], test["reasonOUT"],
-             test["usertypeIN"], test["usertypeOUT"]]
+    tests = [test2["reasonIN"], test2["reasonOUT"],
+             test2["usertypeIN"], test2["usertypeOUT"]]
 
     distances = []
-    for k in range(len(training)):
-        trains = [training[k]["reasonIN"], training[k]["reasonOUT"],
-                  training[k]["usertypeIN"], training[k]["usertypeOUT"]]
+    for k in range(len(training2)):
+        trains = [training2[k]["reasonIN"], training2[k]["reasonOUT"],
+                  training2[k]["usertypeIN"], training2[k]["usertypeOUT"]]
         distance = mahalanobis(trains, tests, invcovmx)
         distances.append([k, distance])
 
@@ -110,8 +114,8 @@ def train():
     start_time = time.time()
     king = {"Epoch": 0, "Genome": weights, "Accuracy": float(Accuracy(weights))}
     speed = time.time() - start_time
-    Epos = 800
-    Deep = 3
+    Epos = 1000
+    Deep = 1
     print("Number of epochs is " + str(Epos))
     print("Deepness of the analysis is " + str(Deep))
     execution_time = 1.1 * speed * Epos * Deep * int(200)
