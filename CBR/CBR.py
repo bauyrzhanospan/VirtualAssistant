@@ -1,5 +1,6 @@
 import operator
 import random
+import numpy as np
 import time
 import datetime
 import pymysql
@@ -41,11 +42,11 @@ def load():
                 n = 10
 
     training = casesRaw
-    test = list(casesRaw[0::5])
+    test = list(casesRaw[0::3])
     return training, test
 
 
-def specy(weights, test):
+def specy(covmx, test):
     training, f = load()
     trainingRaw = []
     for mem in training:
@@ -56,29 +57,18 @@ def specy(weights, test):
         del (training[el]["id"])
     del (test["output"])
     del (test["id"])
-    training2 = []
-    for trainings in training:
-        for key in trainings:
-            trainings[key] = trainings[key] * weights[key]
-        training2.append(trainings)
+    try:
+        invcovmx = sp.linalg.inv(covmx)
+    except:
+        return 2
 
-    test2 = {}
-    for key in test:
-        test2[key] = test[key] * weights[key]
-
-    df = pd.DataFrame(training2)
-
-    covmx = df.cov()
-
-    invcovmx = sp.linalg.inv(covmx)
-
-    tests = [test2["reasonIN"], test2["reasonOUT"],
-             test2["usertypeIN"], test2["usertypeOUT"]]
+    tests = [test["reasonIN"], test["reasonOUT"],
+             test["usertypeIN"], test["usertypeOUT"]]
 
     distances = []
-    for k in range(len(training2)):
-        trains = [training2[k]["reasonIN"], training2[k]["reasonOUT"],
-                  training2[k]["usertypeIN"], training2[k]["usertypeOUT"]]
+    for k in range(len(training)):
+        trains = [training[k]["reasonIN"], training[k]["reasonOUT"],
+                  training[k]["usertypeIN"], training[k]["usertypeOUT"]]
         distance = mahalanobis(trains, tests, invcovmx)
         distances.append([k, distance])
 
@@ -94,6 +84,8 @@ def specy(weights, test):
         if el[1] == sortedVotes[0][0]:
             key = el[0]
             break
+        else:
+            key = el[0]
     response = trainingRaw[key]
     return response
 
@@ -110,9 +102,18 @@ def Accuracy(weights):
 
 
 def train():
-    weights = {"usertypeIN": 1.0, "usertypeOUT": 1.0, "reasonIN": 1.0, "reasonOUT": 1.0}
+    training, f = load()
+    for el in range(len(training)):
+        del (training[el]["output"])
+        del (training[el]["id"])
+
+    df = pd.DataFrame(training)
+    covmx = df.cov()
+
+    genome = covmx
+
     start_time = time.time()
-    king = {"Epoch": 0, "Genome": weights, "Accuracy": float(Accuracy(weights))}
+    king = {"Epoch": 0, "Genome": genome, "Accuracy": float(Accuracy(genome))}
     speed = time.time() - start_time
     Epos = 1000
     Deep = 1
@@ -140,24 +141,26 @@ def train():
                "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "=" * 20 + "\n"
         out.write(str1)
 
-    # Execute GA
-    genome = weights
     for epoha in range(Epos):
         organism = [king]
+        organs = []
         for x in range(Deep):
             for k in range(100):
-                new_weight = [float(i) * pow(10.0, -x) for i in [random.uniform(-1.0, 1.0) for _ in range(4)]]
-                i = 0
-                for key in genome:
-                    genome[key] = genome[key] + new_weight[i]
-                    i += 1
+
+                new_weight = pd.DataFrame(np.random.randn(4, 4))
+                new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
+                new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
+                genome = genome.dot(new_weight)
                 try:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
+                    organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                 except:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
+                    organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
 
         prince = max(organism, key=lambda x: x['Accuracy'])
-        print("Prince for epoh " + str(epoha) + " is " + str(prince))
+        prince2 = max(organs, key=lambda x: x['Accuracy'])
+        print("Prince for epoh " + str(epoha) + " is " + str(prince2))
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince
             filename = "kings.txt"
