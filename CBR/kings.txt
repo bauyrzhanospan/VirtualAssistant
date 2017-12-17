@@ -1,0 +1,5 @@
+Number of epochs is 800
+Deepness of the analysis is 3
+Estimated execution time is 6 days, 1:18:51
+ Genetic algorithms optimisation for KNN with preference weights
+====================

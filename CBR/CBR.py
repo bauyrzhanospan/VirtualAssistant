@@ -1,8 +1,5 @@
-import math
 import operator
 import random
-import sys
-import progressbar
 import time
 import datetime
 import pymysql
@@ -10,7 +7,7 @@ import pandas as pd
 import scipy as sp
 from scipy.spatial.distance import mahalanobis
 
-con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
 cur = con.cursor(pymysql.cursors.DictCursor)
 
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
@@ -42,7 +39,7 @@ def load():
                 casesRaw[k]["usertypeOUT"] = usersList[casesRaw[k]["usertypeOUT"]]
             except KeyError:
                 n = 10
-    print(casesRaw)
+
     training = casesRaw
     test = list(casesRaw[0::5])
     return training, test
@@ -187,4 +184,4 @@ def main(usertypein, usertypeout, reasonin, reasonout):
     return test
 
 
-load2()
+train()
