@@ -306,7 +306,7 @@ def train():
     print("King is:")
     print(king)
     # Write the head of file
-    filename = "kings.txt"
+    filename = "kingsout.txt"
     with open(filename, 'a') as out:
         str1 = "Number of epochs is " + str(Epos) + "\n" + "Deepness of the analysis is " + str(Deep) + "\n" + \
                "Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))) + "\n " + \
@@ -328,7 +328,7 @@ def train():
         prince = max(organism, key=lambda x: x['Accuracy'])
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince
-            filename = "kings.txt"
+            filename = "kingsout.txt"
             with open(filename, 'a') as out:
                 out.write(str(king) + '\n')
 
