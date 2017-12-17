@@ -151,7 +151,9 @@ def train():
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                 except:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
+
         prince = max(organism, key=lambda x: x['Accuracy'])
+        print("Prince for epoh " + str(epoha) + " is " + str(prince))
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince
             filename = "kings.txt"
