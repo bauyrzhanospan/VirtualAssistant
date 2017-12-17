@@ -147,7 +147,10 @@ def train():
                 for key in genome:
                     genome[key] = genome[key] + new_weight[i]
                     i += 1
-                organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
+                try:
+                    organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
+                except:
+                    organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
         prince = max(organism, key=lambda x: x['Accuracy'])
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince
@@ -156,7 +159,7 @@ def train():
                 out.write(str(king) + '\n')
 
         bb = 100 * epoha / Epos
-        print("Percentage is: " + bb + " and accuracy is: " + str(king["Accuracy"]))
+        print("Percentage is: " + str(bb) + " and accuracy is: " + str(king["Accuracy"]))
         # print(epoha)
         if king["Accuracy"] > 99.8:
             break
