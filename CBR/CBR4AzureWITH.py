@@ -1,11 +1,7 @@
-import math
 import operator
 import random
-import sys
-import progressbar
 import time
 import datetime
-import pymysql
 import pandas as pd
 import scipy as sp
 from scipy.spatial.distance import mahalanobis
