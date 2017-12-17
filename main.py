@@ -11,11 +11,11 @@ def write2dbLOG(key, value):
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
     id = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000")
-    cur.execute("UPDATE `eval` SET `" + str(key) + "` = '" + str(value) + "' WHERE `eval`.`id` = '" + str(id) + "';")
+    cur.execute("UPDATE `eval` SET `" + str(key) + "` = '" + str(value)
+                + "' WHERE `eval`.`id` = '" + str(id) + "';")
     con.commit()
     cur.close()
     con.close()
-
 
 def check_status(deviceNum):
     data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
@@ -34,9 +34,11 @@ def randomiser():
     cur = con.cursor(pymysql.cursors.DictCursor)
 
     users = ["Father", "Mother", "Son", "Grandpa"]
+    # bigusers = ["Father", "Mother", "Grandpa"]
+    # lilusers = ["Son", "Grandpa"]
     usertypes2 = {"Father": "adult", "Mother": "adult", "Son": "young", "Grandpa": "elder"}
     reasons = ["energy", "entertainment", "food", "health", "security", "work"]
-    devices = ["kettle", "lamp"]
+    devices = ["lamp"]
     u = random.SystemRandom().choice(users)
     user = usertypes2[u]
     users2 = users
@@ -55,6 +57,11 @@ def randomiser():
         status = int(d.split('"id": ' + str(device))[1].split('" }', 1)[0].strip()[-1])
     except ValueError:
         status = 0
+    cur.close()
+    con.close()
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    cur = con.cursor(pymysql.cursors.DictCursor)
+
     cur.execute("UPDATE `rules` SET `user` = '" + str(user2) + "' WHERE `rules`.`id` = 0")
     con.commit()
     cur.execute("UPDATE `rules` SET `reason` = '" + str(reason) + "' WHERE `rules`.`id` = 0")
@@ -234,7 +241,7 @@ def yesno(username, order):
     text = ''
     reason = "noreason"
     if request.method == 'POST':
-        text = request.form['text']
+        text = request.form['text3']
         if text == "no" or text == "No" or text == "Nope":
             answer = "Okay, waiting for orders."
             statusLamp = check_status(395)
@@ -257,7 +264,7 @@ def reasonClassification(username, order, reason):
     statusKettle = check_status(19)
     text = ''
     if request.method == 'POST':
-        text = request.form['text']
+        text = request.form['text2']
         write2dbLOG("reasonraw", text)
         statusLamp = check_status(395)
         statusKettle = check_status(19)
@@ -279,4 +286,4 @@ def reasonClassification(username, order, reason):
 
 if __name__ == "__main__":
     #    app.run(host='0.0.0.0')
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8090, ssl_context='adhoc')

@@ -24,39 +24,7 @@
     </style>
     <!-- HTML5 Speech Recognition API -->
     <script>
-  function startDictation() {
-    if (document.getElementById("imgClickAndChange").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
-        {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
-        }
-        else
-        {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
-        }
-    if (window.hasOwnProperty('webkitSpeechRecognition')) {
-
-      var recognition = new webkitSpeechRecognition();
-
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.lang = "English";
-      recognition.start();
-
-      recognition.onresult = function(e) {
-        document.getElementById('transcript').value
-                                 = e.results[0][0].transcript;
-        recognition.stop();
-        document.getElementById('labnol').submit();
-      };
-
-      recognition.onerror = function(e) {
-        recognition.stop();
-      }
-
-    }
-  }
-  function speak2(text, callback) {
+  function speak(text, callback) {
     var u = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
 
@@ -79,7 +47,7 @@
 
     speechSynthesis.speak(u);
 }
-function speak(phrase) {
+function speak2(phrase) {
     if(phrase =="")
     {
         alert("Please enter a phrase before asking me to speak for you. Thank you!");

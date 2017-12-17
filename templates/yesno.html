@@ -5,14 +5,14 @@
 <!-- Left Column -->
 
 <script>
-  function startDictation() {
-    if (document.getElementById("imgClickAndChange").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
+  function startDictation3() {
+    if (document.getElementById("imgClickAndChange3").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
         {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
+            document.getElementById("imgClickAndChange3").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
         }
         else
         {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
+            document.getElementById("imgClickAndChange3").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
         }
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
@@ -72,11 +72,11 @@
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Text here or click microphone</h6>
                     <form action="/{{username}}/{{order}}/yesno" method="POST">
-                        <input type="text" name="text" contenteditable="true" class="w3-border w3-padding"
+                        <input type="text" name="text3" contenteditable="true" class="w3-border w3-padding"
                                id="transcript" placeholder="Text or speak"/>
-                        <img onclick="javascript:startDictation()"
+                        <img onclick="javascript:startDictation3()"
                              src="https://image.flaticon.com/icons/svg/568/568026.svg"
-                             style="width:5%;"/>
+                             style="width:5%;" id="imgClickAndChange3"/>
                         <br><input type="submit" class="w3-button w3-theme" name="my-form" value="Send"/>
                     </form>
                 </div>

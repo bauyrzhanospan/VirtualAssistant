@@ -99,3 +99,23 @@ Estimated execution time is 14:12:57
  Genetic algorithms optimisation for KNN with preference weights
 ====================
 {'Genome': [1.0001168075227842, 1.7931690991399394, 2.1920540027685114, 2.0837936240350468, 1.733642474342711, 1.657195865780736, 1.877153798269106, 3.744972038920405, 2.1432851383207177, 0.6103957636378303, 0.08453206358025467, 2.1436254019659877, 0.1930344346931978, 1.305721352840486], 'Accuracy': 80.0, 'Epoch': 0}
+Number of epochs is 800
+Deepness of the analysis is 3
+Estimated execution time is 5 days, 18:08:34
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+Number of epochs is 800
+Deepness of the analysis is 3
+Estimated execution time is 7 days, 22:31:40
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+Number of epochs is 800
+Deepness of the analysis is 3
+Estimated execution time is 2 days, 14:04:31
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+Number of epochs is 800
+Deepness of the analysis is 3
+Estimated execution time is 4 days, 9:29:11
+ Genetic algorithms optimisation for KNN with preference weights
+====================

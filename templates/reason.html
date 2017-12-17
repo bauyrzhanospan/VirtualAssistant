@@ -5,14 +5,14 @@
 <!-- Left Column -->
 
 <script>
-  function startDictation() {
-    if (document.getElementById("imgClickAndChange").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
+  function startDictation2() {
+    if (document.getElementById("imgClickAndChange2").src == "https://image.flaticon.com/icons/svg/568/568026.svg")
         {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
+            document.getElementById("imgClickAndChange2").src = "https://image.flaticon.com/icons/svg/568/568015.svg";
         }
         else
         {
-            document.getElementById("imgClickAndChange").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
+            document.getElementById("imgClickAndChange2").src = "https://image.flaticon.com/icons/svg/568/568026.svg";
         }
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
 
@@ -44,7 +44,7 @@
     <!-- Profile -->
     <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-            <h4 class="w3-center">Media Semantics Place</h4>
+            <h4 class="w3-center">Virtual Assistant</h4>
             <p class="w3-center"><img src="{{smile}}" class="w3-circle"
                                       style="height:106px;width:106px" alt="Avatar"></p>
             <hr>
@@ -71,11 +71,11 @@
                 <div class="w3-container w3-padding">
                     <h6 class="w3-opacity">Text here or click microphone</h6>
                     <form action="/{{username}}/{{reason}}/{{order}}" method="POST">
-                        <input type="text" name="text" contenteditable="true" class="w3-border w3-padding"
+                        <input type="text" name="text2" contenteditable="true" class="w3-border w3-padding"
                                id="transcript" placeholder="Text or speak"/>
-                        <img onclick="javascript:startDictation()"
+                        <img onclick="javascript:startDictation2()"
                              src="https://image.flaticon.com/icons/svg/568/568026.svg"
-                             style="width:5%;"/>
+                             style="width:5%;" id="imgClickAndChange2"/>
                         <br><input type="submit" class="w3-button w3-theme" name="my-form" value="Send"/>
                     </form>
                 </div>
