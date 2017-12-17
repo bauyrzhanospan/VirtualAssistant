@@ -10,8 +10,6 @@ import pandas as pd
 import scipy as sp
 from scipy.spatial.distance import mahalanobis
 
-con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
-cur = con.cursor(pymysql.cursors.DictCursor)
 
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
 usersList = {"adult": 0.6, "young": 0.3, "elder": 0.6}
