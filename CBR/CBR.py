@@ -170,7 +170,7 @@ def train():
         bb = 100 * epoha / Epos
         print("Percentage is: " + str(bb) + " and accuracy is: " + str(king["Accuracy"]))
         # print(epoha)
-        genome = king["Genome"]
+        genome = prince2["Genome"]
         if king["Accuracy"] > 98:
             break
     print()
