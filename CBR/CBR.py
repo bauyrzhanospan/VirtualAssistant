@@ -111,8 +111,7 @@ def train():
 
     df = pd.DataFrame(training)
     covmx = df.cov()
-
-    genome = covmx
+    genome = covmx.round(3)
 
     start_time = time.time()
     king = {"Epoch": 0, "Genome": genome, "Accuracy": float(Accuracy(genome))}
@@ -143,7 +142,7 @@ def train():
                "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "=" * 20 + "\n"
         out.write(str1)
 
-    items = [-0.000001, -0.000001, 0, 0, 0.000001, 0.000001, -0.000001, -0.000001, 0, 0, 0.000001, 0.000001]
+    items = [-0.001, -0.001, 0, 0, 0.001, 0.001, -0.001, -0.001, 0, 0, 0.001, 0.001]
     newI = []
     for p in permutations(items, 4):
         newI.append(list(p))
