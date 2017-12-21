@@ -127,13 +127,6 @@ def train():
     print("=======================================================================")
     print("Starting evolutional algorithm: ")
     bb = 0
-    print("=======================================================================")
-    print()
-    print()
-    print("Epoch num is 0")
-    print("- - - - - - - - - - - - -")
-    print("King is:")
-    print(king)
     # Write the head of file
     filename = "kings.txt"
     with open(filename, 'a') as out:
