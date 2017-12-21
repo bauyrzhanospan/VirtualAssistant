@@ -116,11 +116,10 @@ def train():
     start_time = time.time()
     king = {"Epoch": 0, "Genome": genome, "Accuracy": float(Accuracy(genome))}
     speed = time.time() - start_time
-    Epos = 1000
+    Epos = 100000
     Deep = 1
     print("Number of epochs is " + str(Epos))
-    print("Deepness of the analysis is " + str(Deep))
-    execution_time = 1.1 * speed * Epos * Deep * int(200)
+    execution_time = 1.1 * speed * Epos * Deep * int(100)
     print("Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))))
     print("Estimated execution time for one epoch is " + str(
         datetime.timedelta(seconds=int(execution_time / 100000))))
@@ -144,7 +143,6 @@ def train():
 
     for epoha in range(Epos):
         organism = [king]
-        organs = []
         for x in range(Deep):
             for k in range(100):
 
@@ -157,15 +155,14 @@ def train():
                 genome = genome.add(new_weight)
                 try:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
-                    organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                 except:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
-                    organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
 
         prince = max(organism, key=lambda x: x['Accuracy'])
-        if prince["Accuracy"] >= king["Accuracy"]:
+        if float(prince["Accuracy"]) >= float(king["Accuracy"]):
             king = prince.copy()
             filename = "kings.txt"
+            print("King is dead, new king is now!")
             with open(filename, 'a') as out:
                 out.write(str(king) + '\n')
 
