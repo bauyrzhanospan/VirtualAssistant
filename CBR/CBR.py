@@ -172,7 +172,7 @@ def train():
         prince = max(organism, key=lambda x: x['Accuracy'])
         prince2 = max(organs, key=lambda x: x['Accuracy'])
         if prince["Accuracy"] >= king["Accuracy"]:
-            king = prince
+            king = prince.copy()
             filename = "kings.txt"
             with open(filename, 'a') as out:
                 out.write(str(king) + '\n')
