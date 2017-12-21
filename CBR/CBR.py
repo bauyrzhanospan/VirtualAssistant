@@ -1,4 +1,6 @@
 import operator
+from itertools import permutations
+import itertools
 import random
 import numpy as np
 import time
@@ -141,16 +143,26 @@ def train():
                "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "=" * 20 + "\n"
         out.write(str1)
 
+    items = [-0.000001, -0.000001, 0, 0, 0.000001, 0.000001, -0.000001, -0.000001, 0, 0, 0.000001, 0.000001]
+    newI = []
+    for p in permutations(items, 4):
+        newI.append(list(p))
+    newI.sort()
+    newI = list(newI for newI, _ in itertools.groupby(newI))
+
     for epoha in range(Epos):
         organism = [king]
         organs = []
         for x in range(Deep):
             for k in range(100):
 
-                new_weight = pd.DataFrame(np.random.randn(4, 4))
+                secure_random = random.SystemRandom()
+                newW = [list(secure_random.choice(newI)) for k in range(4)]
+
+                new_weight = pd.DataFrame(np.array(newW))
                 new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
                 new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
-                genome = genome.dot(new_weight)
+                genome = genome.add(new_weight)
                 try:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                     organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
@@ -170,7 +182,7 @@ def train():
         bb = 100 * epoha / Epos
         print("Percentage is: " + str(bb) + " and accuracy is: " + str(king["Accuracy"]))
         # print(epoha)
-        genome = prince2["Genome"]
+        genome = king["Genome"]
         if king["Accuracy"] > 98:
             break
     print()
