@@ -170,7 +170,6 @@ def train():
                     organs.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
 
         prince = max(organism, key=lambda x: x['Accuracy'])
-        prince2 = max(organs, key=lambda x: x['Accuracy'])
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince.copy()
             filename = "kings.txt"
@@ -179,9 +178,9 @@ def train():
 
         bb = 100 * epoha / Epos
         print("Percentage is: " + str(bb))
-        print("Prince accuracy is " + str(prince2['Accuracy']))
+        print("Prince accuracy is " + str(prince['Accuracy']))
         print("Prince genome is: ")
-        print(prince2["Genome"])
+        print(prince["Genome"])
         print("==============")
         print("And king is: " + str(king["Accuracy"]))
         print("King genome is: ")
