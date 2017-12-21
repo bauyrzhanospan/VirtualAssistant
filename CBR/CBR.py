@@ -171,7 +171,6 @@ def train():
 
         prince = max(organism, key=lambda x: x['Accuracy'])
         prince2 = max(organs, key=lambda x: x['Accuracy'])
-        print("Prince for epoh " + str(epoha) + " is " + str(prince2))
         if prince["Accuracy"] >= king["Accuracy"]:
             king = prince
             filename = "kings.txt"
@@ -179,8 +178,15 @@ def train():
                 out.write(str(king) + '\n')
 
         bb = 100 * epoha / Epos
-        print("Percentage is: " + str(bb) + " and accuracy is: " + str(king["Accuracy"]))
-        # print(epoha)
+        print("Percentage is: " + str(bb))
+        print("Prince accuracy is " + str(prince2['Accuracy']))
+        print("Prince genome is: ")
+        print(prince2["Genome"])
+        print("==============")
+        print("And king is: " + str(king["Accuracy"]))
+        print("King genome is: ")
+        print(king["Genome"])
+        print("----------------------")
         genome = king["Genome"]
         if king["Accuracy"] > 98:
             break
