@@ -42,7 +42,7 @@ def load():
                 n = 10
 
     training = casesRaw
-    test = list(casesRaw[0::3])
+    test = list(casesRaw[:])
     return training, test
 
 
