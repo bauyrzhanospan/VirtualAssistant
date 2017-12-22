@@ -1,0 +1,7 @@
+numpy==1.13.3
+scipy==1.0.0
+Flask==0.12.2
+telepot==12.4
+PyMySQL==0.7.11
+pandas==0.21.1
+nltk==3.2.5

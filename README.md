@@ -1,30 +1,18 @@
 # Virtual Assistant
 
-## State of the Art and Preliminary Work
+## Passport of the project
 
-Expert systems are becoming popular in recent years because they are very helpful in
-solving problems related to decision making in different fields, especially in healthcare and
-management. An expert system is a software that uses knowledge of an expert in the field
-of interest. Basically they act like experts: collect data, analyse it and then produce
-algorithm of actions or recommendations for an action. Sometimes they can be autonomous
-and directly connected to actuators. As a result, expert systems can act or change the
-environment based on their own recommendations. This paper is a continuation and
-upgrade of the expert system called “Virtual Assistant” developed by a team from the
-Middlesex University in the Sunny Hill House.
-
-Virtual Assistant of the Middlesex University developed by Kenzhegali Nurgaliyev,
-Dario Di Mauro and others in 2016 is a system that assists people in their Activities of
-Daily Life (ADL). The system uses Graphical User Interface with text based dialogue
-window; speech recognition and text to speech generating software based voice dialogue
-window. Virtual Assistant uses pre-defined preferences based on age of the user profile
-with differentiated priorities of the needs including health, entertainment, security and
+Virtual Assistant is the project of the Erasmus-Plus program students in the Middlesex University, London.
+The main idea of the system is to control Smart-Home environment with dialogue based control interface.
+The system is developed to to assists people with different preferences in their Activities of Dayly Life (ADL).
+The system uses Graphical User Interface with text based dialogue
+window; speech recognition and text to speech generating software (Google API). 
+Virtual Assistant uses pre-defined preferences based on age of the user profile
+with differentiated priorities of the needs including health, food, work, entertainment, security and
 energy consumption of the devices. Virtual Assistant passed the validation tests done by
-the developers and showed acceptable results in conflict resolution. However, there is an
-issue about two identical profile users with conflicting activities; for example, user “1”
-asks the system to turn on the light while user “2” with the same priority level as the user
-“1” asked the system to turn the light off. The aim of this research is to create a dialogue
-based conflict resolution system that takes into account pre-defined preferences and adapts
-to the new information learned from dialogue with users.
+the developers and showed acceptable results in conflict resolution. The system uses Case-Based
+Reasoning module to resolve conflicts, Feed-Forward Artificial Neural Networks to classify 
+orders of the users and the reasons of the orders. Place of the research Sunny Hill House, Middlesex University, London.
 
 ## Research Question and Methodology
 
@@ -38,15 +26,42 @@ will make a decision based on the new information gained from users and will giv
 recommendations till the conflict will be eliminated. An example of that situation is
 described in the scenario template in the end of the proposal.
 
-The system has the architecture of module-based system where any of the module can
-be used as an autonomous system. Firstly, there is speech recognition module that uses
-well-developed speech recognition API with high efficiency, for example Yandex
-SpeechKit, to recognize the speech and semantically analyze the text. The second module
-is actuators control and monitor module. Thirdly, there is core of the system that is
-Dialogue Manager with unified input-output structure or API. API makes it possible to use
-and integrate Dialogue Manager as a module in other projects in future. In addition, there
-is speech synthesizer of the system. To evaluate the system, several test scenarios with
-randomized-blind user feedback to the system will be created.
+## Architecture of the system
+
+![Architecture](./images/arch.png)
+
+- GUI - web-pages
+  - Login page - page where you choose user.
+  - Control page - dialogue with system.
+  - Preferences page - page to change the preferences of the users (no implementation yet)
+  - Rules page - page of rules of the system (no implementation yet): forex, turn off kettle from 9.00 pm till 10.00 pm.
+- Front end
+  - Flask microwebframework for python 3 - controls GUI.
+- Cloud API
+  - Speech recognition - Google API to recognise voice input. [Google Cloud API](https://cloud.google.com/speech/)
+  - Speech generation - Google HTML5 API TtS. [Google Voice Generator](https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API)
+- Core System
+  - Dialogue Manager - module to communicate with the user; send data to the other modules;
+  - Order Classification - Feed-Forward Artificial Neural Network: Perceptron with one hidden 10 neurons
+layer, back-propagation optimisation method (gradient descent parameter = 1), that classifies orders into
+4 groups (on and off state of two devices).
+  - Reason Classification - Feed-Forward Artificial Neural Network: Perceptron with one hidden 10 neurons
+layer, back-propagation optimisation method (gradient descent parameter = 1), that classifies reasons into
+health, food, work, entertainment, security and energy consumption of the devices.
+  - Rule-Based Reasoner - module that checks rules of the system and states of the devices
+to control system if there is no conflict between user order and system state.
+  - Case-Based Reasoner - module that controls the system if there is a conflict between
+user input and system state or other user input.
+  - Device Control Unit - module that controls and monitors state of the devices (in this particular case: Kettle and Lamp)
+- Databases
+  - MySQL database - as a database was used MySQL.
+- Devices
+  - Kettle and Lamp controlled by [VeraSecure](http://getvera.com/)
+
+## User cases
+![UML sequence diagram](./images/UML.png)
+
+
 
 ## Getting Started
 
@@ -104,21 +119,16 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+* [Flask web framework](https://www.jetbrains.com/pycharm/)
+* [Lucid chart diagram online editor](https://www.lucidchart.com)
+* [Pycharm IDE](https://www.jetbrains.com/pycharm/)
+* [Una animated emojies](https://github.com/una/animated-emojis)
+* [W3School CSS templates](https://www.w3schools.com/w3css/w3css_templates.asp)
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Bauyrzhan Ospan**
+* **Mario Jose Quinde Li Say Tan**
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -129,15 +139,28 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Diseases and condition list is from https://www.cdc.gov/diseasesconditions/index.html
-* Chatbot from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
-* 
+* Perceptron made on work of http://www.tarnlab.com/text-classification-using-neural-networks/
 
-## Bibliography concerning the state of the art and the research objectives
+## Bibliography
 
-B. S. Hasler, P. Tuchman and D. Friedman, “Virtual research assistants: Replacing human
-interviewers by automated avatars in virtual worlds”, in Computers in Human Behavior, v.29
-n.4, p.1608-1616, July, 2013.
-K. Mase, “Aspects of Interface Agents: Avatar, Assistant and Actor”, in Proceedings of the
-IJCAI'97 Workshop on Animated Interface Agents, pp. 33-37.
-K. Nurgaliyev, D. D. Mauro, N. Khan and J. C. Augusto, “Improved Multi-user Interaction in
-a Smart Environment Through a Preference-Based Conflict Resolution Virtual Assistant”.
+* [Improved Multi-user Interaction in
+a Smart Environment Through a Preference-Based Conflict Resolution Virtual Assistant](http://ieeexplore.ieee.org/document/8114654/)
+* [A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1510.03820)
+* [Using argumentation to manage users’ preferences](https://www.sciencedirect.com/science/article/pii/S0167739X1630379X)
+* [Is Context-aware Reasoning = Case-based Reasoning?](http://eprints.mdx.ac.uk/21527/)
+* [A survey on managing users’ preferences in ambient intelligence](https://link.springer.com/article/10.1007/s10209-017-0527-y)
+* [Learning frequent behaviours of the users in 
+Intelligent Environments](http://ieeexplore.ieee.org/document/6516530/)
+* [Distance Metric Learning for Large Margin Nearest Neighbor Classification](http://www.jmlr.org/papers/v10/weinberger09a.html)
+* [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
+* [An Agent-Based Architecture for Sensor Data Collection and Reasoning in Smart Home Environments for Independent Living](https://dl.acm.org/citation.cfm?id=2966058)
+* [Design and evaluation of a smart home voice interface for the elderly: acceptability and objection aspects](https://link.springer.com/article/10.1007/s00779-011-0470-5)
+* [Configuration of smart environments made simple: Combining visual modeling with semantic metadata and reasoning](http://ieeexplore.ieee.org/document/7030116/)
+* [Towards adaptive control in smart homes: Overall system design and initial evaluation of activity recognition](https://dspace.lboro.ac.uk/dspace-jspui/handle/2134/24473)
+* [Machine Learning Based Adaptive Context-Aware System for Smart Home Environment](https://pdfs.semanticscholar.org/8cf5/fe5062727744f5429bb34d9c0bd24f439ee6.pdf)
+* [An Ontology-based Context-aware System for Smart Homes: E-care@home](https://www.ncbi.nlm.nih.gov/pubmed/28684686)
+* [Policy Conflict Resolution in IoT via Planning](https://link.springer.com/chapter/10.1007/978-3-319-57351-9_22)
+* [Context-based conflict management in pervasive platforms](http://ieeexplore.ieee.org/document/7917567/)
+* [SVM-Based Multimodal Classification of Activities of Daily Living in Health Smart Homes: Sensors, Algorithms, and First Experimental Results](http://ieeexplore.ieee.org/abstract/document/5352277/)
+* [Context-Aware User Modeling and Semantic Interoperability in Smart Home Environments](http://ieeexplore.ieee.org/document/6735563/)
+
