@@ -52,7 +52,7 @@ health, food, work, entertainment, security and energy consumption of the device
 to control system if there is no conflict between user order and system state.
   - Case-Based Reasoner - module that controls the system if there is a conflict between
 user input and system state or other user input.
-  - Device Control Unit - module that controls and monitors state of the devices (in this particular case: Kettle and Lamp)
+  - Device Control Unit - module that controls and monitors state of the devices (in this particular case: Kettle and Lamp) via get/post requests to VeraSecure controller.
 - Databases
   - MySQL database - as a database was used MySQL.
 - Devices
@@ -61,7 +61,46 @@ user input and system state or other user input.
 ## User cases
 ![UML sequence diagram](./images/UML.png)
 
+#### If there is no conflict
+1.1 User sends command (makes order) to GUI.  
+1.2 From GUI command goes to Dialogue component (Speech Recognition API, Speech Generation API and Dialogue Manager).  
+1.3 Dialogue component sends raw command to Classification component (Order Classification).  
+1.4 Classification component classifies command and sends it to Dialogue component.  
+1.5 Dialogue component sends user's identification (user type) and command to RBR (Rule-Based Reasoner).  
+1.6 RBR asks devices' statuses from Device Ctrl (Device Control Unit).  
+1.7 Device Ctrl posts devices' statuses to RBR (via taking data from VeraSecure).  
+1.8 RBR takes rules and preferences from database via MySQL commands.  
+1.9 Database sends data to RBR.  
+1.10 RBR changes devices via Device Ctrl.  
+1.11 RBR writes data to database (logs and new case if there was created one).  
+1.12 RBR sends report to Dialogue.  
+1.13 Dialogue based on report creates new answer to the user and sends it to GUI.  
+1.14 GUI shows and dictates answer to the user (and shows emotions by emojies).  
+1.15 User reads or listens the answer.  
 
+#### If there is conflict
+2.1 RBR sends data to CBR (Case-Based Reasoner) about conflict (user types of the conflicting users, device).  
+2.2 CBR asks reason of the user from Dialogue.  
+2.3 Dialogue creates question and sends it to GUI.
+2.4 GUI shows and dictates question:"There is conflict, do you want to go through the conflict" to the user.  
+2.5 The user decides and answers to the system.  
+2.6 GUI sends raw answer to Dialogue.  
+2.7 If user answered "no" -> then Dialogue aborts loop; else -> asks about the reason.  
+2.8 GUI shows and dictates question:"What is the reason?".  
+2.9 The user answers.   
+2.10 GUI sends raw answer to Dialogue.  
+2.11 Dialogue sends answer to Classification (Reason Classification).  
+2.12 Classification sends classified reason to Dialogue.  
+2.13 Dialogue sends data to CBR.  
+2.14 CBR takes cases from Database.  
+2.15 Database sends cases to CBR.  
+2.16 CBR resolves conflict and sends case output to RBR.  
+
+#### Changing settings
+3.1 The user form settings page changes rules or preferences.  
+3.2 GUI changes tables in Database.  
+3.3 Database sends new tables to GUI.  
+3.4 GUI shows tables to the user.  
 
 ## Getting Started
 
@@ -69,53 +108,73 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+1. Linux Uubuntu 16.04 (can be used any other Linux, but with other steps below)
+2. Git 2.7.4.
+```Shell
+sudo apt install git
 ```
-Give examples
+3. Python 3.6 and PIP for Python 3.6.
+```Shell
+sudo apt install python3-dev python3-pip
 ```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+4. Copy repository of the system to your machine:
+```Shell
+git clone https://github.com/BiggyBaron/VirtualAssistant.git
+cd VirtualAssistant
 ```
-Give the example
+5. Install all libraries:
+```Shell
+sudo pip3 install -r requirements.txt
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+6. Download Natural Language Toolkit database:
+```Shell
+python3 install_nltk.py
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+### Installing MySQL
+1. Update package index and packages:
+```Shell
+sudo apt-get update
+sudo apt-get upgrade
 ```
-Give an example
+2. Install MySQL:
+```Shell
+sudo apt-get install mysql-server
+```
+3. Set up MySQL (user=root, password="123"):
+```Shell
+sudo mysql_secure_installation
+```
+4. Check if MySQL is running:
+```Shell
+systemctl status mysql.service
+```
+5. Create MySQL database "virtass":
+* Enter to MySQL command line (password=123):
+```Shell
+mysql -u root -p
+```
+* Enter MySQL command to create it:
+```SQL
+CREATE DATABASE virtass;
+```
+6. Import database from repository:
+```Shell
+cd VirtualAssistant/DataBaseBackup
+mysql -u root -p virtass < virtass.sql
 ```
 
-## Deployment
+## Running all system
 
-Add additional notes about how to deploy this on a live system
+To run all system, go to the repository folder and start main.py:
+```Shell
+cd VirtualAssistant
+python3 main.py
+```
+In browser open:  
+https://localhost:8090/  
+Or:  
+https://your_ip:8090/  
 
 ## Built With
 
@@ -124,13 +183,13 @@ Add additional notes about how to deploy this on a live system
 * [Pycharm IDE](https://www.jetbrains.com/pycharm/)
 * [Una animated emojies](https://github.com/una/animated-emojis)
 * [W3School CSS templates](https://www.w3schools.com/w3css/w3css_templates.asp)
+* [Smart Home Controller VeraSecure](http://getvera.com/)
 
 ## Authors
 
 * **Bauyrzhan Ospan**
 * **Mario Jose Quinde Li Say Tan**
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Kenzhegali Nurgaliyev**
 
 ## License
 

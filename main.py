@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 def write2dbLOG(key, value):
-    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
     id = cur.execute("SELECT * FROM `eval` ORDER BY `eval`.`id` ASC LIMIT 10000")
     cur.execute("UPDATE `eval` SET `" + str(key) + "` = '" + str(value)
@@ -33,7 +33,7 @@ def check_status(deviceNum):
 
 def randomiser():
     # Change rules table
-    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
 
     users = ["Father", "Mother", "Son", "Grandpa"]
@@ -62,7 +62,7 @@ def randomiser():
         status = 0
     cur.close()
     con.close()
-    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
 
     cur.execute("UPDATE `rules` SET `user` = '" + str(user2) + "' WHERE `rules`.`id` = 0")
@@ -77,7 +77,7 @@ def randomiser():
     con.close()
 
     # Add values to eval table
-    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
     order = dev.title() + ["On", "Off"][status]
     Newreason = random.SystemRandom().choice(reasons)
@@ -151,7 +151,7 @@ def Summary():
     header = "Summary"
     with open("summary.txt", 'r') as out:
         summary = out.read()
-    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
+    con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
     cur.execute('SELECT * FROM `eval`')
     dataset = cur.fetchall()
