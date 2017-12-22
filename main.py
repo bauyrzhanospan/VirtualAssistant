@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, Markup
-import DM
-import urllib
 import random
+import urllib
+
 import pymysql
+from flask import Flask, render_template, request, Markup
+
+import DM
 
 app = Flask(__name__)
 
@@ -16,6 +18,7 @@ def write2dbLOG(key, value):
     con.commit()
     cur.close()
     con.close()
+
 
 def check_status(deviceNum):
     data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
