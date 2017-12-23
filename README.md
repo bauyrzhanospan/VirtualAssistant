@@ -1,5 +1,8 @@
 # Virtual Assistant
 
+Welcome to the Virtual Assistant project repository
+![Virtual Assistant](./static/hello.gif)
+
 ## Passport of the project
 
 Virtual Assistant is the project of the Erasmus-Plus program students in the Middlesex University, London.
