@@ -9,6 +9,7 @@ import DM
 app = Flask(__name__)
 
 
+# This is database logging engine, it takes key and value and stores it in eval table
 def write2dbLOG(key, value):
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
@@ -20,6 +21,8 @@ def write2dbLOG(key, value):
     con.close()
 
 
+# This module checks status of the devices
+# It sends get request to Vera and parses it
 def check_status(deviceNum):
     data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
     d = data.decode("utf-8")
@@ -31,14 +34,14 @@ def check_status(deviceNum):
         return "somehow?"
 
 
+# This is randomiser module
+# It creates
 def randomiser():
     # Change rules table
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
 
     users = ["Father", "Mother", "Son", "Grandpa"]
-    # bigusers = ["Father", "Mother", "Grandpa"]
-    # lilusers = ["Son", "Grandpa"]
     usertypes2 = {"Father": "adult", "Mother": "adult", "Son": "young", "Grandpa": "elder"}
     reasons = ["energy", "entertainment", "food", "health", "security", "work"]
     devices = ["lamp"]
