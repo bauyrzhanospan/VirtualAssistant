@@ -108,11 +108,11 @@ def train():
     for el in range(len(training)):
         del (training[el]["output"])
         del (training[el]["id"])
-
-    df = pd.DataFrame(training)
+    training1 = [{'usertypeIN': 0.0, 'reasonOUT': 0.0, 'usertypeOUT': 0.0, 'reasonIN': 0.0},
+                 {'usertypeIN': 1.0, 'reasonOUT': 1.0, 'usertypeOUT': 1.0, 'reasonIN': 1.0}]
+    df = pd.DataFrame(training1)
     covmx = df.cov()
     genome = covmx.round(3)
-
     start_time = time.time()
     king = {"Epoch": 0, "Genome": genome, "Accuracy": float(Accuracy(genome))}
     speed = time.time() - start_time
