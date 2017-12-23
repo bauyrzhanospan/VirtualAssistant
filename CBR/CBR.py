@@ -109,7 +109,7 @@ def train():
         del (training[el]["output"])
         del (training[el]["id"])
     training1 = [{'usertypeIN': 0.0, 'reasonOUT': 0.0, 'usertypeOUT': 0.0, 'reasonIN': 0.0},
-                 {'usertypeIN': 1.0, 'reasonOUT': 1.0, 'usertypeOUT': 1.0, 'reasonIN': 1.0}]
+                 {'usertypeIN': 0.0, 'reasonOUT': 0.0, 'usertypeOUT': 0.0, 'reasonIN': 0.0}]
     df = pd.DataFrame(training1)
     covmx = df.cov()
     genome = covmx.round(3)
@@ -134,7 +134,7 @@ def train():
                "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "=" * 20 + "\n"
         out.write(str1)
 
-    items = [-0.001, -0.001, 0, 0, 0.001, 0.001, -0.001, -0.001, 0, 0, 0.001, 0.001]
+    items = [-0.001, -0.01, 0, 0, 0.001, 0.01, -0.1, -0.0001, 0, 0, 0.1, 0.0001]
     newI = []
     for p in permutations(items, 4):
         newI.append(list(p))
