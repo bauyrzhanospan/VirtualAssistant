@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 import urllib.request
 from datetime import datetime, time, timedelta
 import pymysql

@@ -1,4 +1,5 @@
-# use natural language toolkit
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
 import os

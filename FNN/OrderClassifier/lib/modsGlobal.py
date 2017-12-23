@@ -1,4 +1,5 @@
-# use natural language toolkit
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
 import os
@@ -8,7 +9,7 @@ import numpy as np
 import time
 import glob
 
-stemmer = LancasterStemmer()
+stemmer = LancasterStemmer()  # use natural language toolkit
 
 
 # compute sigmoid nonlinearity

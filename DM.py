@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 import RBR
 from CBR import CBR
 import Classification as classify

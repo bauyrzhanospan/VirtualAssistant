@@ -1,4 +1,5 @@
-#! /usr/bin/env python3
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 from FNN.OrderClassifier.lib import modsGlobal as mO
 from FNN.ReasonClassifier.lib import modsGlobal as mR
 
