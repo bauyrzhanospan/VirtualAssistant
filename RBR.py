@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 import urllib.request
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 import pymysql
 import re
 
-# from CBR.CBR import Use as cbr
 
-
+# This function checks time of the order and rule
+# And if they are equal -> sends rule
 def checkTime(order, rules):
     now = datetime.now()
     now = timedelta(0, int(now.second) + int(now.minute) * 60 + int(now.hour) * 3600)
@@ -19,26 +19,31 @@ def checkTime(order, rules):
             return None
 
 
+# This function connects to database and receives rules
+# Return rules as a dictionary
 def importrules():
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
-    dataset = {}
     with con:
         cur.execute('SELECT * FROM rules')
         dataset = cur.fetchall()
     return dataset
 
 
+# This function imports preferences of users
+# Return preferences as a dictionary
 def importprefs():
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
-    dataset = {}
     with con:
         cur.execute('SELECT * FROM preferences')
         dataset = cur.fetchall()
     return dataset
 
 
+# This function checks if the device is in the status user needs
+# If device status == order -> return 1
+# Else return 0
 def check_same(order):
     try:
         data = urllib.request.urlopen("http://10.12.102.156/port_3480/data_request?id=lu_status").read()
@@ -86,6 +91,7 @@ def check_same(order):
     return 0
 
 
+# This function returns user type of user from database
 def Usertype(username):
     con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user=None, passwd=None, db='virtass')
     cur = con.cursor(pymysql.cursors.DictCursor)
@@ -99,12 +105,14 @@ def Usertype(username):
     return ""
 
 
+# This is the Rule Based Reasoner
+# It imports order and username
 def RBR(order, username):
+    # It calls rules importer
     rules = importrules()
-    prefs = importprefs()
-    usertypein = Usertype(username)
-    conflict = {}
     order2 = order
+
+    # It parse order type
     orderDevice = re.sub('[On]', '', order2)
     orderDevice = re.sub('[Off]', '', orderDevice)
     if order[-1] == "n":
@@ -113,10 +121,10 @@ def RBR(order, username):
         orderStatus = 1
     orderdata = [orderDevice, orderStatus]
 
+    # It checks for conflict
     # 0 - device in the same status
     # 1 - you have no enough power
     # 2 - device is changed - it is ok
-
     if check_same(order) == 1:
         return 0, {"Hello": "No conflict"}
     else:
