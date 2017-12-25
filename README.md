@@ -7,7 +7,7 @@ Welcome to the Virtual Assistant project repository
 
 Virtual Assistant is the project of the Erasmus-Plus program students in the Middlesex University, London.
 The main idea of the system is to control Smart-Home environment with dialogue based control interface.
-The system is developed to to assists people with different preferences in their Activities of Dayly Life (ADL).
+The system is developed to to assists people with different preferences in their Activities of Daily Life (ADL).
 The system uses Graphical User Interface with text based dialogue
 window; speech recognition and text to speech generating software (Google API). 
 Virtual Assistant uses pre-defined preferences based on age of the user profile
