@@ -1,7 +1,8 @@
 # Virtual Assistant
 
 Welcome to the Virtual Assistant project repository
-![Virtual Assistant](./static/hello.gif)
+![Virtual Assistant](./static/hello.gif)  
+You can find all information about the system in the [Wiki Page](https://github.com/BiggyBaron/VirtualAssistant/wiki)  
 
 ## Passport of the project
 
@@ -17,93 +18,8 @@ the developers and showed acceptable results in conflict resolution. The system 
 Reasoning module to resolve conflicts, Feed-Forward Artificial Neural Networks to classify 
 orders of the users and the reasons of the orders. Place of the research Sunny Hill House, Middlesex University, London.
 
-## Research Question and Methodology
-
-The aim of the research is to create a voice based dialogue manager for multi-users
-with identical priority that allows controlling actuators inside the Sunny Hill House in
-conflict situations. Conflict Resolution sub-system will communicate with different users
-to collect the data about reasoning behind the actions they want to be done by the system.
-For example, if two identical users want conflicted actions to be done they will
-communicate with system to give reasons to act in the way they want. After that, the system
-will make a decision based on the new information gained from users and will give
-recommendations till the conflict will be eliminated. An example of that situation is
-described in the scenario template in the end of the proposal.
-
-## Architecture of the system
-
-![Architecture](./images/arch.png)
-
-- GUI - web-pages
-  - Login page - page where you choose user.
-  - Control page - dialogue with system.
-  - Preferences page - page to change the preferences of the users (no implementation yet)
-  - Rules page - page of rules of the system (no implementation yet): forex, turn off kettle from 9.00 pm till 10.00 pm.
-- Front end
-  - Flask microwebframework for python 3 - controls GUI.
-- Cloud API
-  - Speech recognition - Google API to recognise voice input. [Google Cloud API](https://cloud.google.com/speech/)
-  - Speech generation - Google HTML5 API TtS. [Google Voice Generator](https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API)
-- Core System
-  - Dialogue Manager - module to communicate with the user; send data to the other modules;
-  - Order Classification - Feed-Forward Artificial Neural Network: Perceptron with one hidden 10 neurons
-layer, back-propagation optimisation method (gradient descent parameter = 1), that classifies orders into
-4 groups (on and off state of two devices).
-  - Reason Classification - Feed-Forward Artificial Neural Network: Perceptron with one hidden 10 neurons
-layer, back-propagation optimisation method (gradient descent parameter = 1), that classifies reasons into
-health, food, work, entertainment, security and energy consumption of the devices.
-  - Rule-Based Reasoner - module that checks rules of the system and states of the devices
-to control system if there is no conflict between user order and system state.
-  - Case-Based Reasoner - module that controls the system if there is a conflict between
-user input and system state or other user input.
-  - Device Control Unit - module that controls and monitors state of the devices (in this particular case: Kettle and Lamp) via get/post requests to VeraSecure controller.
-- Databases
-  - MySQL database - as a database was used MySQL.
-- Devices
-  - Kettle and Lamp controlled by [VeraSecure](http://getvera.com/)
-
-## User cases
-![UML sequence diagram](./images/UML.png)
-
-#### If there is no conflict
-1.1 User sends command (makes order) to GUI.  
-1.2 From GUI command goes to Dialogue component (Speech Recognition API, Speech Generation API and Dialogue Manager).  
-1.3 Dialogue component sends raw command to Classification component (Order Classification).  
-1.4 Classification component classifies command and sends it to Dialogue component.  
-1.5 Dialogue component sends user's identification (user type) and command to RBR (Rule-Based Reasoner).  
-1.6 RBR asks devices' statuses from Device Ctrl (Device Control Unit).  
-1.7 Device Ctrl posts devices' statuses to RBR (via taking data from VeraSecure).  
-1.8 RBR takes rules and preferences from database via MySQL commands.  
-1.9 Database sends data to RBR.  
-1.10 RBR changes devices via Device Ctrl.  
-1.11 RBR writes data to database (logs and new case if there was created one).  
-1.12 RBR sends report to Dialogue.  
-1.13 Dialogue based on report creates new answer to the user and sends it to GUI.  
-1.14 GUI shows and dictates answer to the user (and shows emotions by emojies).  
-1.15 User reads or listens the answer.  
-
-#### If there is conflict
-2.1 RBR sends data to CBR (Case-Based Reasoner) about conflict (user types of the conflicting users, device).  
-2.2 CBR asks reason of the user from Dialogue.  
-2.3 Dialogue creates question and sends it to GUI.
-2.4 GUI shows and dictates question:"There is conflict, do you want to go through the conflict" to the user.  
-2.5 The user decides and answers to the system.  
-2.6 GUI sends raw answer to Dialogue.  
-2.7 If user answered "no" -> then Dialogue aborts loop; else -> asks about the reason.  
-2.8 GUI shows and dictates question:"What is the reason?".  
-2.9 The user answers.   
-2.10 GUI sends raw answer to Dialogue.  
-2.11 Dialogue sends answer to Classification (Reason Classification).  
-2.12 Classification sends classified reason to Dialogue.  
-2.13 Dialogue sends data to CBR.  
-2.14 CBR takes cases from Database.  
-2.15 Database sends cases to CBR.  
-2.16 CBR resolves conflict and sends case output to RBR.  
-
-#### Changing settings
-3.1 The user form settings page changes rules or preferences.  
-3.2 GUI changes tables in Database.  
-3.3 Database sends new tables to GUI.  
-3.4 GUI shows tables to the user.  
+![VirtAss demo page](./mockup.png)  
+Interface of the project.
 
 ## Getting Started
 
