@@ -164,6 +164,8 @@ def train():
                 # Secure random selection of mutation pattern, it uses os.random to make it trully random
                 secure_random = random.SystemRandom()
                 newW = [list(secure_random.choice(newI)) for k in range(4)]
+                print(newW)
+                print("-----")
                 # Creating new genome of specy and checking its accuracy level
                 new_weight = pd.DataFrame(np.array(newW))
                 new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
@@ -220,7 +222,9 @@ def train():
 
 # Function to use CBR by other part, takes case and returns decision
 def main(usertypein, usertypeout, reasonin, reasonout):
-    weights = []  # It is the best genome found by GA (genetic algorithm)
+    weights = [[1.5882, -0.3039, -1.1047, 0.6826], [-0.7584, 0.2737, 0.1781, -0.2904],
+               [0.1010, 0.0266, 0.3134, -0.8066],
+               [-0.3870, -0.0481, -0.1985, -0.7557]]  # It is the best genome found by GA (genetic algorithm) kings.txt
     new_weight = pd.DataFrame(np.array(weights))
     new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
     new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
