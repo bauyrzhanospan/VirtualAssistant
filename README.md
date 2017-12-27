@@ -22,7 +22,7 @@ the developers and showed acceptable results in conflict resolution. The system 
 Reasoning module to resolve conflicts, Feed-Forward Artificial Neural Networks to classify 
 orders of the users and the reasons of the orders. Place of the research Sunny Hill House, Middlesex University, London.
 
-![VirtAss demo page](./mockup.png)  
+![VirtAss demo page](./images/mockup.png)  
 Interface of the project.
 
 ## Getting Started
