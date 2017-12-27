@@ -11,8 +11,10 @@ import numpy as np
 import time
 from lib import mods as m
 
+
 while 1:
-    data = input("What:")
+    data = input("Your reason is: ")
     # m.classify(data)
+    print("Output vector for your reason classification is: ")
     k = m.classify(data)
-    print(k[0][0])
+    # print(k[0][0])

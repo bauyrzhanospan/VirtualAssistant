@@ -66,7 +66,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
     # randomly initialize our weights with mean 0
     synapse_0 = 2 * np.random.random((len(X[0]), hidden_neurons)) - 1
     synapse_1 = 2 * np.random.random((hidden_neurons, len(classes))) - 1
-
+    print("Input matrix: %sx%s    Output matrix: %sx%s" % (len(X), len(X[0]), 1, len(classes)))
     prev_synapse_0_weight_update = np.zeros_like(synapse_0)
     prev_synapse_1_weight_update = np.zeros_like(synapse_1)
 
@@ -88,7 +88,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
         # how much did we miss the target value?
         layer_2_error = y - layer_2
 
-        if (j % 100) == 0 and j > 50:
+        if (j % 10000) == 0 and j > 50:
             # if this 10k iteration's error is greater than the last iteration, break out
             if np.mean(np.abs(layer_2_error)) < last_mean_error:
                 print("delta after " + str(j) + " iterations:" + str(np.mean(np.abs(layer_2_error))))
@@ -96,6 +96,7 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
             else:
                 print("break:", np.mean(np.abs(layer_2_error)), ">", last_mean_error)
                 # break
+                mamba = 1
 
         # in what direction is the target value?
         # were we really sure? if so, don't change too much.
@@ -138,19 +139,19 @@ def train(X, y, hidden_neurons=10, alpha=1, epochs=50000, dropout=False, dropout
         json.dump(synapse, outfile, indent=4, sort_keys=True)
     with open(synapse_file2, 'w') as outfile:
         json.dump(synapse, outfile, indent=4, sort_keys=True)
-    # print ("saved synapses to:", synapse_file)
+    print("saved synapses to:", synapse_file)
     return last_mean_error
 
 
 def classify(sentence, show_details=False):
     # probability threshold
-    ERROR_THRESHOLD = 0.2
+    ERROR_THRESHOLD = 0.8
     results = think(sentence, show_details)
-
+    # print(results)
     results = [[i, r] for i, r in enumerate(results) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
     return_results = [[classes[r[0]], r[1]] for r in results]
-    #    print ("%s \n classification: %s" % (sentence, return_results))
+    print("%s \n classification: %s" % (sentence, return_results))
     return return_results
 
 

@@ -141,4 +141,5 @@ Intelligent Environments](http://ieeexplore.ieee.org/document/6516530/)
 * [Context-based conflict management in pervasive platforms](http://ieeexplore.ieee.org/document/7917567/)
 * [SVM-Based Multimodal Classification of Activities of Daily Living in Health Smart Homes: Sensors, Algorithms, and First Experimental Results](http://ieeexplore.ieee.org/abstract/document/5352277/)
 * [Context-Aware User Modeling and Semantic Interoperability in Smart Home Environments](http://ieeexplore.ieee.org/document/6735563/)
-
+* [Text Categorization by Backpropagation Network](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.206.4349&rep=rep1&type=pdf)
+* [Simulation of a Simple Bio-Mimetic Robot with Neuromorphic Control System and Optimization Based on the Genetic Algorithm](http://ijiet.com/wp-content/uploads/2017/09/9.pdf)
