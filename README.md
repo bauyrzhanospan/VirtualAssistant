@@ -2,7 +2,11 @@
 
 Welcome to the Virtual Assistant project repository
 ![Virtual Assistant](./static/hello.gif)  
-You can find all information about the system in the [Wiki Page](https://github.com/BiggyBaron/VirtualAssistant/wiki)  
+
+#### **SIGNIFICANT INFO**
+**I will not answer any of your questions if you did not read the Wiki**  
+You can find all information about the system in the [Wiki Page](https://github.com/BiggyBaron/VirtualAssistant/wiki)   
+**Seriously, read it, please. I spend a week to write it**
 
 ## Passport of the project
 
