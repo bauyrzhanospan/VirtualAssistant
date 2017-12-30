@@ -235,5 +235,3 @@ def main(usertypein, usertypeout, reasonin, reasonout):
             'id': 0}
     return specy(new_weight, test)
 
-
-train()
