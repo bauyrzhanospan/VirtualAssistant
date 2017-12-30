@@ -18,7 +18,7 @@ cur = con.cursor(pymysql.cursors.DictCursor)
 
 # Put coefficients of reasons and preferences
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
-usersList = {"adult": 0.6, "young": 0.3, "elder": 0.6}
+usersList = {"adult": 0.9, "young": 0.3, "elder": 0.6}
 
 
 # Function that loads cases and preferences
@@ -222,12 +222,18 @@ def train():
 
 # Function to use CBR by other part, takes case and returns decision
 def main(usertypein, usertypeout, reasonin, reasonout):
-    weights = [[1.5882, -0.3039, -1.1047, 0.6826], [-0.7584, 0.2737, 0.1781, -0.2904],
+    weights = [[1.5882, -0.3039, -1.1047, 0.6826],
+               [-0.7584, 0.2737, 0.1781, -0.2904],
                [0.1010, 0.0266, 0.3134, -0.8066],
                [-0.3870, -0.0481, -0.1985, -0.7557]]  # It is the best genome found by GA (genetic algorithm) kings.txt
     new_weight = pd.DataFrame(np.array(weights))
     new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
     new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
-    test = {'output': 1, 'usertypeIN': str.lower(usertypein), 'reasonIN': str.lower(reasonin),
-            'reasonOUT': str.lower(reasonout), 'usertypeOUT': str.lower(usertypeout), 'id': 0}
+    test = {'output': 1, 'usertypeIN': usersList[str.lower(usertypein)],
+            'reasonIN': float(prefList[str.lower(reasonin)]) / 10,
+            'reasonOUT': float(prefList[str.lower(reasonout)]) / 10, 'usertypeOUT': usersList[str.lower(usertypeout)],
+            'id': 0}
     return specy(new_weight, test)
+
+
+train()

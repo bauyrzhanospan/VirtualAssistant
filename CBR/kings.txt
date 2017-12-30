@@ -7678,3 +7678,78 @@ Deepness of the analysis is 1
 Estimated execution time is 65 days, 3:37:12
  Genetic algorithms optimisation for KNN with preference weights
 ====================
+Number of epochs is 100000
+Deepness of the analysis is 1
+Estimated execution time is 112 days, 13:00:30
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+Number of epochs is 100000
+Deepness of the analysis is 1
+Estimated execution time is 106 days, 4:41:10
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+Number of epochs is 100000
+Deepness of the analysis is 1
+Estimated execution time is 102 days, 10:22:39
+ Genetic algorithms optimisation for KNN with preference weights
+====================
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0010     0.0001       0.000       0.0100
+reasonOUT     -0.0001    -0.0100       0.000       0.0001
+usertypeIN    -0.0010    -0.0001       0.100       0.0001
+usertypeOUT    0.0010    -0.1000      -0.001      -0.0001, 'Epoch': 0, 'Accuracy': 63.46153846153846}
+{'Accuracy': 63.46153846153846, 'Epoch': 0, 'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0010     0.0001       0.000       0.0100
+reasonOUT     -0.0001    -0.0100       0.000       0.0001
+usertypeIN    -0.0010    -0.0001       0.100       0.0001
+usertypeOUT    0.0010    -0.1000      -0.001      -0.0001}
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0020     0.0001      0.0100       0.0100
+reasonOUT     -0.0101     0.0000     -0.0001       0.0001
+usertypeIN    -0.1010    -0.0011      0.1010       0.0002
+usertypeOUT    0.0020    -0.2000      0.0090      -0.0001, 'Epoch': 2, 'Accuracy': 65.38461538461539}
+{'Accuracy': 65.38461538461539, 'Epoch': 2, 'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0020     0.0001      0.0100       0.0100
+reasonOUT     -0.0101     0.0000     -0.0001       0.0001
+usertypeIN    -0.1010    -0.0011      0.1010       0.0002
+usertypeOUT    0.0020    -0.2000      0.0090      -0.0001}
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0020     0.0001      0.0100       0.0100
+reasonOUT     -0.0101     0.0000     -0.0001       0.0001
+usertypeIN    -0.1010    -0.0011      0.1010       0.0002
+usertypeOUT    0.0020    -0.2000      0.0090      -0.0001, 'Epoch': 2, 'Accuracy': 65.38461538461539}
+{'Accuracy': 65.38461538461539, 'Epoch': 2, 'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN      -0.0020     0.0001      0.0100       0.0100
+reasonOUT     -0.0101     0.0000     -0.0001       0.0001
+usertypeIN    -0.1010    -0.0011      0.1010       0.0002
+usertypeOUT    0.0020    -0.2000      0.0090      -0.0001}
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN       0.0980    -0.0999      0.0099       0.0100
+reasonOUT     -0.0101     0.0000      0.0099       0.0000
+usertypeIN    -0.2010    -0.0011      0.2010      -0.0098
+usertypeOUT   -0.0980    -0.1000      0.0080      -0.0002, 'Epoch': 6, 'Accuracy': 73.07692307692307}
+{'Accuracy': 73.07692307692307, 'Epoch': 6, 'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN       0.0980    -0.0999      0.0099       0.0100
+reasonOUT     -0.0101     0.0000      0.0099       0.0000
+usertypeIN    -0.2010    -0.0011      0.2010      -0.0098
+usertypeOUT   -0.0980    -0.1000      0.0080      -0.0002}
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN       0.0980    -0.0999      0.0099       0.0100
+reasonOUT     -0.0101     0.0000      0.0099       0.0000
+usertypeIN    -0.2010    -0.0011      0.2010      -0.0098
+usertypeOUT   -0.0980    -0.1000      0.0080      -0.0002, 'Epoch': 6, 'Accuracy': 73.07692307692307}
+{'Accuracy': 73.07692307692307, 'Epoch': 6, 'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN       0.0980    -0.0999      0.0099       0.0100
+reasonOUT     -0.0101     0.0000      0.0099       0.0000
+usertypeIN    -0.2010    -0.0011      0.2010      -0.0098
+usertypeOUT   -0.0980    -0.1000      0.0080      -0.0002}
+{'Genome':              reasonIN  reasonOUT  usertypeIN  usertypeOUT
+reasonIN       0.0980    -0.0999      0.0099       0.0100
+reasonOUT     -0.0101     0.0000      0.0099       0.0000
+usertypeIN    -0.2010    -0.0011      0.2010      -0.0098
+usertypeOUT   -0.0980    -0.1000      0.0080      -0.0002, 'Epoch': 6, 'Accuracy': 73.07692307692307}
+Number of epochs is 100000
+Deepness of the analysis is 1
+Estimated execution time is 138 days, 17:02:42
+ Genetic algorithms optimisation for KNN with preference weights
+====================
