@@ -11,6 +11,7 @@ import pymysql
 import pandas as pd
 import scipy as sp
 from scipy.spatial.distance import mahalanobis
+import copy
 
 # Connect to db
 con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
@@ -222,16 +223,15 @@ def train():
 
 # Function to use CBR by other part, takes case and returns decision
 def main(usertypein, usertypeout, reasonin, reasonout):
-    weights = [[1.5882, -0.3039, -1.1047, 0.6826],
-               [-0.7584, 0.2737, 0.1781, -0.2904],
-               [0.1010, 0.0266, 0.3134, -0.8066],
-               [-0.3870, -0.0481, -0.1985, -0.7557]]  # It is the best genome found by GA (genetic algorithm) kings.txt
-    new_weight = pd.DataFrame(np.array(weights))
-    new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
-    new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
+    training, testFull = load()
+    trainM = copy.deepcopy(training)
+    for el in range(len(trainM)):
+        del (trainM[el]["output"])
+        del (trainM[el]["id"])
+    df = pd.DataFrame(trainM)
+    Mahalanobis = df.cov()
     test = {'output': 1, 'usertypeIN': usersList[str.lower(usertypein)],
             'reasonIN': float(prefList[str.lower(reasonin)]) / 10,
             'reasonOUT': float(prefList[str.lower(reasonout)]) / 10, 'usertypeOUT': usersList[str.lower(usertypeout)],
             'id': 0}
-    return specy(new_weight, test)
-
+    return specy(Mahalanobis, test)
