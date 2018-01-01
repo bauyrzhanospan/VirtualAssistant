@@ -1,12 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 import operator
-from itertools import permutations
-import itertools
-import random
-import numpy as np
-import time
-import datetime
 import pymysql
 import pandas as pd
 import scipy as sp
@@ -19,7 +13,7 @@ cur = con.cursor(pymysql.cursors.DictCursor)
 
 # Put coefficients of reasons and preferences
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
-usersList = {"adult": 0.9, "young": 0.3, "elder": 0.6}
+usersList = {"adult": 3, "young": 2, "elder": 1}
 
 
 # Function that loads cases and preferences
@@ -55,12 +49,12 @@ def load():
     # Creating training and test set and return it
     training = casesRaw
     test = list(casesRaw[0::4])
-    return training, test
+    return training
 
 
 # Pure CBR, calculating Mahalanobis distance and find nearest case and return it back
-def specy(covmx, test):
-    training, f = load()
+def Calculate(covmx, test):
+    training = load()
     trainingRaw = []
     for mem in training:
         trainingRaw.append(mem["output"])
@@ -103,135 +97,22 @@ def specy(covmx, test):
     return response
 
 
-# Calculate Accuracy of genome by compaing its values with predefined outputs, return accuracy percentage
-def Accuracy(weights):
-    training, test = load()
-    acc = 0
-    for el in range(len(test)):
-        testing = test[el].copy()
-        resp = specy(weights, testing)
-        if resp == test[el]["output"]:
-            acc = acc + 1
-    return (acc / len(test)) * 100.0
-
-
-# Fun starts here, this is genetic algorithm to find best Mahalanobis matrix
-def train():
-    training, f = load()
-    for el in range(len(training)):
-        del (training[el]["output"])
-        del (training[el]["id"])
-
-    # Creating Mahalanobis Matrix of zeros and store it in genome
-    training1 = [{'usertypeIN': 0.0, 'reasonOUT': 0.0, 'usertypeOUT': 0.0, 'reasonIN': 0.0},
-                 {'usertypeIN': 0.0, 'reasonOUT': 0.0, 'usertypeOUT': 0.0, 'reasonIN': 0.0}]
-    df = pd.DataFrame(training1)
-    covmx = df.cov()
-    genome = covmx.round(3)
-
-    # Calculating time of execution
-    start_time = time.time()
-    king = {"Epoch": 0, "Genome": genome, "Accuracy": float(Accuracy(genome))}
-    speed = time.time() - start_time
-    Epos = 100000  # Defining number of epochs in training algorithm
-    Deep = 1  # Deepness of the GA, don`t change
-    print("Number of epochs is " + str(Epos))
-    execution_time = 1.1 * speed * Epos * Deep * int(100)  # Execution time of the GA
-    print("Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))))
-    print("Estimated execution time for one epoch is " + str(
-        datetime.timedelta(seconds=int(execution_time / 100000))))
-    print("=======================================================================")
-    print("Starting evolutional algorithm: ")
-
-    # Write the head of log file
-    filename = "kings.txt"
-    with open(filename, 'a') as out:
-        str1 = "Number of epochs is " + str(Epos) + "\n" + "Deepness of the analysis is " + str(Deep) + "\n" + \
-               "Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))) + "\n " + \
-               "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "=" * 20 + "\n"
-        out.write(str1)
-    # Creating mutation patterns
-    items = [-0.001, -0.01, 0, 0, 0.001, 0.01, -0.1, -0.0001, 0, 0, 0.1, 0.0001]  # Mutation types
-    newI = []
-    for p in permutations(items, 4):  # Permutation of mutation types
-        newI.append(list(p))
-    newI.sort()
-    newI = list(newI for newI, _ in itertools.groupby(newI))  # It creates pattern of mutations
-    # Genetic algorithm
-    for epoha in range(Epos):
-        organism = [king]  # King is the part of choose
-        for x in range(Deep):
-            for k in range(100):
-                # Secure random selection of mutation pattern, it uses os.random to make it trully random
-                secure_random = random.SystemRandom()
-                newW = [list(secure_random.choice(newI)) for k in range(4)]
-                print(newW)
-                print("-----")
-                # Creating new genome of specy and checking its accuracy level
-                new_weight = pd.DataFrame(np.array(newW))
-                new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
-                new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
-                genome = genome.add(new_weight)
-                try:
-                    organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
-                except:
-                    organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
-        # Defining its best result
-        prince = max(organism, key=lambda x: x['Accuracy'])
-        # If prince`s accuracy better than king`s, then new king is here
-        if float(prince["Accuracy"]) >= float(king["Accuracy"]):
-            # It writes it to kings.txt log file
-            king = prince.copy()
-            filename = "kings.txt"
-            print("King is dead, new king is now!")
-            with open(filename, 'a') as out:
-                out.write(str(king) + '\n')
-        # Prompt results of the algorithm
-        bb = 100 * epoha / Epos
-        print("Percentage is: " + str(bb))
-        print("Prince accuracy is " + str(prince['Accuracy']))
-        print("Prince genome is: ")
-        print(prince["Genome"])
-        print("==============")
-        print("And king is: " + str(king["Accuracy"]))
-        print("King genome is: ")
-        print(king["Genome"])
-        print("----------------------")
-        genome = king["Genome"]
-        # If accuracy is better than 98%, then -> break GA
-        if king["Accuracy"] > 98:
-            break
-    # Print out results
-    print()
-    print()
-    print("=======================================================================")
-    print()
-    print()
-    print("Epoch num is " + str(epoha))
-    print("- - - - - - - - - - - - -")
-    print("King is:")
-    print(king)
-    print("That is all!")
-    with open(filename, 'a') as out:
-        str1 = "=" * 20
-        str1 = str1 + "Number of epochs is " + str(Epos) + "\n" + "Deepness of the analysis is " + str(Deep) + "\n" + \
-               "Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))) + "\n " + \
-               "Genetic algorithms optimisation for KNN with preference weights" + "\n" + "The king is: \n" + str(king) \
-               + "\n" + "=" * 20
-        out.write(str1)
-
-
 # Function to use CBR by other part, takes case and returns decision
 def main(usertypein, usertypeout, reasonin, reasonout):
-    training, testFull = load()
+    # Loading cases Database
+    training = load()
     trainM = copy.deepcopy(training)
+    # Removing output and id coulumns
     for el in range(len(trainM)):
         del (trainM[el]["output"])
         del (trainM[el]["id"])
+    # Calculating Conversion matrix
     df = pd.DataFrame(trainM)
     Mahalanobis = df.cov()
+    # Restructuring input into readable for program
     test = {'output': 1, 'usertypeIN': usersList[str.lower(usertypein)],
             'reasonIN': float(prefList[str.lower(reasonin)]) / 10,
             'reasonOUT': float(prefList[str.lower(reasonout)]) / 10, 'usertypeOUT': usersList[str.lower(usertypeout)],
             'id': 0}
-    return specy(Mahalanobis, test)
+    # Returning result
+    return Calculate(Mahalanobis, test)
