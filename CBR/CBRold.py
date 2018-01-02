@@ -63,12 +63,18 @@ def load():
 def specy(weights, test):
     training, f = load()
     trainingRaw = []
+    for mem in training:
+        trainingRaw.append(mem["output"])
 
+    for el in range(len(training)):
+        del (training[el]["output"])
+        del (training[el]["id"])
+    del (test["output"])
+    del (test["id"])
     try:
         invcovmx = sp.linalg.inv(weights)
     except:
         return 2
-
     tests = list(test.values())
 
     distances = []
@@ -136,7 +142,7 @@ def train():
     execution_time = 1.1 * speed * Epos * Deep * int(100)  # Execution time of the GA
     print("Estimated execution time is " + str(datetime.timedelta(seconds=int(execution_time))))
     print("Estimated execution time for one epoch is " + str(
-        datetime.timedelta(seconds=int(execution_time / 100000))))
+        datetime.timedelta(seconds=int(execution_time / 10000))))
     print("=======================================================================")
     print("Starting evolutional algorithm: ")
 
@@ -158,16 +164,25 @@ def train():
                 secure_random = random.SystemRandom()
                 newW = []
                 for m in range(14):
-                    newM = [list(secure_random.choice(newI)) for k in range(14)]
+                    newM = []
+                    for k in range(14):
+                        newM.append(secure_random.choice(newI))
                     newW.append(newM)
                 # Creating new genome of specy and checking its accuracy level
                 new_weight = pd.DataFrame(np.array(newW))
-                new_weight.columns = ['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']
-                new_weight = new_weight.set_index([['reasonIN', 'reasonOUT', 'usertypeIN', 'usertypeOUT']])
+                new_weight.columns = ['energyI', 'energyO', 'entertainmentI', 'entertainmentO', 'foodI', 'foodO',
+                                      'healthI', 'healthO', 'securityI', 'securityO', 'usertypeI', 'usertypeO',
+                                      'workI', 'workO']
+                new_weight = new_weight.set_index([['energyI', 'energyO', 'entertainmentI', 'entertainmentO',
+                                                    'foodI', 'foodO',
+                                                    'healthI', 'healthO', 'securityI', 'securityO', 'usertypeI',
+                                                    'usertypeO',
+                                                    'workI', 'workO']])
                 genome = genome.add(new_weight)
                 try:
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                 except:
+                    organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(Accuracy(genome))})
                     organism.append({"Epoch": epoha, "Genome": genome, "Accuracy": float(0)})
         # Defining its best result
         prince = max(organism, key=lambda x: x['Accuracy'])
@@ -179,9 +194,12 @@ def train():
             print("King is dead, new king is now!")
             with open(filename, 'a') as out:
                 out.write(str(king) + '\n')
+                out.write("Accuracy is: ")
+                out.write(str(king["Accuracy"]) + "\n")
+                out.write("Epoch number is:")
+                out.write(str(king["Epoch"]) + "\n")
         # Prompt results of the algorithm
-        bb = 100 * epoha / Epos
-        print("Percentage is: " + str(bb))
+        print("Epoch is: " + epoha)
         print("Prince accuracy is " + str(prince['Accuracy']))
         print("Prince genome is: ")
         print(prince["Genome"])

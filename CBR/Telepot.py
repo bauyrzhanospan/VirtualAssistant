@@ -16,7 +16,7 @@ def handle(msg):
         file = "./kings.txt"
         with open(file, 'r') as f:
             lines = f.readlines()
-            text = lines[-6:]
+            text = lines[-2:]
         texty = "The last lines of the kings.txt are: \n"
         for el in text:
             texty = texty + str(el)
