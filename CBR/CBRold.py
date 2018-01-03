@@ -120,17 +120,9 @@ def train():
         del (training[el]["output"])
         del (training[el]["id"])
 
-    # Creating Mahalanobis Matrix of zeros and store it in genome
-    training1 = [
-        {"energyI": 0, "entertainmentI": 0, "foodI": 0, "healthI": 0, "securityI": 0, "workI": 0, "usertypeI": 0,
-         "energyO": 0, "entertainmentO": 0, "foodO": 0, "healthO": 0, "securityO": 0, "workO": 0, "usertypeO": 0},
-        {"energyI": 0, "entertainmentI": 0, "foodI": 0, "healthI": 0, "securityI": 0, "workI": 0,
-         "usertypeI": 0,
-         "energyO": 0, "entertainmentO": 0, "foodO": 0, "healthO": 0, "securityO": 0, "workO": 0,
-         "usertypeO": 0}]
-    df = pd.DataFrame(training1)
+    df = pd.DataFrame(training)
     covmx = df.cov()
-    genome = covmx.round(3)
+    genome = covmx
 
     # Calculating time of execution
     start_time = time.time()
@@ -199,7 +191,7 @@ def train():
                 out.write("Epoch number is:")
                 out.write(str(king["Epoch"]) + "\n")
         # Prompt results of the algorithm
-        print("Epoch is: " + epoha)
+        print("Epoch is: " + str(epoha))
         print("Prince accuracy is " + str(prince['Accuracy']))
         print("Prince genome is: ")
         print(prince["Genome"])
