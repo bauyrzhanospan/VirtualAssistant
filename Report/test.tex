@@ -1,0 +1,297 @@
+% This is LLNCS.DOC the documentation file of
+% the LaTeX2e class from Springer-Verlag
+% for Lecture Notes in Computer Science, version 2.4
+\documentclass{llncs}
+\usepackage{llncsdoc}
+%
+\begin{document}
+    \title{Context Aware Virtual Assistant with
+    Case-Based Conflict Resolution in
+    Multi-User Smart Home Environment}
+    \author{Bauyrzhan Ospan\inst{1} \and Kenzhegali Nurgaliyev\inst{1} \and Mario Jose Quinde Li Say Tan \inst{2} \and Nawaz Khan \inst{2}}
+    \institute{Department of Information Technology, Kazakh University of Technology and Business, Kayim Muhamedhanov 37A, Astana 010000, Kazakhstan \\ \email{{bospan,knurgaliev}@gmail.com}
+    \and Department of Computer Science, Middlesex University, The Burroughs, London NW4 4BT, United Kingdom \\ \email{{MQ093,N.X.Khan}@live.mdx.ac.uk}}
+    \maketitle
+    \begin{abstract}
+        In this work we will examine and develop a Virtual Assistant which is the intelligence system that is used as a control
+        interface of the Smart Home environment in the Farm Side Middlesex University laboratory. Specifically, the system is
+        constructed to give multiple users ability to control devices` statuses by voice or text commands through the dialogue
+        interface. Primarily, the main purpose of the system is to create user friendly interface with conflict resolution based
+        on user cases. As a result, a Case-Based Reasoning algorithm was created with an innovative Ospan Matrix distance
+        measurement module. In addition, Feed-Forward Artificial Neural Networks were used to classify user inputs, voice
+        recognition and voice generation instruments were used to implement natural dialogue model of interactions with users.
+        Moreover, the user friendly graphical web interface was developed. Further, a set of randomised double-blinded
+        evaluation tests were established to check procedure of smart home control actions by multiple users.
+    \end{abstract}
+    \begin{keywords}
+        Smart Home, Case-Based Reasoning, Context Awareness, Multiple User systems, Virtual Assistant
+    \end{keywords}
+    %
+    \section{Introduction}
+    %
+    Managing a comfortable life could be a challenging task for people with special needs because some of them may need additional
+    assistance to control electronic and electric devices in the living are [1]. The next group of users that probably seek
+    assistance in Activities of Daily Life (ADL) is younger population while adults are away from home [1]. As a result,
+    the Smart Home environments are developed to help users in controlling home and devices states with voice graphical
+    interfaces [10] that are often called Virtual Assistants [1] or monitor behaviours of people
+    with special needs [17] to classify changes in ADL that then alarm or notify relatives, health and care professionals
+    and organizations [9]. Additional finding identified other techniques in the state of art.
+    For example, in Smart Home systems there are Ontology-based platforms that allows to analyze user`s actions and
+    perform context recognition [14] or visual tools for creating personal preferences table of each user based on semantics
+    metadata [11]. As a consequence, majority of the researches is aimed to develop systems that helps alone living users.
+    \\Despite number of
+    researches in the Smart Home solutions that are automated, adaptive, multifunctional and interactive, there is a lack of
+    investigations and development of systems that operates in a conflict resolution between multiple users with different
+    needs and priorities. Some researchers in order to solve this dilemma developed context-aware automation platforms
+    [13, 16] that resolves conflicts between automated devices such as fire alarms and automated door locks.
+    On the other hand, these solutions resolves conflicts only between automated devices based on priorities of their rules.
+    The next group of
+    developers are focused on preference Rule-Based Reasoning (RBR) to resolve conflicts between users [1]. Even through
+    these systems introduces efficient set of rules, they are not able to handle with adaptation to the new user cases or
+    specific out-of-rule situations. \\To sum up
+    state of art, there are number of systems that monitors and adapts to single users, resolves conflicts between devices
+    in single user multi-agent environments and resolves conflicts between users based on if-else rules. On the contrary,
+    there is a lack of the Virtual Assistants with an adaptive conflict resolution systems. \\
+    In this research, we propose a Virtual Assistant (VA) system that controls Smart Home environment based on the user inputs via
+    voice and text based dialogue graphical web user interface for multiple users. As a result, we developed number of
+    subsystems to fully implement number of requests. First of all, interaction with the VA has to be user-friendly and
+    natural as a human to human interaction. Second, the system has to be able to control and monitor state of the Smart
+    Home devices. Finally, the VA has to manage to resolve conflicts between multiple users, and adapt to the new user cases.
+    \\To cover all objectives, we introduced and developed the VA with next modules. Firstly, we have developed user friendly
+    graphical interface based on web and cloud technologies to give to user intuitive way of interacting with the VA. For this
+    reason, we used dynamic web framework, cloud voice recognition and generation technologies and animated emotional icons
+    to mimicry natural face emotions in the dialogues. In addition to user friendly interface, we have developed and implemented
+    adaptive natural language classification algorithms based on Artificial Neural Network (ANN) to make the VA understand
+    different variates of the user commands and argumentation sentences. Therefore, users were able to speak to
+    VA in the way they speak with other human. Secondly, we used Farm Side Middlesex University Smart Home laboratory and
+    Smart Home devices control unit to manage and monitor Smart Home devices. In order that, we have developed and integrated
+    software API to implement communication between Smart Home control unit and VA. The last but not the least, we have
+    introduced and developed a conflict resolution system that used Case-Based Reasoning (CBR) to make a decision about
+    conflict between multiple users. In order to make decision, VA identifies in dialogue form the argumentation of the user
+    in performing an action, analyzes via Ospan Matrix distance k-nearest neighbour (kNN) algorithm similarities between
+    this case and previous cases and chooses best-fit case. In other words, VA asks user to say why he or she wants to change
+    device status if there conflicting instruction from other user and makes decision what to do with device based on users
+    arguments and previous cases.
+    \\Furthermore, we have established randomized double-blinded evaluation tests. In order to perform randomized double
+    blinded experiment, we developed scenario creating sub-module. Firstly, it creates random scenario for tester by choosing
+    conflicting device and arguments for tester by using crypto-secure randomise function based on operation system inner
+    clocks. Secondly, it provides such instructions to testers that he or she was
+    asked to provide command and arguments in their own words. As a result, it was hidden from us and testers scenarios till
+    the beginning of the experiment. In addition, testers were asked to fill evaluation form. To conclude, feedback from
+    testers are positive and only weak place of the system is accent recognition task.
+    \\This paper presents Virtual Assistant in the multiple user Smart Home environment. The architecture of the system is
+    described in the Section II. The system algorithms and sequences are described in the Section III. Section IV demonstrates
+    our results and validation. Finally, Section V draws the conclusion and predictions for the future work.
+    %
+    \section{Architecture}
+    %
+    There will be architecture.
+    %
+    \subsection{Graphical User Interface}
+    %
+    Gui is described here.
+    \subsection{Dialogue Component}
+    %
+    All about ANNs and dialogue manager.
+    %
+    \subsection{Rule-Based Reasoner}
+    %
+    \subsection{Case-Based Reasoner}
+    %
+    \subsection{Device Control Unit}
+    %
+    \section{Sequences}
+    %
+    There is sequence diagram.
+    %
+    \subsection{Regular Scenario}
+    %
+    \subsection{Conflict Scenario}
+    %
+    \section{Results and Validation}
+    %
+    \section{Conclusion and Future Work}
+    \section{References}
+    \label{refer}
+    %
+    There are three reference systems available; only one, of course,
+    should be used for your contribution. With each system (by
+    number only, by letter-number or by author-year) a reference list
+    containing all citations in the
+    text, should be included at the end of your contribution placing the
+    \LaTeX{} environment \verb|thebibliography| there.
+    For an overall information on that environment
+    see the {\em \LaTeX{} User's Guide \& Reference
+    Manual\/} by Leslie Lamport, p.~71.
+
+    There is a special {\sc Bib}\TeX{} style for LLNCS that works along
+    with the class: \verb|splncs.bst|
+    -- call for it with a line \verb|\bibliographystyle{splncs}|.
+    If you plan to use another {\sc Bib}\TeX{} style you are customed to,
+    please specify the option \verb|[oribibl]| in the
+    \verb|documentclass| line, like:
+    \begin{verbatim}
+        \documentclass[oribibl]{llncs}
+    \end{verbatim}
+    This will retain the original \LaTeX{} code for the bibliographic
+    environment and the \verb|\cite| mechanism that many {\sc Bib}\TeX{}
+    applications rely on.
+    %
+    \subsection{References by Letter-Number or by Number Only}
+    %
+    References are cited in the text -- using the \verb|\cite|
+    command of \LaTeX{} -- by number or by letter-number in square
+    brackets, e.g.\ [1] or [E1, S2], [P1], according to your use of the
+    \verb|\bibitem| command in the \verb|thebibliography| environment. The
+    coding is as follows: if you choose your own label for the sources by
+    giving an optional argument to the \verb|\bibitem| command the citations
+    in the text are marked with the label you supplied. Otherwise a simple
+    numbering is done, which is preferred.
+    \begin{verbatim}
+        The results in this section are a refined version
+        of \cite{clar:eke}; the minimality result of Proposition~14
+        was the first of its kind.
+    \end{verbatim}
+    The above input produces the citation: ``\dots\ refined version of
+    [CE1]; the min\-i\-mality\dots''. Then the \verb|\bibitem| entry of
+    the \verb|thebibliography| environment should read:
+    \begin{verbatim}
+        \begin{thebibliography}{[MT1]}
+            .
+            .
+            \bibitem[CE1]{clar:eke}
+            Clarke, F., Ekeland, I.:
+            Nonlinear oscillations and boundary-value problems for
+            Hamiltonian systems.
+            Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+            .
+            .
+        \end{thebibliography}
+    \end{verbatim}
+    The complete bibliography looks like this:
+    %
+    \begin{thebibliography}{[MT1]}
+        %
+        \bibitem[CE1]{clar:eke}
+        Clarke, F., Ekeland, I.:
+        Nonlinear oscillations and
+        boundary-value problems for Hamiltonian systems.
+        Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+        %
+        \bibitem[CE2]{clar:eke:2}
+        Clarke, F., Ekeland, I.:
+        Solutions p\'{e}riodiques, du
+        p\'{e}riode donn\'{e}e, des \'{e}quations hamiltoniennes.
+        Note CRAS Paris 287, 1013--1015 (1978)
+        %
+        \bibitem[MT1]{mich:tar}
+        Michalek, R., Tarantello, G.:
+        Subharmonic solutions with prescribed minimal
+        period for nonautonomous Hamiltonian systems.
+        J. Diff. Eq. 72, 28--55 (1988)
+        %
+        \bibitem[Ta1]{tar}
+        Tarantello, G.:
+        Subharmonic solutions for Hamiltonian
+        systems via a $\bbbz_{p}$ pseudoindex theory.
+        Annali di Matematica Pura (to appear)
+        %
+        \bibitem[Ra1]{rab}
+        Rabinowitz, P.:
+        On subharmonic solutions of a Hamiltonian system.
+        Comm. Pure Appl. Math. 33, 609--633 (1980)
+    \end{thebibliography}
+    %
+    \subsubsection*{Number-Only System.}
+    %
+    For this preferred system do not use the optional argument
+    in the \verb|\bibitem| command: then, only numbers will
+    appear for the citations in the text (enclosed in square brackets)
+    as well as for the marks in your
+    bibliography (here the number is only end-punctuated without
+    square brackets).
+
+    Subsequent citation numbers in the text are collapsed to ranges.
+    Non-numeric and undefined labels are handled correctly but no sorting is
+    done.
+
+    E.g., \verb|\cite{n1,n3,n2,n3,n4,n5,foo,n1,n2,n3,?,n4,n5}| -- where
+    \verb|n|$x$ is the key of the $x^{\mathrm{th}}$ \verb|\bibitem|
+    command in sequence, \verb|foo| is the key of a \verb|\bibitem| with an
+    optional argument, and \verb|?| is an undefined reference -- gives
+    1,3,2-5,foo,1-3,?,4,5 as the citation reference.
+
+    \begin{verbatim}
+        \begin{thebibliography}{1}
+            \bibitem {clar:eke}
+            Clarke, F., Ekeland, I.:
+            Nonlinear oscillations and boundary-value problems for
+            Hamiltonian systems.
+            Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+        \end{thebibliography}
+    \end{verbatim}
+    %
+    \subsection{Author-Year System}
+    %
+    References are cited in the text by name and year in parentheses
+    and should look as follows:
+    (Smith 1970, 1980), (Ekeland et al. 1985, Theorem 2), (Jones and Jaffe
+    1986; Farrow 1988, Chap.\,2). If the name is part of the sentence
+    only the year may appear in parentheses,
+    e.g.\ Ekeland et al. (1985, Sect.\,2.1)
+    The reference list should contain all citations occurring in the text,
+    ordered alphabetically by surname (with initials following). If there
+    are several works by the same author(s) the references should be listed
+    in the appropriate order indicated below:
+    \begin{alpherate}
+        \setlength{\hfuzz}{5pt}
+        \item
+        One author: list works chronologically;
+        \item
+        Author and same co-author(s): list works chronologically;
+        \item
+        Author and different co-authors: list works alphabetically
+        according to co-authors.
+    \end{alpherate}
+    If there are several works by the same author(s) and in the same year,
+    but which are cited separately, they should be distinguished by the use
+    of ``a'', ``b'' etc., e.g.\ (Smith 1982a), (Ekeland et al. 1982b).
+    %
+    \subsubsection*{How to Code Author-Year System.}
+    %
+    If you want to use this system you have to specify the option
+    \verb|[citeauthoryear]| in the \verb|documentclass|, like:
+    \begin{verbatim}
+        \documentclass[citeauthoryear]{llncs}
+    \end{verbatim}
+    Write your citations in the text explicitly except for the year, leaving
+    that up to \LaTeX{} with the \verb|\cite| command. Then give only the
+    appropriate year as the optional argument (i.e. the label in square
+    brackets) with the \verb|\bibitem| command(s).\\[2mm]
+    {\itshape Sample Input}
+    \begin{verbatim}
+        The results in this section are a refined version
+        of Clarke and Ekeland (\cite{clar:eke}); the minimality result of
+        Proposition~14 was the first of its kind.
+    \end{verbatim}
+    The above input produces the citation: ``\dots\ refined version of
+    Clarke and Ekeland (1982); the minimality\dots''. Then the
+    \verb|\bibitem| entry of \verb|clar:eke| in the \verb|thebibliography|
+    environment should read:
+    \begin{verbatim}
+        \begin{thebibliography}{}  % (do not forget {})
+            .
+            .
+            \bibitem[1982]{clar:eke}
+            Clarke, F., Ekeland, I.:
+            Nonlinear oscillations and boundary-value problems for
+            Hamiltonian systems.
+            Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+            .
+            .
+        \end{thebibliography}
+    \end{verbatim}
+    {\itshape Sample Output}
+    \bibauthoryear
+    %
+\end{document}
