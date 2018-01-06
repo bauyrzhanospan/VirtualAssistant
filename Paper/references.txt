@@ -1,0 +1,52 @@
+\begin{thebibliography}{1} 
+\bibitem {1}
+Alirezaie, M., Renoux, J., Köckemann, U., Kristoffersson, A., Karlsson, L., Blomqvist, E., Tsiftes, N., Voigt, T., Loutfi, A.: An Ontology-based Context-aware System for Smart Homes: E-care@home. Sensors. 17, 1586 (2017).
+
+\bibitem {2}
+Aztiria, A., Augusto, J., Basagoiti, R., Izaguirre, A., Cook, D.: Learning Frequent Behaviors of the Users in Intelligent Environments. IEEE Transactions on Systems, Man, and Cybernetics: Systems. 43, 1265-1278 (2013).
+
+\bibitem {3}
+Fleury, A., Vacher, M., Noury, N.: SVM-Based Multimodal Classification of Activities of Daily Living in Health Smart Homes: Sensors, Algorithms, and First Experimental Results. IEEE Transactions on Information Technology in Biomedicine. 14, 274-283 (2010).
+
+\bibitem {4}
+Göynügür, E., Bernardini, S., de Mel, G., Talamadupula, K., Şensoy, M.: Policy Conflict Resolution in IoT via Planning. Advances in Artificial Intelligence. 169-175 (2017).
+
+\bibitem {5}
+Hadj, R., Hamon, C., Chollet, S., Vega, G., Lalanda, P.: Context-based conflict management in pervasive platforms. 2017 IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops). (2017).
+
+\bibitem {6}
+Kabir, M., Hoque, M., Seo, H., Yang, S.: Machine Learning Based Adaptive Context-Aware System for Smart Home Environment, https://pdfs.semanticscholar.org/8cf5/fe5062727744f5429bb34d9c0bd24f439ee6.pdf.
+
+\bibitem {7}
+Khan, N., Alegre, U., Kramer, D., Augusto, J.: Is ‘Context-Aware Reasoning = Case-Based Reasoning’?. Modeling and Using Context. 418-431 (2017).
+
+\bibitem {8}
+Mayer, S., Inhelder, N., Verborgh, R., Van de Walle, R., Mattern, F.: Configuration of smart environments made simple: Combining visual modeling with semantic metadata and reasoning. 2014 International Conference on the Internet of Things (IOT). (2014).
+
+\bibitem {9}
+Nurgaliyev, K., Mauro, D., Khan, N., Augusto, J.: Improved Multi-user Interaction in a Smart Environment Through a Preference-Based Conflict Resolution Virtual Assistant. 2017 International Conference on Intelligent Environments (IE). (2017).
+
+\bibitem {10}
+Oguego, C., Augusto, J., Muñoz, A., Springett, M.: A survey on managing users’ preferences in ambient intelligence. Universal Access in the Information Society. (2017).
+
+\bibitem {11}
+Oguego, C., Augusto, J., Muñoz, A., Springett, M.: Using argumentation to manage users’ preferences. Future Generation Computer Systems. 81, 235-243 (2018).
+
+\bibitem {12}
+Ospan, B.: Simulation of a Simple Bio-Mimetic Robot with Neuromorphic Control System and Optimization Based on the Genetic Algorithm. International Journal of Innovations in Engineering and Technology. 8, 59-65 (2017).
+\bibitem {13}
+Portet, F., Vacher, M., Golanski, C., Roux, C., Meillon, B.: Design and evaluation of a smart home voice interface for the elderly: acceptability and objection aspects. Personal and Ubiquitous Computing. 17, 127-144 (2011).
+
+\bibitem {14}
+Ramasundaram, S., Victor, S.: Text Categorization by Backpropagation Network, http://www.ijcaonline.org/archives/volume8/number6/1217-1754.
+
+\bibitem {15}
+Reichherzer, T., Satterfield, S., Belitsos, J., Chudzynski, J., Watson, L.: An Agent-Based Architecture for Sensor Data Collection and Reasoning in Smart Home Environments for Independent Living. Advances in Artificial Intelligence. 15-20 (2016).
+
+\bibitem {16}
+Siolas, G., Caridakis, G., Mylonas, P., Kollias, S., Stafylopatis, A.: Context-Aware User Modeling and Semantic Interoperability in Smart Home Environments. 2013 8th International Workshop on Semantic and Social Media Adaptation and Personalization. (2013).
+
+\bibitem {17}
+Weinberger, K., Lawrence, S.: Distance Metric Learning for Large Margin Nearest Neighbor Classification. Journal of Machine Learning Research. 10, 207-244 (2009).
+
+\end{thebibliography} 
