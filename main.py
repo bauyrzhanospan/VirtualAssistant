@@ -339,4 +339,4 @@ def reasonClassification(username, order, reason):
 # Main flask app
 if __name__ == "__main__":
     # It creates https access by last argument. It is need to be give to web-page permission to microphone
-    app.run(host='0.0.0.0', port=8090)  # ssl_context='adhoc')  # If no need in https, just delete last argument
+    app.run(host='0.0.0.0', port=8090, ssl_context='adhoc')  # If no need in https, just delete last argument

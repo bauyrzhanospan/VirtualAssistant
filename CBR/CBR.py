@@ -116,3 +116,4 @@ def main(usertypein, usertypeout, reasonin, reasonout):
             'id': 0}
     # Returning result
     return Calculate(Mahalanobis, test)
+

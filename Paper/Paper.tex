@@ -12,9 +12,9 @@
     \title{Context Aware Virtual Assistant with
     Case-Based Conflict Resolution in
     Multi-User Smart Home Environment}
-    \author{Bauyrzhan Ospan\inst{1} \and Kenzhegali Nurgaliyev\inst{1} \and Mario Jose Quinde Li Say Tan \inst{2} \and Nawaz Khan \inst{2}}
-    \institute{Department of Information Technology, Kazakh University of Technology and Business, Kayim Muhamedhanov 37A, Astana 010000, Kazakhstan \\ \email{{bospan,knurgaliev}@gmail.com}
-    \and Department of Computer Science, Middlesex University, The Burroughs, London NW4 4BT, United Kingdom \\ \email{{MQ093,N.X.Khan}@live.mdx.ac.uk}}
+    \author{Bauyrzhan Ospan\inst{1} \and Nawaz Khan \inst{2} \and Juan Augusto \inst{2} \and Mario Jose Quinde Li Say Tan \inst{2} \and Kenzhegali Nurgaliyev \inst{1}}
+    \institute{Department of Information Technology, Kazakh University of Technology and Business, Kayim Muhamedhanov 37A, Astana 010000, Kazakhstan \\ \email{{bospan,knurgaliev}@nu.edu.kz}
+    \and Department of Computer Science, Middlesex University, The Burroughs, London NW4 4BT, United Kingdom \\ \email{{N.X.Khan,J.Augusto,MQ093}@live.mdx.ac.uk}}
     \maketitle
     \begin{abstract}
         In this work we will examine and develop a Virtual Assistant which is the intelligence system that is used as a control
@@ -28,7 +28,7 @@
         evaluation tests were established to check procedure of smart home control actions by multiple users.
     \end{abstract}
     \begin{keywords}
-        Smart Home, Case-Based Reasoning, Context Awareness, Multiple User systems, Virtual Assistant
+        Case-Based Reasoning, Context Awareness, Multiple User systems, Smart Home, Virtual Assistant
     \end{keywords}
     %
     \section{Introduction}
@@ -234,13 +234,58 @@
         \item If there is conflict between rule and user`s order: send task to Case-Based Reasoner; else: send command to Device COntrol Unit.
     \end{enumerate}
     \subsection{Case-Based Reasoner}
-
-
-
-
-
+    Case-Based Reasoner works by finding the lowest distance of input case to the cases inside the database.
+    CBR is an artificial intelligence approach to determine a similarity amongst a set of cases.
+    This method indexes cases from history of the system usage and retrieves best similar case by measurement of distance between the input case and past cases.
+    The result of finding best match is stored inside the cases database to update the cases database and adapt old solution to the new variables and environment.
+    CBR is based on a suggestion that the similar cases have similar solution.
+    The decisions in our system is binary (0 for not change device status, 1 for change it).
+    As a result, it is accessible that CBR assumption works in our system.
+    Most of the CBR systems uses k-nearest neighbour algorithm.
+    The accuracy of this classification algorithm seriously depends on the metrics or system of measurement used to compute distances between different cases.
+    The nearest neighbour algorithm determines the similarity or dissimilarity of a new case with the case base and follows a cyclical process of Retrieve-Reuse-Revise-Retain.
+    In our case inputs to the system are in different system of measurements.
+    Cases in the system are build on preferences and priority of users of the system.
+    Both two variables have different basis.
+    As a result, standard Euclidean Distance cannot be used as a distance measurement algorithm.
+    It was proposed to use Mahalanobis distance that is the global linear transformation tool of the input spaces of the cases from different classes separated by a large margins.
+    Using of Mahalanobis distance significantly increases kNN accuracy.
+    In addition, there was used a Genetic Algorithm to find best value of Mahalanobis covariance matrix.
+    It is was set nearly 11 quadrillion types of mutations patterns.
+    The covariance matrix was used as genome of each genome in the epoch.
+    As a result, each epoch system chooses best accuracy model and mutates it`s one hundred children with different not significant mutations in the genome.
+    Then the system iterate again while accuracy of the best model (king) will not reach threshold value.
+    \subsection{Device Control Unit}
+    Smart Home environment of the Farm Side Middlesex University is driven by Vera Secure system.
+    In consequence, we developed API to communicate with it.
+    Vera Secure system has own web interface.
+    In order to communicate with it, we sending and receiving GET and POST requests.
+    Special POST requests changes status of the devices, which are kettle and light in our experiment.
+    Next, updating information about device statuses is done by parsing response from special GET request sent to the Vera Secure server.
     \section{Sequences}
     %
+    Sequences inside the system are mentioned in this chapter.
+    \subsection{Terminology}
+    We used user types and preference system proposed by \cite{9} .
+    As a result, different group of users were outlined and divided by age.
+    Moreover, we declared updated system of preferences.
+    \begin{table}
+        \caption{List of users and preferences}
+        \begin{tabular}{llllll}
+            \hline\noalign{\smallskip}
+            User types & Preferences (positions 0,1,2,3,4,5)\\
+            \noalign{\smallskip}
+            \hline
+            \noalign{\smallskip}
+            Adult (26-69 ages) & Security, Health, Work, Food, Energy, Entertainment\\
+            Elderly (older 70) & Health, Security, Food, Energy, Entertainment, Work\\
+            Young (up to 25 ages) & Security, Work, Entertainment, Health, Food, Energy\\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \subsection{Regular Case}
+    \subsection{Conflicting Case}
     \section{Results and Validation}
     %
     \section{Conclution}

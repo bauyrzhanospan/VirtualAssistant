@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  6 JAN 2018 00:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  9 JAN 2018 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -597,76 +597,69 @@ File: Images/HL.png Graphic file (type png)
 Package pdftex.def Info: Images/HL.png used on input line 185.
 (pdftex.def)             Requested size: 277.69987pt x 171.71684pt.
  [6 <./Images/ANN.png>] [7 <./Images/HL.png (PNG copy)>]
-Overfull \hbox (4.37396pt too wide) in paragraph at lines 215--228
-\T1/cmr/m/n/10 30000 it-er-a-tions:0.00105975676227 delta af-ter 40000 it-er-a-
-tions:0.000905619354028
+Overfull \hbox (43.49765pt too wide) in paragraph at lines 194--196
+\T1/cmr/m/n/10 System clas-si-fied it as: \T1/cmr/m/it/10 [['Work', 0.999514733
+83654765], ['Health', 0.056650409249493161],
  []
 
 
-Overfull \hbox (55.77808pt too wide) in paragraph at lines 215--228
-\T1/cmr/m/n/10 delta af-ter 50000 it-er-a-tions:0.000802125845806 delta af-ter 
-60000 it-er-a-tions:0.000726645045015
+Overfull \hbox (4.4571pt too wide) in paragraph at lines 194--196
+\T1/cmr/m/it/10 ['En-ter-tain-ment', 0.0011293354032656073], ['En-ergy', 1.4169
+164768812246e-05],
  []
 
 
-Overfull \hbox (55.77808pt too wide) in paragraph at lines 215--228
-\T1/cmr/m/n/10 delta af-ter 70000 it-er-a-tions:0.000668536139359 delta af-ter 
-80000 it-er-a-tions:0.000622059862315
+Underfull \hbox (badness 10000) in paragraph at lines 215--228
+
  []
 
-
-Overfull \hbox (60.77686pt too wide) in paragraph at lines 215--228
-\T1/cmr/m/n/10 delta af-ter 90000 it-er-a-tions:0.000583815748815 delta af-ter 
-100000 it-er-a-tions:0.000551645861196
- []
-
-
-Underfull \hbox (badness 1264) in paragraph at lines 244--245
+[8] [9]
+Underfull \hbox (badness 1264) in paragraph at lines 295--296
 []\T1/cmr/m/n/9 Alirezaie, M., Re-noux, J., Köck-e-mann, U., Kristof-fers-son, 
 A., Karls-son, L.,
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 259--260
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
 []\T1/cmr/m/n/9 Kabir, M., Hoque, M., Seo, H., Yang, S.: Ma-chine Learn-ing Bas
 ed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--260
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
 \T1/cmr/m/n/9 Adap-tive Context-Aware Sys-tem for Smart Home En-vi-ron-ment,
  []
 
 
-Overfull \hbox (1.84503pt too wide) in paragraph at lines 259--260
+Overfull \hbox (1.84503pt too wide) in paragraph at lines 310--311
 \T1/cmr/m/n/9 https://pdfs.semanticscholar.org/8cf5/fe5062727744f5429bb34d9c0bd
 24f439ee6.pdf. 
  []
 
-[9] [10] (./Paper.aux) ) 
+[11] (./Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 2485 strings out of 493029
- 31058 string characters out of 6136233
+ 2486 strings out of 493029
+ 31064 string characters out of 6136233
  108462 words of memory out of 5000000
- 5981 multiletter control sequences out of 15000+600000
+ 5982 multiletter control sequences out of 15000+600000
  14159 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,23p,331b,286s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.
-enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/
-texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/pu
-blic/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx12
-00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/t
-exmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/pub
-lic/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm090
-0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/te
-xmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/publ
-ic/cm-super/sftt0900.pfb>
-Output written on Paper.pdf (10 pages, 363596 bytes).
+ 37i,9n,23p,331b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public
+/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sftt0900.pfb>
+Output written on Paper.pdf (11 pages, 372631 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
