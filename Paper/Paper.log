@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  9 JAN 2018 12:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  24 JAN 2018 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -570,81 +570,90 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [2]
-<Images/arch.png, id=18, 732.18544pt x 327.92513pt>
+<Images/arch.png, id=15, 732.18544pt x 327.92513pt>
 File: Images/arch.png Graphic file (type png)
  <use Images/arch.png>
-Package pdftex.def Info: Images/arch.png used on input line 125.
+Package pdftex.def Info: Images/arch.png used on input line 119.
 (pdftex.def)             Requested size: 347.12354pt x 155.47083pt.
 
-Underfull \vbox (badness 5985) has occurred while \output is active []
+[2] <Images/mockup.png, id=20, 904.37875pt x 465.74pt>
+File: Images/mockup.png Graphic file (type png)
+ <use Images/mockup.png>
+Package pdftex.def Info: Images/mockup.png used on input line 134.
+(pdftex.def)             Requested size: 347.12354pt x 178.75969pt.
 
- [3]
-Underfull \vbox (badness 5260) has occurred while \output is active []
-
- [4 <./Images/arch.png>] [5] <Images/ANN.png, id=32, 560.0925pt x 234.8775pt>
+[3 <./Images/arch.png>] [4 <./Images/mockup.png>]
+<Images/ANN.png, id=30, 560.0925pt x 234.8775pt>
 File: Images/ANN.png Graphic file (type png)
-
-<use Images/ANN.png>
-Package pdftex.def Info: Images/ANN.png used on input line 167.
+ <use Images/ANN.png>
+Package pdftex.def Info: Images/ANN.png used on input line 163.
 (pdftex.def)             Requested size: 347.12354pt x 145.57236pt.
- <Images/HL.png, id=33, 602.25pt x 372.39125pt>
-File: Images/HL.png Graphic file (type png)
 
-<use Images/HL.png>
-Package pdftex.def Info: Images/HL.png used on input line 185.
-(pdftex.def)             Requested size: 277.69987pt x 171.71684pt.
- [6 <./Images/ANN.png>] [7 <./Images/HL.png (PNG copy)>]
-Overfull \hbox (43.49765pt too wide) in paragraph at lines 194--196
-\T1/cmr/m/n/10 System clas-si-fied it as: \T1/cmr/m/it/10 [['Work', 0.999514733
-83654765], ['Health', 0.056650409249493161],
- []
-
-
-Overfull \hbox (4.4571pt too wide) in paragraph at lines 194--196
-\T1/cmr/m/it/10 ['En-ter-tain-ment', 0.0011293354032656073], ['En-ergy', 1.4169
-164768812246e-05],
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--228
+Underfull \hbox (badness 10000) in paragraph at lines 150--186
 
  []
 
-[8] [9]
-Underfull \hbox (badness 1264) in paragraph at lines 295--296
+[5 <./Images/ANN.png>]
+Overfull \hbox (36.08844pt too wide) in paragraph at lines 186--188
+\T1/cmr/m/n/10 System clas-si-fied it as: [['Work', 0.99951473383654765], ['Hea
+lth', 0.056650409249493161],
+ []
+
+[6] <Images/UML.png, id=38, 542.025pt x 596.67918pt>
+File: Images/UML.png Graphic file (type png)
+ <use Images/UML.png>
+Package pdftex.def Info: Images/UML.png used on input line 229.
+(pdftex.def)             Requested size: 347.12354pt x 382.1374pt.
+
+[7] [8 <./Images/UML.png>] <Images/eval.png, id=46, 929.4725pt x 521.95pt>
+File: Images/eval.png Graphic file (type png)
+
+<use Images/eval.png>
+Package pdftex.def Info: Images/eval.png used on input line 264.
+(pdftex.def)             Requested size: 347.12354pt x 194.92636pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--273
+
+ []
+
+
+Overfull \hbox (9.6546pt too wide) in paragraph at lines 274--275
+[]\T1/cmr/m/n/10 Lack of train-ing data: cre-ate more train-ing cases and store
+ them into Databases. 
+ []
+
+[9]
+Underfull \hbox (badness 1264) in paragraph at lines 297--298
 []\T1/cmr/m/n/9 Alirezaie, M., Re-noux, J., Köck-e-mann, U., Kristof-fers-son, 
 A., Karls-son, L.,
  []
 
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
+[10 <./Images/eval.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
 []\T1/cmr/m/n/9 Kabir, M., Hoque, M., Seo, H., Yang, S.: Ma-chine Learn-ing Bas
 ed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
 \T1/cmr/m/n/9 Adap-tive Context-Aware Sys-tem for Smart Home En-vi-ron-ment,
  []
 
 
-Overfull \hbox (1.84503pt too wide) in paragraph at lines 310--311
+Overfull \hbox (1.84503pt too wide) in paragraph at lines 309--310
 \T1/cmr/m/n/9 https://pdfs.semanticscholar.org/8cf5/fe5062727744f5429bb34d9c0bd
 24f439ee6.pdf. 
  []
 
 [11] (./Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 2486 strings out of 493029
- 31064 string characters out of 6136233
- 108462 words of memory out of 5000000
- 5982 multiletter control sequences out of 15000+600000
+ 2494 strings out of 493029
+ 31246 string characters out of 6136233
+ 102454 words of memory out of 5000000
+ 5988 multiletter control sequences out of 15000+600000
  14159 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,23p,331b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,9n,23p,298b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texm
@@ -656,10 +665,10 @@ cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pf
 b></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/
 fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/c
 m-super/sftt0900.pfb>
-Output written on Paper.pdf (11 pages, 372631 bytes).
+Output written on Paper.pdf (11 pages, 446133 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
+ 97 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6,6 +6,7 @@ import pandas as pd
 import scipy as sp
 from scipy.spatial.distance import mahalanobis
 import copy
+from random import shuffle
 
 # Connect to db
 con = pymysql.connect(host='0.0.0.0', unix_socket='/tmp/mysql.sock', user="root", passwd="123", db='virtass')
@@ -13,7 +14,7 @@ cur = con.cursor(pymysql.cursors.DictCursor)
 
 # Put coefficients of reasons and preferences
 prefList = {"energy": 0, "entertainment": 1, "food": 2, "health": 3, "security": 4, "work": 5}
-usersList = {"adult": 3, "young": 2, "elder": 1}
+usersList = {"adult": 3, "young": 1, "elder": 2}
 
 
 # Function that loads cases and preferences
@@ -116,4 +117,3 @@ def main(usertypein, usertypeout, reasonin, reasonout):
             'id': 0}
     # Returning result
     return Calculate(Mahalanobis, test)
-

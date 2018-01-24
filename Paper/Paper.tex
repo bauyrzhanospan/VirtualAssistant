@@ -17,15 +17,17 @@
     \and Department of Computer Science, Middlesex University, The Burroughs, London NW4 4BT, United Kingdom \\ \email{{N.X.Khan,J.Augusto,MQ093}@live.mdx.ac.uk}}
     \maketitle
     \begin{abstract}
-        In this work we will examine and develop a Virtual Assistant which is the intelligence system that is used as a control
-        interface of the Smart Home environment in the Farm Side Middlesex University laboratory. Specifically, the system is
-        constructed to give multiple users ability to control devices` statuses by voice or text commands through the dialogue
-        interface. Primarily, the main purpose of the system is to create user friendly interface with conflict resolution based
-        on user cases. As a result, a Case-Based Reasoning algorithm was created with a k-Nearest Neighbor classification algorithm.
+        In this work we will examine and develop a Virtual Assistant that is used as a control
+        interface of the Smart Home environment in the Farm Side Middlesex University laboratory.
+        Specifically, the system is
+        constructed to give multiple users ability to control devices by voice or text commands through the dialogue
+        interface.
+        Primarily, the main purpose of the research is to create user friendly interface with adaptive context aware
+        Case-Based conflict resolution system.
         In addition, Feed-Forward Artificial Neural Networks were used to classify user inputs, voice
         recognition and voice generation instruments were used to implement natural dialogue model of interactions with users.
-        Moreover, the user friendly graphical web interface was developed. Further, a set of randomised double-blinded
-        evaluation tests were established to check procedure of smart home control actions by multiple users.
+        Further, a set of randomised double-blinded
+        evaluation tests were established.
     \end{abstract}
     \begin{keywords}
         Case-Based Reasoning, Context Awareness, Multiple User systems, Smart Home, Virtual Assistant
@@ -33,76 +35,68 @@
     %
     \section{Introduction}
     %
-    Managing a comfortable life could be a challenging task for people with special needs because some of them may need additional
-    assistance to control electronic and electric devices in the living are [1]. The next group of users that probably seek
-    assistance in Activities of Daily Life (ADL) is younger population while adults are away from home [1]. As a result,
-    the Smart Home environments are developed to help users in controlling home and devices states with voice graphical
-    interfaces [10] that are often called Virtual Assistants [1] or monitor behaviours of people
-    with special needs [17] to classify changes in ADL that then alarm or notify relatives, health and care professionals
-    and organizations [9]. Additional finding identified other techniques in the state of art.
+    Managing a comfortable Activities of Daily Life (ADL) could be a challenging task for people with special needs
+    and younger population \cite{9}.
+    As a result,
+    the Smart Home environments are developed to help users in controlling devices \cite{13}
+    that are often called Virtual Assistants \cite{9} or monitor behaviours of people
+    with special needs \cite{3} to classify changes in ADL that then alarm or notify relatives, health and care professionals
+    and organizations \cite{15}.
+    Additional finding identified other techniques in the state of art.
     For example, in Smart Home systems there are Ontology-based platforms that allows to analyze user`s actions and
-    perform context recognition [14] or visual tools for creating personal preferences table of each user based on semantics
-    metadata [11]. As a consequence, majority of the researches is aimed to develop systems that helps alone living users.\\
+    perform context recognition \cite{1} or visual tools for creating personal preferences table of each user based on semantics
+    metadata \cite{8}.
+    As a consequence, majority of the researches is aimed to develop systems that helps alone living users.\\
+    On the other hand, conflicting orders inside the system by different users can lead to the risks \cite{5}.
     Despite number of
     researches in the Smart Home solutions that are automated, adaptive, multifunctional and interactive, there is a lack of
     investigations and development of systems that operates in a conflict resolution between multiple users with different
-    needs and priorities. Some researchers in order to solve this dilemma developed context-aware automation platforms
-    [13, 16] that resolves conflicts between automated devices such as fire alarms and automated door locks.
+    needs and priorities.
+    Some researchers in order to solve this dilemma developed context-aware automation platforms
+    \cite{5,6} that resolves conflicts between automated devices such as fire alarms and automated door locks.
     On the other hand, these solutions resolves conflicts only between automated devices based on priorities of their rules.
     The next group of
-    developers are focused on preference Rule-Based Reasoning (RBR) to resolve conflicts between users [1]. Even through
+    developers are focused on preference Rule-Based Reasoning (RBR) to resolve conflicts between users \cite{9}. Even through
     these systems introduces efficient set of rules, they are not able to handle with adaptation to the new user cases or
     specific out-of-rule situations. \\
-    To sum up
-    state of art, there are number of systems that monitors and adapts to single users, resolves conflicts between devices
-    in single user multi-agent environments and resolves conflicts between users based on if-else rules. On the contrary,
-    there is a lack of the Virtual Assistants with an adaptive conflict resolution systems.\\
     In this research, we propose a Virtual Assistant (VA) system that controls Smart Home environment based on the user inputs via
-    voice and text based dialogue graphical web user interface for multiple users. As a result, we developed number of
-    subsystems to fully implement number of requests. First of all, interaction with the VA has to be user-friendly and
-    natural as a human to human interaction. Second, the system has to be able to control and monitor state of the Smart
-    Home devices. Finally, the VA has to manage to resolve conflicts between multiple users, and adapt to the new user cases.\\
-    To cover all objectives, we introduced and developed the VA with next modules. Firstly, we have developed user friendly
-    graphical interface based on web and cloud technologies to give to user intuitive way of interacting with the VA. For this
-    reason, we used dynamic web framework, cloud voice recognition and generation technologies and animated emotional icons
-    to mimicry natural face emotions in the dialogues. In addition to user friendly interface, we have developed and implemented
-    adaptive natural language classification algorithms based on Artificial Neural Network (ANN) to make the VA understand
-    different variates of the user commands and argumentation sentences, because they are effective algorithms for
-    sentence classification [19]. Therefore, users were able to speak to
-    VA in the way they speak with other human. Secondly, we used Farm Side Middlesex University Smart Home laboratory and
-    Smart Home devices control unit to manage and monitor Smart Home devices. In order that, we have developed and integrated
-    software API to implement communication between Smart Home control unit and VA. The last but not the least, we have
-    introduced and developed a conflict resolution system that used Case-Based Reasoning (CBR) to make a decision about
-    conflict between multiple users. In order to make decision, VA identifies in dialogue form the argumentation of the user
-    in performing an action, analyzes via k-nearest neighbour (kNN) algorithm similarities between
-    this case and previous cases and chooses best-fit case [4,7,15]. In other words, VA asks user to say why he or she wants to change
-    device status if there conflicting instruction from other user and makes decision what to do with device based on users
-    arguments and previous cases. Futhermore, arguments priorities was established by personal user preferences [3] because
-    number of researches shows that the preference-based argumentation increases ability of the systems to meet user
-    expectations [5].\\
-    Furthermore, we have established randomized double-blinded evaluation tests. In order to perform randomized double
-    blinded experiment, we developed scenario creating sub-module. Firstly, it creates random scenario for tester by choosing
-    conflicting device and arguments for tester by using crypto-secure randomise function based on operation system inner
-    clocks. Secondly, it provides such instructions to testers that he or she was
-    asked to provide command and arguments in their own words. As a result, it was hidden from us and testers scenarios till
-    the beginning of the experiment. In addition, testers were asked to fill evaluation form. To conclude, feedback from
-    testers are positive and only weak place of the system is accent recognition task.\\
-    This paper presents Virtual Assistant in the multiple user Smart Home environment. The Virtual Assistant was created
-    to manage and monitor Smart Home environment by dialogue based interaction with users. Different machine learning
-    algorithms and cloud technologies were implemented to meet project objectives. The main focus of the research was to
-    develop adaptive conflict resolution system based on Case-Based Reasoner. The validation tests feedback is positive.
-    The future direction of the work is to implement context-aware system that analyzes user behaviour and reports it as
-    a case to the database of Case-Based Reasoner.\\
-    This paper presents Virtual Assistant in the multiple user Smart Home environment. The architecture of the system is
+    voice and text based dialogue graphical web user interface for multiple users and resolve conflicts in changing environment.\\
+    This paper presents Virtual Assistant in the multiple user Smart Home environment.
+    The architecture of the system is
     described in the Section II. The system algorithms and sequences are described in the Section III. Section IV demonstrates
-    our results and validation. Finally, Section V draws the conclusion and predictions for the future work.
+    our results and validation.
+    Finally, Section V draws the conclusion and predictions for the future work.
     %
     \section{Architecture}
     %
     Technical details of the system are given in this section.
     It consider architecture diagram of the system and explanation of all functional units called modules each
     or divided into the groups called components.
-    \subsection{Overall}
+    We have used updated user types and preference system proposed by \cite{9}.
+    Moreover, arguments priorities was established by personal user preferences \cite{11} because
+    number of researches shows that the preference-based argumentation increases ability of the systems to meet user
+    expectations \cite{10}.\\
+    The preferences are reasons why user wants to change the device status.
+    Introducing reason is the way to increase usability of the system through the implicit interpretation of user needs.
+    Context awareness of the system is the key for creating high usability via making the interaction
+    between user and system more natural \cite{7}.\\
+    We have used "Ceteris paribus" preferences binary tree representation.
+    At the moment, CP-nets are most effective qualitative approach for presenting preferences in the strict known
+    environment as the Smart Home \cite{10}.
+    \begin{table}
+        \caption{List of users and preferences}
+        \begin{tabular}{llllll}
+            \hline\noalign{\smallskip}
+            User types & Preferences (positions 0,1,2,3,4,5)\\
+            \noalign{\smallskip}
+            \hline
+            \noalign{\smallskip}
+            Adult (26-69 ages) & Security, Health, Work, Food, Energy, Entertainment\\
+            Elderly (older 70) & Health, Security, Food, Energy, Entertainment, Work\\
+            Young (up to 25 ages) & Security, Work, Entertainment, Health, Food, Energy\\
+            \hline
+        \end{tabular}
+    \end{table}
     The architecture of the system is layered and modular.
     As a result, each functional part (module) of the system is designed to execute complete task and some of them are
     divided into components.
@@ -126,48 +120,50 @@
         \caption[]{Architecture diagram of the system}
     \end{figure}
     \subsection{Graphical User Interface and Front End}
-    The interface of the system is graphical web interface developed as web site.
-    As a result, Graphical User Interface (GUI) is expressed by 3 functional and Login Pages that are listed below:
-    \begin{enumerate}
-        \item Login Page: Welcome interface - user chooses his or her account.
-        \item Control Page: Dialogue interface - user communicates with system in form of dialogue by voice or text chat,
-        gives orders \footnote{Order is command of the user given to the system. For example, turn off the light.} and reasons \footnote{Reason is argument given by the user to the system to justify his/her order. For example, turn off the light, because my eyes hurts.}.
-        \item Rules \footnote{Rule is set of instructions given for system to do automatically. For example, system is obligated keep kettle turned off from 11:00 till 13:00 everyday because of energy saving issue.}
-        Page: Rules editing interface - user edits list of instructions \footnote{Rules are discussed in the Section III.} given to the system.
-        \item Preferences \footnote{Preference is set of issues that justifies orders of the user to the system. Every user type has its own priority level for preferences.} Page: Preferences editing interface - user edits his or her preferences \footnote{Preferences are discussed in the Section III.}.
-    \end{enumerate}
-    Flask Micro Web Framework is used as Front End controlling technology or Back End of the interface, because most of the project is coded by Python 3 language.
+    The interface of the system is graphical web interface developed as web site shown in the figure below.
+    Graphical User Interface (GUI) is expressed by 3 functional and Login pages.
+    In the Login Page user chooses account.
+    User communicates with system in form of dialogue by voice or text chat,
+    gives orders \footnote{Order is command of the user given to the system.
+    For example, turn off the light.} and reasons \footnote{Reason is argument given by the user to the system to
+    justify his/her order.
+    For example, turn off the light, because my eyes hurts.} in the Control Page.
+    Rules Page and Preference Page are database table editing pages where user changes rules \footnote{Rule is set of instructions given for system to do automatically.
+    For example, system is obligated keep kettle turned off from 11:00 till 13:00 everyday because of energy saving issue.} and preferences.\\
+    \begin{figure}
+        \includegraphics[width=\textwidth]{mockup.png}
+        \caption[]{Control Page of the web interface}
+    \end{figure}
+    Firstly, header menu with hyperlinks to each page is located on the top of the interface.
+    In the upper left corner of the Control Page there are emotional icon representing facial expressions of the Virtual Assistant
+    and text of the VA answers below it.
+    In addition, usage manual is provided below VA that can be easily closed by clicking "x" button.
+    In the middle of the page, you can find input box with microphone activating and send buttons.
+    In order to explain system, there is instruction block under the input box.
+    Last but not the least, right hand side of the interface is filled by devices status indicators that shows current statuses.
     \subsection{Cloud API}
     The function units of the Speech Generation and Speech Recognition were established via W3C Web Speech API \footnote{More information on https://w3c.github.io/speech-api/speechapi.html.}.
     They are JavaScript Application Programming Interfaces (API) that are used by most of the modern browsers.
-    As a result, the system sends record of the user input to W3C API and it returns text that is the recognition of the record.
+    As a result, the system sends record of the user input to W3C API and it returns recognised text.
     Moreover, the system sends text to the browser of the user in such way that the browser automatically generates it into voice.
-    The modules of the Speech Generation and Speech Recognition are inserted to the Dialogue component with Dilague Manager module.
     \subsection{Core System}
     Core System is main functional layer of the system.
     Consequently, functions as decision-making, dialogue compilation, text classification and device controlling are all executed in the modules inside the Core System layer.
     It consists of Dialogue Manager, Classification Component, Rule-Based Reasoner, Case-Based Reasoner and Device Control Unit.
-    \subsection{Dialogue Manager}
-    Dialogue Manager is one of the central modules of the system.
-    Dialogue Manager receives phrases from the user and classifies it by Classification component and sends it to Rule-Based Reasoner.
-    Based on the data from Rule-Based Reasoner and actions done by the system it sends human readable report or response to user via interface.
-    In addition to Cloud API, Dialogue Manager is part of the Dialogue component that is the subsystem to communicate with user in natural way.
-    Lastly, Dialogue Manager is set of if-else rules and dialogues database developed to pretend human-like speaking.
-    \subsection{Classification Component}
     Classification component is group of two Classification modules that are Order and Reason Classification.
     Their function is to classify orders and reason from user input raw data.
     As a result, they need classification algorithm.\\
-    Text classification is non-trivial complex task that is cannot be solved sequentially or by sequential algorithms artificial neural network systems (ANN) provides the better solution \cite{14}.
-    Backpropagation as an ANS is very useful in recognizing complex patterns and performing nontrivial mapping functions.
-    The figure below represents a simple Feed Forward Neural Network (FNN) diagram.
-    The rounded objects represent the artificial neurons or processing elements of a neural network.
-    The directed lines that are connecting the neurons are called weights that are the multiplication coefficients for input signal.
-    Also every line of processing elements is a layer of a network.
+    Text classification is non-trivial complex task that is cannot be solved sequentially
+    Artificial neural network systems (ANN) provides the better solution \cite{14}.
+    Backpropagation as an ANN is very useful in recognizing complex patterns and performing nontrivial mapping functions.
+    The figure below represents a Feed Forward Neural Network (FNN) diagram used in the project.
+    The rounded objects represent the artificial neurons.
+    The directed lines that are connecting the neurons are called weights that are the multiplication coefficients for input signal.\\
     \begin{figure}
         \includegraphics[width=\textwidth]{ANN.png}
         \caption[]{Classification Neural Network Topology}
     \end{figure}
-    \subsubsection{Topology of the Artificial Neural Network} is consists of Input, Output and Hidden layers.\\
+    Topology of the Artificial Neural Network consists of Input, Output and Hidden layers.\\
     \em Input layer \em consist of input neurons that are binomial representation of the unique stemmed words (stemmed by LancasterStemmer from Natural Language Toolkit library) inside the text that is already cleaned from punctuation and meaningless words like articles.
     In a text document a word may exist in a different morphological variants.
     For example the word “love” may also exist in other morphological variants such as “loving”, “loved”.
@@ -178,118 +174,124 @@
     \em Hidden layer \em is the regression function of FNN, or layer between input and output layers.
     FNN applies a sequence of linear functions to the data.
     These functions are sigmoid linear transformation of the previous layer.
-    As a result, it followed by a squashing nonlinearity
-    While training the ANN (see below) it was concluded that the accuracy of the neural network does not significantly changes between one hidden layer neural network and multiple hidden layer neural network.
-    The most efficient number of hidden layer neurons (14) was found by calculation of the delta that was calculated by 1000 iterations of Backpropogation training algorithm with standard training/test set especially created for this experiment.
-    \begin{figure}
-        \includegraphics[width=0.8\textwidth]{HL.png}
-        \caption[]{Iterations of FNN with different Hidden Layer size, where horizontal line is number of neurons and vertical line is delta function percentage}
-    \end{figure}
-    \subsubsection{General Case: Trivial Reason.}
+    As a result, it followed by a squashing nonlinearity.
+    While training the ANN it was concluded that the accuracy of the neural network does not significantly changes between one hidden layer neural network and multiple hidden layer neural network.
+    The most efficient number of hidden layer neurons (14) was found by calculation of the delta that was calculated by
+    1000 iterations of Backpropogation training algorithm with standard training/test set especially created for this experiment.\\
     In the next example user typed that he wants to change device status because he needs to finish a project about flu.
     Classifier says that it is 99.9\% about work, and a little bit (0.05\%) about heath issue, because his project about flu.
-    The system normally does not accept any classification lower that 80\% possibility, and if user says something not
-    correlated to the predefined preferences, the system will skip classification and ask again.
+    The system normally does not accept any classification lower that 30\% possibility, and if user says something not
+    correlated to the predefined preferences, the system will skip classification and ask again.\\
     \begin{example}
-        User input is: \em I need to finish my project about flu \em \\
-        System classified it as: \em [['Work', 0.99951473383654765], ['Health', 0.056650409249493161], ['Entertainment', 0.0011293354032656073], ['Energy', 1.4169164768812246e-05], ['Security', 1.238332260956378e-05], ['Food', 3.1674436013529605e-07]] \em
+        User input is: I need to finish my project about flu\\
+        System classified it as: [['Work', 0.99951473383654765], ['Health', 0.056650409249493161], ['Entertainment', 0.0011293354032656073], ['Energy', 1.4169164768812246e-05], ['Security', 1.238332260956378e-05], ['Food', 3.1674436013529605e-07]]
     \end{example}
-    \subsubsection{General Case: Nontrivial Reason.}
-    In the next example user typed "G'ylym janyp turg'an s'yraq" (Kazakh Language: Science is a burning candle).
-    The system did not managed to classify this reason, because the system is tuned only for English.
-    \begin{example}
-        User input is: \em G'ylym janyp turg`an s`yraq \em\\
-        System classified it as: \em [] (Null) \em
-    \end{example}
-    \subsection{Training of FNN}
-    It was used Backpropogation method for artificial neural network weights of the synapses optimisation.
+    It was used Backpropogation method for the synapses optimisation.
     The Backpropagation learning rule based on supervised learning \cite{14}.
-    In order to train neural network, a set of training documents and a specification of the pre-defined categories the documents belong to are required.
+    In order to train neural network, a set of training documents and a specification of the pre-defined categories the
+    documents belong to are required.
     Training and testing sets were created specially for this experiment.
     There were used common English phrases and their synonyms to create set of sentences and their class.
     During training, the connection weights of the neural network are initialized to random values.
-    The training examples in the training set are then presented to the neural network classifier in random order, and the connection weights are adjusted according to the Backpropagation learning rule.
-    This process is repeated until the learning error falls below a predefined tolerance level (99.95\%).
-    Below there is an example of the training of the Reason Classifier.
-    \begin{example}
-        Input matrix: 260x198 Output matrix: 1x6\\
-        delta after 10000 iterations:0.00195103818538\\
-        delta after 20000 iterations:0.00132469839464\\
-        delta after 30000 iterations:0.00105975676227\\
-        delta after 40000 iterations:0.000905619354028\\
-        delta after 50000 iterations:0.000802125845806\\
-        delta after 60000 iterations:0.000726645045015\\
-        delta after 70000 iterations:0.000668536139359\\
-        delta after 80000 iterations:0.000622059862315\\
-        delta after 90000 iterations:0.000583815748815\\
-        delta after 100000 iterations:0.000551645861196\\
-        saved synapses to: ./include/synapses.json\\
-        processing time: 103.20042490959167 seconds\\
-    \end{example}
-    \subsection{Rule-Based Reasoner}
+    The training examples in the training set are then presented to the neural network classifier in random order, and
+    the connection weights are adjusted according to the Backpropagation learning rule.
+    This process is repeated until the learning error falls below a predefined tolerance level (99.95\%).\\
     Rule-Based Reasoner receives data about the user`s order and compares it with rules in the Database and actual status of the devices.
-    Core of the Rule-Based Reasoner is the set of if-else rules:
-    \begin{enumerate}
-        \item If status of device equals to status that user already wants: return similarity response; else: go further.
-        \item If there is conflict between rule and user`s order: send task to Case-Based Reasoner; else: send command to Device COntrol Unit.
-    \end{enumerate}
-    \subsection{Case-Based Reasoner}
-    Case-Based Reasoner works by finding the lowest distance of input case to the cases inside the database.
+    Core of the Rule-Based Reasoner is the set of if-else rules.
+    Firstly, RBR checks the status of the device and compares it with order.
+    Secondly, it checks is there conflict between user command and rule.
+    If there is conflict it executes Case-Based Reasoner (CBR).\\
     CBR is an artificial intelligence approach to determine a similarity amongst a set of cases.
+    CBR is the foundation of the many intelligent systems.
     This method indexes cases from history of the system usage and retrieves best similar case by measurement of distance between the input case and past cases.
     The result of finding best match is stored inside the cases database to update the cases database and adapt old solution to the new variables and environment.
-    CBR is based on a suggestion that the similar cases have similar solution.
-    The decisions in our system is binary (0 for not change device status, 1 for change it).
-    As a result, it is accessible that CBR assumption works in our system.
+    CBR is based on a suggestion that the similar cases have similar solution \cite{7}.\\
     Most of the CBR systems uses k-nearest neighbour algorithm.
     The accuracy of this classification algorithm seriously depends on the metrics or system of measurement used to compute distances between different cases.
     The nearest neighbour algorithm determines the similarity or dissimilarity of a new case with the case base and follows a cyclical process of Retrieve-Reuse-Revise-Retain.
-    In our case inputs to the system are in different system of measurements.
+    In our case inputs to the system are in different systems of measurements.
     Cases in the system are build on preferences and priority of users of the system.
     Both two variables have different basis.
-    As a result, standard Euclidean Distance cannot be used as a distance measurement algorithm.
+    As a result, standard Euclidean Distance cannot be used as a distance measurement algorithm.\\
     It was proposed to use Mahalanobis distance that is the global linear transformation tool of the input spaces of the cases from different classes separated by a large margins.
-    Using of Mahalanobis distance significantly increases kNN accuracy.
-    In addition, there was used a Genetic Algorithm to find best value of Mahalanobis covariance matrix.
-    It is was set nearly 11 quadrillion types of mutations patterns.
-    The covariance matrix was used as genome of each genome in the epoch.
-    As a result, each epoch system chooses best accuracy model and mutates it`s one hundred children with different not significant mutations in the genome.
-    Then the system iterate again while accuracy of the best model (king) will not reach threshold value.
-    \subsection{Device Control Unit}
+    Using of Mahalanobis distance significantly increases kNN accuracy \cite{17}.\\
+    Dialogue Manager is one of the central modules of the system.
+    Dialogue Manager receives phrases from the user and classifies it by Classification component and sends it to Rule-Based Reasoner.
+    Based on the data from Rule-Based Reasoner and actions done by the system it sends human readable report or response to user.\\
     Smart Home environment of the Farm Side Middlesex University is driven by Vera Secure system.
-    In consequence, we developed API to communicate with it.
-    Vera Secure system has own web interface.
-    In order to communicate with it, we sending and receiving GET and POST requests.
-    Special POST requests changes status of the devices, which are kettle and light in our experiment.
-    Next, updating information about device statuses is done by parsing response from special GET request sent to the Vera Secure server.
+    In consequence, we developed API to communicate with it that is represented by Device Control Unit in the architecture diagram.
     \section{Sequences}
     %
     Sequences inside the system are mentioned in this chapter.
-    \subsection{Terminology}
-    We used user types and preference system proposed by \cite{9} .
-    As a result, different group of users were outlined and divided by age.
-    Moreover, we declared updated system of preferences.
-    \begin{table}
-        \caption{List of users and preferences}
-        \begin{tabular}{llllll}
-            \hline\noalign{\smallskip}
-            User types & Preferences (positions 0,1,2,3,4,5)\\
-            \noalign{\smallskip}
-            \hline
-            \noalign{\smallskip}
-            Adult (26-69 ages) & Security, Health, Work, Food, Energy, Entertainment\\
-            Elderly (older 70) & Health, Security, Food, Energy, Entertainment, Work\\
-            Young (up to 25 ages) & Security, Work, Entertainment, Health, Food, Energy\\
-            \hline
-        \end{tabular}
-    \end{table}
-
-    \subsection{Regular Case}
-    \subsection{Conflicting Case}
+    Sequence diagram of the system can be found in figure below.
+    It shows three main scenarios\footnote{Scenario - set of similar cases} inside the system.\\
+    \begin{figure}
+        \includegraphics[width=\textwidth]{UML.png}
+        \caption[]{UML Sequence diagram of the system}
+    \end{figure}
+    In order to describe system lifelines, there is explanation of the scenarios.
+    First of all, the user sends command to the system (1.1) that is analysed by Dialogue Component (1.2) via Classification ANN (1.3, 1.4).
+    Next, system sends classified order to the RBR (1.5) and checks it`s context (1.6 - 1.9).
+    If there is no conflict, it changes device status (1.10, 1.11) and answers to the user (1.12 - 1.14).
+    Else, it executes Conflict Resolution Scenario by Case-Based Reasoner (2.1).\\
+    Next, it informs the user about conflict (2.2 - 2.4) and wait command.
+    If the user cancels command (2.5, 2.6), it aborts Conflict Resolution loop.
+    Else, the system asks for argumentation (2.7, 2.8) from user (2.9, 2.10) and classifies it (2.11, 2.12).
+    After collection of data (2.13) CBR reads old cases (2.14, 2.15) and makes a decision (2.16).\\
+    In the settings pages the user changes database (3.1 - 3.4).
     \section{Results and Validation}
     %
-    \section{Conclution}
-    \section{References}
+    To evaluate the system we have constructed randomised double-blind experiment.
+    In order to perform randomized double
+    blinded experiment, we developed scenario creating sub-module.
+    Firstly, it creates random scenario for tester by choosing
+    conflicting device and reasons for tester by using crypto-secure randomise function based on operation system inner
+    clocks.
+    Secondly, it provides such instructions to testers that he or she was
+    asked to provide command and arguments in their own words.
+    As a result, scenarios were hidden from us and testers till
+    the beginning of the experiment.\\
+    In addition, thirteen testers were asked to fill evaluation form.
+    In the evaluation form testers were asked to answers questions with quantitative form, where 0 is very badly and 4 is very good, about Speech recognition,
+    classification, conflict resolution, total idea, interface design, interaction with VA and user friendliness.
+    Furthermore, they were provided with additional text box under each question to justify their answers if they though
+    that they need to be justified and one more question about what they would include or change in the system.\\
+    The majority of the responses were positive \footnote{83 of 91 quantitative answers are positive, 5 neutral and 3 negative.}
+    and the average of the all answers are higher the "Good" level (3 and more) except "Conflict Resolution" question, which
+    has 2.9 average value with 1.2 standard deviation amount.
+    The basic quantitative analysis of the answers are shown in the figure below.\\
+    \begin{figure}
+        \includegraphics[width=\textwidth]{eval.png}
+        \caption[]{Quantitative analysis of the answers}
+    \end{figure}
+    The question about conflict resolution quality was the most hard for the system, because it has two negative answers.
+    Firstly, there was disagreement about priorities policy of the system and the general view of the user.
+    The tester did not agree that the adult has higher priority with entertainment issue versus younger with work issue.
+    The second case was unique and new to the CBR, and it did not managed to give appropriate output.
+    Analysis of the system logs and simulation of the case gave us better understanding of the system fault.
+    As a result, there is a list of possible cause effects and ways to solve them:\\
+    \begin{enumerate}
+        \item Lack of training data: create more training cases and store them into Databases.
+        \item Ineffective distance measurement algorithm: replace k-Nearest Neighbor algorithm with Artificial Neural Network or other machine learning algorithm. Combination of heuristic algorithms gives higher results than separately \cite{12}.
+        \item Ineffective input matrix: replace input variables by new system that will take into account difference between reasons.
+    \end{enumerate}
+    \section{Conclusion}
+    This paper presents Virtual Assistant in the multiple user Smart Home environment.
+    The Virtual Assistant was created
+    to manage and monitor Smart Home environment by dialogue based interaction with users.
+    Different machine learning
+    algorithms and cloud technologies were implemented to meet project objectives.
+    The main focus of the research was to
+    develop adaptive context aware conflict resolution system based on Case-Based Reasoner.
+    The validation tests feedback is positive.
+    The future direction of the work is to implement context-aware system that analyzes user behaviour and reports it as
+    a case to the database of Case-Based Reasoner.
+    In order to change paradigm from technology centered perspective to human centered perspective,
+    it is significant to introduce behaviour adapting sub-system \cite{2}.\\
+    In addition, it is recommended to implement machine learning algorithms to measure distances between cases to
+    increase accuracy of the Case-Based Reasoner.\\
+    All the materials and sources of the system can be found in the GitHub repository of the project \footnote{https://github.com/BiggyBaron/VirtualAssistant}.
+    Furthermore, there is well structured and full observing documentation is available on Wiki page of the system \footnote{https://github.com/BiggyBaron/VirtualAssistant/wiki}.
     \begin{thebibliography}{1}
         \bibitem {1}
         Alirezaie, M., Renoux, J., Köckemann, U., Kristoffersson, A., Karlsson, L., Blomqvist, E., Tsiftes, N., Voigt, T., Loutfi, A.: An Ontology-based Context-aware System for Smart Homes: E-care@home. Sensors. 17, 1586 (2017).
@@ -299,9 +301,6 @@
 
         \bibitem {3}
         Fleury, A., Vacher, M., Noury, N.: SVM-Based Multimodal Classification of Activities of Daily Living in Health Smart Homes: Sensors, Algorithms, and First Experimental Results. IEEE Transactions on Information Technology in Biomedicine. 14, 274-283 (2010).
-
-        \bibitem {4}
-        Göynügür, E., Bernardini, S., de Mel, G., Talamadupula, K., Şensoy, M.: Policy Conflict Resolution in IoT via Planning. Advances in Artificial Intelligence. 169-175 (2017).
 
         \bibitem {5}
         Hadj, R., Hamon, C., Chollet, S., Vega, G., Lalanda, P.: Context-based conflict management in pervasive platforms. 2017 IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops). (2017).
@@ -334,9 +333,6 @@
 
         \bibitem {15}
         Reichherzer, T., Satterfield, S., Belitsos, J., Chudzynski, J., Watson, L.: An Agent-Based Architecture for Sensor Data Collection and Reasoning in Smart Home Environments for Independent Living. Advances in Artificial Intelligence. 15-20 (2016).
-
-        \bibitem {16}
-        Siolas, G., Caridakis, G., Mylonas, P., Kollias, S., Stafylopatis, A.: Context-Aware User Modeling and Semantic Interoperability in Smart Home Environments. 2013 8th International Workshop on Semantic and Social Media Adaptation and Personalization. (2013).
 
         \bibitem {17}
         Weinberger, K., Lawrence, S.: Distance Metric Learning for Large Margin Nearest Neighbor Classification. Journal of Machine Learning Research. 10, 207-244 (2009).
