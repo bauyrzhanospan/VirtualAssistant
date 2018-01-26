@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  24 JAN 2018 20:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.29)  26 JAN 2018 15:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,120 +555,122 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 18.
+(Font)              <7> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 18.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 18.
+(Font)              <5> on input line 20.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 18.
+(Font)              <9> on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 18.
+(Font)              <6> on input line 20.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 <Images/arch.png, id=15, 732.18544pt x 327.92513pt>
 File: Images/arch.png Graphic file (type png)
  <use Images/arch.png>
-Package pdftex.def Info: Images/arch.png used on input line 119.
+Package pdftex.def Info: Images/arch.png used on input line 117.
 (pdftex.def)             Requested size: 347.12354pt x 155.47083pt.
 
 [2] <Images/mockup.png, id=20, 904.37875pt x 465.74pt>
 File: Images/mockup.png Graphic file (type png)
  <use Images/mockup.png>
-Package pdftex.def Info: Images/mockup.png used on input line 134.
+Package pdftex.def Info: Images/mockup.png used on input line 124.
 (pdftex.def)             Requested size: 347.12354pt x 178.75969pt.
 
-[3 <./Images/arch.png>] [4 <./Images/mockup.png>]
-<Images/ANN.png, id=30, 560.0925pt x 234.8775pt>
+[3 <./Images/arch.png>] <Images/ANN.png, id=27, 933.4875pt x 341.275pt>
 File: Images/ANN.png Graphic file (type png)
- <use Images/ANN.png>
-Package pdftex.def Info: Images/ANN.png used on input line 163.
-(pdftex.def)             Requested size: 347.12354pt x 145.57236pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--186
+<use Images/ANN.png>
+Package pdftex.def Info: Images/ANN.png used on input line 152.
+(pdftex.def)             Requested size: 347.12354pt x 126.90508pt.
+
+Overfull \hbox (2.34668pt too wide) in paragraph at lines 139--170
+\T1/cmr/m/n/10 Core Sys-tem is main func-tional layer. Con-se-quently, func-tio
+ns as decision-making,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--170
 
  []
 
-[5 <./Images/ANN.png>]
-Overfull \hbox (36.08844pt too wide) in paragraph at lines 186--188
-\T1/cmr/m/n/10 System clas-si-fied it as: [['Work', 0.99951473383654765], ['Hea
-lth', 0.056650409249493161],
+[4 <./Images/mockup.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 173--196
+
  []
 
-[6] <Images/UML.png, id=38, 542.025pt x 596.67918pt>
+[5 <./Images/ANN.png>] <Images/UML.png, id=35, 483.75731pt x 476.07863pt>
 File: Images/UML.png Graphic file (type png)
- <use Images/UML.png>
-Package pdftex.def Info: Images/UML.png used on input line 229.
-(pdftex.def)             Requested size: 347.12354pt x 382.1374pt.
 
-[7] [8 <./Images/UML.png>] <Images/eval.png, id=46, 929.4725pt x 521.95pt>
-File: Images/eval.png Graphic file (type png)
+<use Images/UML.png>
+Package pdftex.def Info: Images/UML.png used on input line 202.
+(pdftex.def)             Requested size: 242.98541pt x 239.12837pt.
 
-<use Images/eval.png>
-Package pdftex.def Info: Images/eval.png used on input line 264.
-(pdftex.def)             Requested size: 347.12354pt x 194.92636pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 244--273
+Underfull \hbox (badness 10000) in paragraph at lines 198--213
 
  []
 
 
-Overfull \hbox (9.6546pt too wide) in paragraph at lines 274--275
-[]\T1/cmr/m/n/10 Lack of train-ing data: cre-ate more train-ing cases and store
- them into Databases. 
+Underfull \hbox (badness 10000) in paragraph at lines 215--239
+
  []
 
-[9]
-Underfull \hbox (badness 1264) in paragraph at lines 297--298
+
+Underfull \vbox (badness 1997) has occurred while \output is active []
+
+ [6]
+[7 <./Images/UML.png>]
+Underfull \hbox (badness 1264) in paragraph at lines 257--258
 []\T1/cmr/m/n/9 Alirezaie, M., Re-noux, J., Köck-e-mann, U., Kristof-fers-son, 
 A., Karls-son, L.,
  []
 
-[10 <./Images/eval.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 []\T1/cmr/m/n/9 Kabir, M., Hoque, M., Seo, H., Yang, S.: Ma-chine Learn-ing Bas
 ed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 \T1/cmr/m/n/9 Adap-tive Context-Aware Sys-tem for Smart Home En-vi-ron-ment,
  []
 
 
-Overfull \hbox (1.84503pt too wide) in paragraph at lines 309--310
+Overfull \hbox (1.84503pt too wide) in paragraph at lines 269--270
 \T1/cmr/m/n/9 https://pdfs.semanticscholar.org/8cf5/fe5062727744f5429bb34d9c0bd
 24f439ee6.pdf. 
  []
 
-[11] (./Paper.aux) ) 
+[8] [9] (./Paper.aux) ) 
 Here is how much of TeX's memory you used:
- 2494 strings out of 493029
- 31246 string characters out of 6136233
- 102454 words of memory out of 5000000
- 5988 multiletter control sequences out of 15000+600000
+ 2489 strings out of 493029
+ 31159 string characters out of 6136233
+ 102452 words of memory out of 5000000
+ 5984 multiletter control sequences out of 15000+600000
  14159 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,23p,298b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sftt0900.pfb>
-Output written on Paper.pdf (11 pages, 446133 bytes).
+ 37i,9n,23p,276b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.e
+nc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx120
+0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/te
+xmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sftt0900.pfb>
+Output written on Paper.pdf (9 pages, 430863 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
